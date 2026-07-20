@@ -3,6 +3,8 @@
 import { useEffect, useState } from 'react'
 import Icon from './Icon'
 
+const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || ''
+
 function sendMetric(name, value, id) {
   try {
     if (typeof window.gtag === 'function') {
@@ -67,7 +69,10 @@ export default function ModernWebFeatures() {
     const schedule = window.requestIdleCallback || ((callback) => window.setTimeout(callback, 800))
     const cancel = window.cancelIdleCallback || window.clearTimeout
     const task = schedule(() => {
-      if ('serviceWorker' in navigator) navigator.serviceWorker.register('/sw.js', { scope: '/' }).catch(() => {})
+      if ('serviceWorker' in navigator) {
+        const scope = `${BASE_PATH || ''}/`
+        navigator.serviceWorker.register(`${BASE_PATH}/sw.js`, { scope }).catch(() => {})
+      }
     })
     const stopVitals = observeWebVitals()
     return () => {
