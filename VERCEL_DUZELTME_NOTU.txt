@@ -1,0 +1,15 @@
+VERCEL NPM KURULUM DUZELTMESI
+
+Kok neden:
+Eski package-lock.json dosyasindaki resolved alanlari, Vercel tarafindan erisilemeyen dahili paket sunucusuna bakiyordu.
+
+Uygulanan duzeltmeler:
+- Tum resolved adresleri https://registry.npmjs.org/ olarak yenilendi.
+- package.json ve package-lock.json tam senkron hale getirildi.
+- Node.js 20.x ve npm 10.x sabitlendi.
+- Vercel install komutu npm ci --no-audit --no-fund olarak ayarlandi.
+- Temiz npm ci testi basariyla tamamlandi.
+- Next.js production build testi basariyla tamamlandi.
+
+Vercel Project Settings icinde eski bir Install Command override varsa temizleyin veya su komutu kullanin:
+npm ci --no-audit --no-fund

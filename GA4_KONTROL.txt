@@ -1,0 +1,7 @@
+Google Analytics 4
+Olcum Kimligi: G-BDVJ5W4E3E
+Durum: Aktif
+Dosya: src/app/layout.js
+Consent Mode v2: Aktif
+Production build: Basarili
+Kontrol tarihi: 17.07.2026

@@ -1,0 +1,29 @@
+HESAPLAS.COM v4.4 - YENI ARAYUZ VE ARAC PAKETI
+Tarih: 17.07.2026
+
+ARAYUZ
+- Tum tasarim sistemi bastan yenilendi.
+- Masaustu header, kategori menusu ve arac kartlari yeniden tasarlandi.
+- Ctrl+K ve / kisayolu ile global arac arama penceresi eklendi.
+- Acik/koyu tema secimi eklendi ve tercih tarayicida saklaniyor.
+- Mobil alt hizli menu eklendi: Ana sayfa, Ara, Araclar, Favoriler.
+- Ana sayfa hero, one cikan arac paneli, kategori seridi ve karar onizlemesi yenilendi.
+- Tum araclar sayfasi kategori yan menusu, arama ve siralama ile yenilendi.
+- Hesaplama formu ve sonuc paneli daha belirgin iki kolonlu karar ekranina donusturuldu.
+- SVG tabanli tutarli ikon sistemi eklendi.
+
+YENI ARACLAR
+1. Kar Marji ve Kar Orani Hesaplama
+2. Basabas Noktasi Hesaplama
+3. Tapu Harci Hesaplama
+4. Emlakci Komisyonu Hesaplama
+5. Saatlik ve Gunluk Ucret Hesaplama
+6. Dosya Indirme Suresi Hesaplama
+
+TEKNIK
+- Toplam arac sayisi 48 oldu.
+- Node.js motoru Vercel icin 24.x olarak guncellendi.
+- GA4 olcum kimligi: G-BDVJ5W4E3E
+- Consent Mode v2 ve AdSense izin akisi korundu.
+- GitLab push BAT dosyasi v4.4 commit mesaji ile guncellendi.
+- Sitemap yeni araclari otomatik kapsiyor.

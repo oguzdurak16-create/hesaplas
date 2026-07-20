@@ -1,0 +1,18 @@
+HESAPLAS.COM v4.4 TEST RAPORU
+Tarih: 17.07.2026
+
+- npm ci: BASARILI
+- Next.js production build: BASARILI
+- Uretilen statik sayfa: 61 route cikisi
+- Hesaplama araci: 48
+- Formullu arac: 47 (Doviz Cevirici canli/manual kur ozel bileseni)
+- Sitemap URL: 55
+- Tekrarlanan sitemap URL: 0
+- Kirik dahili baglanti: 0
+- JSON-LD parse hatasi: 0
+- NPM disi resolved paket adresi: 0
+- GA4 kimligi: G-BDVJ5W4E3E
+- Yeni 6 arac sayfasi: URETILDI
+- Masaustu ve mobil responsive CSS: EKLENDI
+- Koyu tema: EKLENDI
+- Ctrl+K global arama: EKLENDI
