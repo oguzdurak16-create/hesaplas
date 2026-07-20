@@ -1,13 +1,22 @@
 {
   "name": "Hesaplas.com - Online Hesaplama Araçları",
   "short_name": "Hesaplas",
-  "description": "Finans, maaş, vergi, ev, yaşam, sağlık ve eğitim hesaplama araçları.",
-  "start_url": "/",
+  "description": "Finans, maaş, vergi, ev, yaşam, sağlık, eğitim ve teknoloji hesaplama araçları.",
+  "id": "/",
+  "start_url": "/?source=pwa",
+  "scope": "/",
   "display": "standalone",
-  "background_color": "#f4f7fb",
-  "theme_color": "#0b1220",
+  "display_override": ["window-controls-overlay", "standalone", "minimal-ui"],
+  "background_color": "#0b111a",
+  "theme_color": "#2563eb",
+  "categories": ["finance", "business", "education", "utilities", "productivity"],
+  "shortcuts": [
+    { "name": "Tüm araçlar", "short_name": "Araçlar", "url": "/tum-araclar/", "icons": [{ "src": "/logo-192.png", "sizes": "192x192" }] },
+    { "name": "Kredi hesaplama", "short_name": "Kredi", "url": "/kredi-hesaplama/", "icons": [{ "src": "/logo-192.png", "sizes": "192x192" }] },
+    { "name": "AI token maliyeti", "short_name": "AI Maliyeti", "url": "/yapay-zeka-token-maliyeti/", "icons": [{ "src": "/logo-192.png", "sizes": "192x192" }] }
+  ],
   "icons": [
-    { "src": "/logo-192.png", "sizes": "192x192", "type": "image/png" },
-    { "src": "/logo-512.png", "sizes": "512x512", "type": "image/png" }
+    { "src": "/logo-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
+    { "src": "/logo-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
   ]
 }
