@@ -1,0 +1,12 @@
+.all-tools-button {
+  color: #ffffff !important;
+  background: linear-gradient(135deg, #2563eb 0%, #5b45d8 100%) !important;
+  border: 1px solid rgba(255,255,255,.08);
+  box-shadow: 0 10px 26px rgba(37,99,235,.28);
+}
+
+.all-tools-button:hover {
+  color: #ffffff !important;
+  background: linear-gradient(135deg, #1d4ed8 0%, #4f38c8 100%) !important;
+  transform: translateY(-1px);
+}
