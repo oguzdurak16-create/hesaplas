@@ -3,21 +3,30 @@ import './styles/layout.css'
 import './styles/components.css'
 import './styles/responsive.css'
 import './styles/hotfix.css'
+import './styles/modern.css'
 import Script from 'next/script'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import CookieConsent from '@/components/CookieConsent'
 import MobileDock from '@/components/MobileDock'
+import ModernWebFeatures from '@/components/ModernWebFeatures'
 import { SITE_NAME, SITE_URL } from '@/lib/seo'
 
 const GA_ID = 'G-BDVJ5W4E3E'
 const COOKIE_KEY = 'hesaplas_cookie_consent_v3'
+const speculationRules = {
+  prerender: [{
+    source: 'list',
+    urls: ['/tum-araclar/', '/yapay-zeka-token-maliyeti/', '/elektrikli-arac-sarj-maliyeti/', '/gunes-paneli-geri-donus-hesaplama/'],
+    eagerness: 'moderate',
+  }],
+}
 
 export const metadata = {
   metadataBase: new URL(SITE_URL),
   applicationName: SITE_NAME,
   title: { default: 'Hesaplas.com - Ücretsiz Online Hesaplama Araçları', template: '%s | Hesaplas.com' },
-  description: 'Finans, maaş, vergi, ev, yaşam, sağlık, eğitim ve günlük ihtiyaçlar için hızlı ve ücretsiz online hesaplama araçları.',
+  description: 'Finans, maaş, vergi, ev, yaşam, sağlık, eğitim ve teknoloji için hızlı ve ücretsiz online hesaplama araçları.',
   verification: { google: 'F7GLVRoGq5iKNUxcXUWmGMmVXqZVgn439DybOGu-ITM' },
   icons: { icon: '/logo-192.png', shortcut: '/logo-192.png', apple: '/apple-touch-icon.png' },
   manifest: '/manifest.webmanifest',
@@ -32,6 +41,12 @@ export default function RootLayout({ children }) {
   }
   return (
     <html lang="tr">
+      <head>
+        <meta name="mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <script type="speculationrules" dangerouslySetInnerHTML={{ __html: JSON.stringify(speculationRules) }} />
+      </head>
       <body>
         <Script id="theme-init" strategy="beforeInteractive" dangerouslySetInnerHTML={{ __html: `try{var t=localStorage.getItem('hesaplas_theme_v1');if(!t)t=window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';document.documentElement.dataset.theme=t}catch(e){}` }} />
         <Script id="website-schema" type="application/ld+json" strategy="beforeInteractive" dangerouslySetInnerHTML={{ __html: JSON.stringify(website) }} />
@@ -50,6 +65,7 @@ export default function RootLayout({ children }) {
         <Footer />
         <CookieConsent />
         <MobileDock />
+        <ModernWebFeatures />
       </body>
     </html>
   )
