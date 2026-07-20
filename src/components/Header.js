@@ -14,6 +14,12 @@ const links = [
   { name: 'Eğitim', href: '/tum-araclar/#egitim' },
 ]
 
+const allToolsButtonStyle = {
+  color: '#ffffff',
+  background: 'linear-gradient(135deg, #2563eb 0%, #5b45d8 100%)',
+  border: '1px solid rgba(255,255,255,.12)',
+}
+
 export default function Header() {
   const [open, setOpen] = useState(false)
   const [searchOpen, setSearchOpen] = useState(false)
@@ -44,7 +50,7 @@ export default function Header() {
           <div className="header-actions">
             <button className="header-search-button" type="button" onClick={() => setSearchOpen(true)}><Icon name="search" size="sm" /><span>Araç ara</span><kbd>Ctrl K</kbd></button>
             <ThemeToggle />
-            <Link className="all-tools-button" href="/tum-araclar/"><Icon name="grid" size="sm" /> <span>Tüm araçlar</span></Link>
+            <Link className="all-tools-button" style={allToolsButtonStyle} href="/tum-araclar/"><Icon name="grid" size="sm" /> <span>Tüm araçlar</span></Link>
             <button className="menu-button" onClick={() => setOpen(!open)} aria-expanded={open} aria-label="Menüyü aç veya kapat"><Icon name={open ? 'close' : 'menu'} /></button>
           </div>
         </div>
