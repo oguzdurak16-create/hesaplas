@@ -33,6 +33,10 @@ const categoryContent = {
     intro: 'Bu eğitim aracı doğru ve yanlış sayılarını ilgili sınavın ham net kuralına göre işler. Standart puan, okul başarı puanı ve aday dağılımı gibi değişkenleri içermez.',
     evaluate: 'Netleri ders bazında ve denemeler arasında takip edin. Kesin puan, sıralama veya yüzdelik dilim için yalnızca resmî sınav sonucunu esas alın.',
   },
+  teknoloji: {
+    intro: 'Bu teknoloji aracı API, yapay zeka, SaaS veya dijital altyapı maliyetlerini girilen kullanım değerleriyle tahmin eder. Sağlayıcı fiyatları ve kullanım desenleri zaman içinde değişebilir.',
+    evaluate: 'Fiyat alanlarını kullandığınız hizmetin güncel tarifesiyle doldurun. En doğru bütçe için düşük, normal ve yüksek kullanım senaryolarını ayrı ayrı kaydedip karşılaştırın.',
+  },
 }
 
 const applicationCategories = {
@@ -42,6 +46,7 @@ const applicationCategories = {
   saglik: 'HealthApplication',
   pratik: 'UtilitiesApplication',
   egitim: 'EducationalApplication',
+  teknoloji: 'DeveloperApplication',
 }
 
 export function generateStaticParams() { return tools.map((tool) => ({ slug: tool.slug })) }
