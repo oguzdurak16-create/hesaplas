@@ -14,10 +14,12 @@ import { SITE_NAME, SITE_URL } from '@/lib/seo'
 
 const GA_ID = 'G-BDVJ5W4E3E'
 const COOKIE_KEY = 'hesaplas_cookie_consent_v3'
+const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || ''
+const withBase = (path) => `${BASE_PATH}${path}`
 const speculationRules = {
   prerender: [{
     source: 'list',
-    urls: ['/tum-araclar/', '/yapay-zeka-token-maliyeti/', '/elektrikli-arac-sarj-maliyeti/', '/gunes-paneli-geri-donus-hesaplama/'],
+    urls: ['/tum-araclar/', '/yapay-zeka-token-maliyeti/', '/elektrikli-arac-sarj-maliyeti/', '/gunes-paneli-geri-donus-hesaplama/'].map(withBase),
     eagerness: 'moderate',
   }],
 }
@@ -28,8 +30,8 @@ export const metadata = {
   title: { default: 'Hesaplas.com - Ücretsiz Online Hesaplama Araçları', template: '%s | Hesaplas.com' },
   description: 'Finans, maaş, vergi, ev, yaşam, sağlık, eğitim ve teknoloji için hızlı ve ücretsiz online hesaplama araçları.',
   verification: { google: 'F7GLVRoGq5iKNUxcXUWmGMmVXqZVgn439DybOGu-ITM' },
-  icons: { icon: '/logo-192.png', shortcut: '/logo-192.png', apple: '/apple-touch-icon.png' },
-  manifest: '/manifest.webmanifest',
+  icons: { icon: withBase('/logo-192.png'), shortcut: withBase('/logo-192.png'), apple: withBase('/apple-touch-icon.png') },
+  manifest: withBase('/manifest.webmanifest'),
 }
 
 export const viewport = { width: 'device-width', initialScale: 1, themeColor: '#2563eb' }
