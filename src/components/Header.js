@@ -12,6 +12,7 @@ const links = [
   { name: 'Ev & Yaşam', href: '/tum-araclar/#ev-yasam' },
   { name: 'Sağlık', href: '/tum-araclar/#saglik' },
   { name: 'Eğitim', href: '/tum-araclar/#egitim' },
+  { name: 'Teknoloji', href: '/tum-araclar/#teknoloji' },
 ]
 
 const allToolsButtonStyle = {
