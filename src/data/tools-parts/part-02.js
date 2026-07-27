@@ -20,19 +20,53 @@ export const toolsPart02 = [
     },
   },
 {
-    slug: 'maas-hesaplama', title: 'Brüt Net Maaş Hesaplama', shortTitle: 'Maaş', category: 'maas-vergi', icon: 'banknote', badge: 'Popüler', trend: true,
-    description: 'Brüt maaştan SGK, işsizlik, gelir vergisi ve damga vergisi kesintileriyle yaklaşık net maaşı hesaplayın.',
-    keywords: ['brüt net maaş hesaplama', 'maaş kesintileri', 'net ücret'],
+    slug: 'maas-hesaplama', title: 'Basit Brüt Net Maaş Tahmini', shortTitle: 'Maaş Tahmini', category: 'maas-vergi', icon: 'banknote', badge: 'Popüler', trend: true,
+    description: 'Tek bir ay için brüt maaş, SGK tavanı, prim oranları, gelir vergisi oranı ve kullanıcı tarafından girilen istisnalarla yaklaşık net ücreti hesaplayın.',
+    keywords: ['brüt net maaş tahmini', 'maaş kesintileri hesaplama', 'net ücret hesaplama', '2026 sgk tavanı', 'gelir vergisi maaş'],
+    updatedAt: '2026-07-27',
     fields: [
       { key: 'gross', label: 'Aylık brüt maaş', type: 'number', default: 75000, min: 0, suffix: 'TL' },
-      { key: 'incomeTax', label: 'Gelir vergisi oranı', type: 'number', default: 20, min: 0, max: 100, step: 0.01, suffix: '%' },
+      { key: 'incomeTax', label: 'Uygulanacak gelir vergisi oranı', type: 'number', default: 20, min: 0, max: 100, step: 0.01, suffix: '%', help: 'Kümülatif matrahınıza karşılık gelen marjinal oranı girin.' },
+      { key: 'incomeTaxExemption', label: 'Aylık gelir vergisi istisnası', type: 'number', default: 0, min: 0, suffix: 'TL', help: 'Bordronuzdaki istisna tutarını biliyorsanız girin; araç bunu otomatik belirlemez.' },
       { key: 'sgk', label: 'Çalışan SGK oranı', type: 'number', default: 14, min: 0, max: 100, step: 0.01, suffix: '%' },
-      { key: 'unemployment', label: 'İşsizlik sigortası', type: 'number', default: 1, min: 0, max: 100, step: 0.01, suffix: '%' },
+      { key: 'unemployment', label: 'İşsizlik sigortası oranı', type: 'number', default: 1, min: 0, max: 100, step: 0.01, suffix: '%' },
+      { key: 'sgkCeiling', label: 'Aylık SGK matrah tavanı', type: 'number', default: 297270, min: 0, suffix: 'TL', help: '2026 özel sektör aylık prime esas kazanç üst sınırı varsayılan olarak girilmiştir.' },
+      { key: 'stampRate', label: 'Damga vergisi oranı', type: 'number', default: 0.759, min: 0, max: 100, step: 0.001, suffix: '%' },
+      { key: 'stampExemption', label: 'Damga vergisi istisna matrahı', type: 'number', default: 0, min: 0, suffix: 'TL', help: 'Bordronuzdaki damga vergisi istisnasına esas brüt matrahı biliyorsanız girin.' },
     ],
     calculate: (v) => {
-      const g = n(v.gross), sgk = g * n(v.sgk) / 100, un = g * n(v.unemployment) / 100, base = Math.max(0, g - sgk - un), income = base * n(v.incomeTax) / 100, stamp = g * 0.00759, net = g - sgk - un - income - stamp
-      return result([item('Yaklaşık net maaş', money(net), 'primary'), item('Toplam kesinti', money(g - net), 'warning'), item('Vergi matrahı', money(base))], [item('SGK', money(sgk)), item('İşsizlik', money(un)), item('Gelir vergisi', money(income)), item('Damga vergisi', money(stamp))], 'Asgari ücret istisnası, kümülatif matrah ve özel indirimler dahil değildir.')
+      const gross = Math.max(0, n(v.gross))
+      const ceiling = Math.max(0, n(v.sgkCeiling))
+      const sgkBase = ceiling > 0 ? Math.min(gross, ceiling) : gross
+      const sgk = sgkBase * Math.max(0, n(v.sgk)) / 100
+      const unemployment = sgkBase * Math.max(0, n(v.unemployment)) / 100
+      const taxBase = Math.max(0, gross - sgk - unemployment)
+      const grossIncomeTax = taxBase * Math.max(0, n(v.incomeTax)) / 100
+      const incomeTaxExemption = Math.min(grossIncomeTax, Math.max(0, n(v.incomeTaxExemption)))
+      const incomeTax = Math.max(0, grossIncomeTax - incomeTaxExemption)
+      const stampBase = Math.max(0, gross - Math.max(0, n(v.stampExemption)))
+      const stampTax = stampBase * Math.max(0, n(v.stampRate)) / 100
+      const net = Math.max(0, gross - sgk - unemployment - incomeTax - stampTax)
+      return result(
+        [item('Yaklaşık net ücret', money(net), 'primary'), item('Toplam kesinti', money(gross - net), 'warning'), item('Gelir vergisi matrahı', money(taxBase))],
+        [item('SGK primi', money(sgk)), item('İşsizlik primi', money(unemployment)), item('Gelir vergisi', money(incomeTax)), item('Damga vergisi', money(stampTax)), item('SGK matrahı', money(sgkBase))],
+        'Bu araç tek aylık ve kullanıcı kontrollü bir tahmindir. Kümülatif vergi matrahını, otomatik vergi dilimi geçişini, bordroya özgü ek ödeme ve kesintileri kendiliğinden hesaplamaz.'
+      )
     },
+    formula: 'Önce brüt ücret, girilen SGK tavanıyla sınırlandırılarak SGK ve işsizlik primi matrahı belirlenir. Gelir vergisi matrahı brüt ücretten bu iki prim düşülerek bulunur. Girilen gelir vergisi oranı uygulanır, yazılan istisna tutarı vergiden düşülür. Damga vergisi ise brüt tutardan girilen istisna matrahı çıkarıldıktan sonra seçilen oranla hesaplanır.',
+    guide: {
+      intro: 'Bu sayfa tam bordro hesaplayıcısı değil, tek aylık brüt-net ücret tahmin aracıdır. Kullanıcının gelir vergisi oranını ve bordrosundaki istisna tutarlarını bilerek girmesini bekler. Böylece otomatik ve hatalı bir “kesin maaş” sonucu vermek yerine hangi varsayımların kullanıldığını açıkça gösterir.',
+      evaluate: 'Sonucu bordronuzla karşılaştırırken kümülatif gelir vergisi matrahını, prim ve ikramiyeleri, yemek-yol yardımlarını, engellilik indirimi gibi kişisel unsurları ve işveren uygulamalarını dikkate alın. SGK tavanı üzerindeki brüt ücretlerde prim hesabının tavanla sınırlandığını kontrol edin.',
+    },
+    faqs: [
+      { q: 'Bu araç 2026 bordrosunu kesin hesaplar mı?', a: 'Hayır. Tek ay için kullanıcı tarafından girilen oran ve istisnalarla tahmin üretir. Kümülatif matrah ve kişisel bordro kalemleri otomatik hesaplanmadığı için resmî bordro yerine kullanılamaz.' },
+      { q: 'Gelir vergisi oranına ne yazılmalı?', a: 'Yıl içindeki kümülatif ücret matrahınıza karşılık gelen oranı yazın. 2026 ücret gelirleri için oranlar yüzde 15, 20, 27, 35 ve 40 dilimlerinden oluşur; hangi dilimde olduğunuz bordro dönemine göre değişebilir.' },
+      { q: 'SGK tavanı neden ayrı bir alan?', a: 'SGK ve işsizlik primi, prime esas kazanç üst sınırını aşan ücret kısmından hesaplanmaz. 2026 özel sektör için aylık üst sınır varsayılan olarak 297.270 TL girilmiştir; dönem değişirse alanı güncelleyin.' },
+    ],
+    sources: [
+      { label: 'SGK — 2026 prime esas kazanç alt ve üst sınırları', url: 'https://www.sgk.gov.tr/Content/Post/2e0c9e1a-2cfe-4456-af10-49d3de0c58ba/Prime-Esas-Kazanc-Miktarlari-2026-01-14-10-35-39' },
+      { label: 'Gelir İdaresi Başkanlığı — 2026 gelir vergisi tarifesi', url: 'https://www.gib.gov.tr/yardim-kaynaklar/yararli-bilgiler/gelir-vergisi-tarifesi' },
+    ],
   },
 {
     slug: 'zam-hesaplama', title: 'Maaş Zam Hesaplama', shortTitle: 'Zam', category: 'maas-vergi', icon: 'arrow-up', badge: 'Trend', trend: true,
