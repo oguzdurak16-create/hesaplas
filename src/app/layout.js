@@ -15,7 +15,6 @@ import ModernWebFeatures from '@/components/ModernWebFeatures'
 import { SITE_NAME, SITE_URL } from '@/lib/seo'
 
 const GA_ID = 'G-BDVJ5W4E3E'
-const COOKIE_KEY = 'hesaplas_cookie_consent_v3'
 const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || ''
 const withBase = (path) => `${BASE_PATH}${path}`
 const speculationRules = {
@@ -46,16 +45,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="tr" data-theme="light">
       <head>
-        <script id="consent-default" dangerouslySetInnerHTML={{ __html: `
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments)}
-          window.gtag = window.gtag || gtag;
-          var a='denied', d='denied';
-          try { var c=JSON.parse(localStorage.getItem('${COOKIE_KEY}')||'null'); a=c&&c.analytics?'granted':'denied'; d=c&&c.ads?'granted':'denied'; } catch(e){}
-          gtag('consent','default',{analytics_storage:a,ad_storage:d,ad_user_data:d,ad_personalization:d,functionality_storage:'granted',security_storage:'granted',wait_for_update:500});
-          gtag('set','ads_data_redaction',true);
-          gtag('set','url_passthrough',true);
-        ` }} />
+        <script id="consent-default" src="/consent-default.js" />
         <script
           id="adsense-loader"
           async
