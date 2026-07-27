@@ -1,0 +1,155 @@
+:root,
+html[data-theme="dark"] {
+  --ink: #111827;
+  --ink-2: #273449;
+  --muted: #66758b;
+  --line: #dfe6ef;
+  --paper: #ffffff;
+  --surface: #f7f9fc;
+  --surface-2: #eef3f9;
+  --bg: #f4f7fb;
+  --primary: #2563eb;
+  --primary-dark: #1649bb;
+  --primary-soft: #eaf1ff;
+  --header: rgba(255, 255, 255, .92);
+  --shadow-sm: 0 8px 25px rgba(32, 51, 83, .07);
+  --shadow: 0 22px 65px rgba(31, 50, 81, .11);
+  --shadow-lg: 0 35px 100px rgba(14, 27, 51, .16);
+  --card-border: color-mix(in srgb, var(--line) 88%, transparent);
+  --card-shadow: 0 1px 2px rgba(15, 23, 42, .03), 0 18px 55px rgba(30, 55, 92, .08);
+  --card-shadow-hover: 0 3px 8px rgba(15, 23, 42, .04), 0 24px 70px rgba(37, 99, 235, .13);
+  color-scheme: light;
+}
+
+html { color-scheme: light; }
+body { background: var(--paper); color: var(--ink); }
+.theme-toggle { display: none !important; }
+.eyebrow.light { color: var(--primary); }
+
+/* Açık sonuç kartları */
+.result-card {
+  color: var(--ink);
+  border-color: var(--line);
+  background:
+    radial-gradient(circle at 94% -8%, rgba(37, 99, 235, .12), transparent 34%),
+    linear-gradient(145deg, #ffffff 0%, #f6f9ff 100%);
+  box-shadow: var(--card-shadow);
+}
+.result-card::before { background: rgba(37, 99, 235, .08); }
+.result-card::after { opacity: .04; }
+.result-kicker,
+.result-label,
+.summary-item span,
+.result-list span,
+.result-note,
+.form-disclaimer,
+.result-placeholder { color: var(--muted); }
+.result-card h2,
+.summary-item strong,
+.result-list strong { color: var(--ink); }
+.copy-button {
+  color: var(--primary);
+  border-color: var(--line);
+  background: var(--paper);
+}
+.copy-button:hover { color: var(--primary-dark); background: var(--primary-soft); }
+.summary-item,
+.summary-item:first-child {
+  border-color: var(--line);
+  background: var(--paper);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .8), 0 8px 24px rgba(31, 55, 91, .05);
+}
+.summary-item:first-child { background: linear-gradient(135deg, #edf4ff, #f0fbff); }
+.summary-item.success strong { color: #047857; }
+.summary-item.warning strong { color: #b45309; }
+.summary-item.danger strong { color: #b4233b; }
+.result-list { border-top-color: var(--line); }
+.result-list > div { border-bottom-color: var(--line); }
+
+/* Ana sayfadaki karar alanını açık karta çevir */
+.featured-section,
+html body .v6-home .featured-section {
+  color: var(--ink);
+  border: 1px solid var(--line);
+  background:
+    radial-gradient(circle at 94% 0%, rgba(37, 99, 235, .10), transparent 34%),
+    linear-gradient(135deg, #ffffff 0%, #f5f8ff 100%);
+  box-shadow: var(--card-shadow);
+}
+.featured-section::after { background: rgba(37, 99, 235, .06); }
+.featured-copy p { color: var(--muted); }
+.featured-actions .button.white {
+  color: #fff;
+  border-color: var(--primary);
+  background: var(--primary);
+}
+.featured-actions .button.white:hover { background: var(--primary-dark); }
+.featured-actions .button.glass {
+  color: var(--ink-2);
+  border-color: var(--line);
+  background: var(--paper);
+}
+.decision-preview {
+  border-color: var(--line);
+  background: var(--paper);
+  box-shadow: 0 20px 55px rgba(31, 55, 91, .10);
+  backdrop-filter: none;
+}
+.preview-top,
+.preview-main small,
+.preview-grid small { color: var(--muted); }
+.preview-main strong,
+.preview-grid b { color: var(--ink); }
+.preview-top i,
+.preview-change { color: #047857; background: #e8f7f1; }
+.preview-grid div { background: var(--surface); }
+.preview-bar { background: var(--surface-2); }
+.preview-bar i { background: var(--primary); }
+
+/* Footer da açık tema */
+.site-footer {
+  color: var(--ink-2);
+  border-top: 1px solid var(--line);
+  background: #f7f9fc;
+}
+.footer-brand,
+.footer-links h3 { color: var(--ink); }
+.footer-intro p,
+.footer-trust,
+.footer-links a,
+.footer-bottom { color: var(--muted); }
+.footer-links a:hover { color: var(--primary); }
+.footer-bottom { border-top-color: var(--line); }
+
+/* Arama penceresinde koyu perde kullanma */
+.search-dialog-backdrop {
+  background: rgba(238, 243, 250, .88);
+  backdrop-filter: blur(10px);
+}
+.search-dialog {
+  border-color: var(--line);
+  background: var(--paper);
+  box-shadow: 0 35px 100px rgba(31, 55, 91, .18);
+}
+
+/* Eski hero bileşenleri kullanılırsa yine açık görünür */
+.hero {
+  color: var(--ink);
+  background:
+    radial-gradient(circle at 75% 10%, rgba(37, 99, 235, .10), transparent 35%),
+    linear-gradient(180deg, #f6f9ff, #ffffff);
+}
+.hero::before { opacity: .06; }
+.hero-badge,
+.hero-copy > p,
+.hero-trust,
+.hero-trust b { color: var(--muted); }
+.hero-search,
+.hero-dashboard {
+  color: var(--ink);
+  border-color: var(--line);
+  background: var(--paper);
+  box-shadow: var(--card-shadow);
+}
+.hero-dashboard .tool-card { color: var(--ink); border-bottom-color: var(--line); }
+.hero-dashboard .tool-card-top strong { color: var(--ink); }
