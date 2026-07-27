@@ -200,7 +200,7 @@ export default function CalculatorApp({ slug }) {
 
       {output?.table && <section className="payment-table-card">
         <div className="table-head"><div><span className="eyebrow">İlk dönemler</span><h2>Örnek ödeme planı</h2></div><small>İlk 12 ay gösterilir</small></div>
-        <div className="table-scroll"><table><thead><tr>{output.table.headers.map((header) => <th key={header}>{header}</th>)}</tr></thead><tbody>{output.table.rows.map((row, i) => <tr key={i}>{row.map((cell, j) => <td key={j}>{cell}</td>)}</tr>)}</tbody></table></div>
+        <div className="table-scroll"><table><thead><tr>{output.table.headers.map((header) => <th key={header}>{header}</th>)}</tr></thead><tbody>{output.table.rows.slice(0, 12).map((row, i) => <tr key={i}>{row.map((cell, j) => <td key={j}>{cell}</td>)}</tr>)}</tbody></table></div>
       </section>}
     </div>
   )
