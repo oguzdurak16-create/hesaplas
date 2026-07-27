@@ -46,7 +46,18 @@ export default function RootLayout({ children }) {
   return (
     <html lang="tr" data-theme="light">
       <head>
+        <script id="consent-default" dangerouslySetInnerHTML={{ __html: `
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments)}
+          window.gtag = window.gtag || gtag;
+          var a='denied', d='denied';
+          try { var c=JSON.parse(localStorage.getItem('${COOKIE_KEY}')||'null'); a=c&&c.analytics?'granted':'denied'; d=c&&c.ads?'granted':'denied'; } catch(e){}
+          gtag('consent','default',{analytics_storage:a,ad_storage:d,ad_user_data:d,ad_personalization:d,functionality_storage:'granted',security_storage:'granted',wait_for_update:500});
+          gtag('set','ads_data_redaction',true);
+          gtag('set','url_passthrough',true);
+        ` }} />
         <script
+          id="adsense-loader"
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4491868887846507"
           crossOrigin="anonymous"
@@ -58,14 +69,6 @@ export default function RootLayout({ children }) {
       </head>
       <body>
         <Script id="website-schema" type="application/ld+json" strategy="beforeInteractive" dangerouslySetInnerHTML={{ __html: JSON.stringify(website) }} />
-        <Script id="consent-default" strategy="beforeInteractive" dangerouslySetInnerHTML={{ __html: `
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments)}
-          window.gtag = window.gtag || gtag;
-          var a='denied', d='denied';
-          try { var c=JSON.parse(localStorage.getItem('${COOKIE_KEY}')||'null'); a=c&&c.analytics?'granted':'denied'; d=c&&c.ads?'granted':'denied'; } catch(e){}
-          gtag('consent','default',{analytics_storage:a,ad_storage:d,ad_user_data:d,ad_personalization:d,wait_for_update:500});
-        ` }} />
         <Script src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`} strategy="afterInteractive" />
         <Script id="ga-config" strategy="afterInteractive" dangerouslySetInnerHTML={{ __html: `gtag('js',new Date());gtag('config','${GA_ID}',{anonymize_ip:true});` }} />
         <Header />
