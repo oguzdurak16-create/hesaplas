@@ -5,6 +5,7 @@ import './styles/responsive.css'
 import './styles/hotfix.css'
 import './styles/modern.css'
 import './styles/premium.css'
+import './styles/light-only.css'
 import Script from 'next/script'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
@@ -35,7 +36,7 @@ export const metadata = {
   manifest: withBase('/manifest.webmanifest'),
 }
 
-export const viewport = { width: 'device-width', initialScale: 1, themeColor: '#2563eb' }
+export const viewport = { width: 'device-width', initialScale: 1, themeColor: '#ffffff' }
 
 export default function RootLayout({ children }) {
   const website = {
@@ -43,15 +44,14 @@ export default function RootLayout({ children }) {
     potentialAction: { '@type': 'SearchAction', target: `${SITE_URL}/tum-araclar/?q={search_term_string}`, 'query-input': 'required name=search_term_string' },
   }
   return (
-    <html lang="tr">
+    <html lang="tr" data-theme="light">
       <head>
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
-        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
         <script type="speculationrules" dangerouslySetInnerHTML={{ __html: JSON.stringify(speculationRules) }} />
       </head>
       <body>
-        <Script id="theme-init" strategy="beforeInteractive" dangerouslySetInnerHTML={{ __html: `try{var t=localStorage.getItem('hesaplas_theme_v1');if(!t)t=window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';document.documentElement.dataset.theme=t}catch(e){}` }} />
         <Script id="website-schema" type="application/ld+json" strategy="beforeInteractive" dangerouslySetInnerHTML={{ __html: JSON.stringify(website) }} />
         <Script id="consent-default" strategy="beforeInteractive" dangerouslySetInnerHTML={{ __html: `
           window.dataLayer = window.dataLayer || [];
