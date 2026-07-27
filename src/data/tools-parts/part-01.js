@@ -30,22 +30,53 @@ export const toolsPart01 = [
     },
   },
 {
-    slug: 'kredi-karti-borc', title: 'Kredi Kartı Borç Hesaplama', shortTitle: 'Kart Borcu', category: 'finans', icon: 'credit-card', badge: 'Çok Aranan', trend: true,
-    description: 'Kredi kartı borcunuzun seçtiğiniz faiz ve vadede yaklaşık aylık ödeme ve toplam maliyetini görün.',
-    keywords: ['kredi kartı borç hesaplama', 'kart borcu faiz', 'kredi kartı yapılandırma'],
+    slug: 'kredi-karti-borc', title: 'Kredi Kartı Borcu Kapatma ve Taksit Simülasyonu', shortTitle: 'Kart Borcu', category: 'finans', icon: 'credit-card', badge: 'Çok Aranan', trend: true,
+    description: 'Kart borcunu seçtiğiniz aylık faiz, faiz üzerindeki ek yük ve vadeyle eşit taksitli bir kapatma senaryosu olarak hesaplayın.',
+    keywords: ['kredi kartı borç hesaplama', 'kredi kartı borcu kapatma', 'kart borcu faiz hesaplama', 'kredi kartı taksit simülasyonu', 'kredi kartı yapılandırma hesaplama'],
+    updatedAt: '2026-07-27',
     fields: [
       { key: 'debt', label: 'Toplam kart borcu', type: 'number', default: 75000, min: 100, suffix: 'TL' },
-      { key: 'rate', label: 'Aylık faiz oranı', type: 'number', default: 4.25, min: 0, step: 0.01, suffix: '%' },
+      { key: 'rate', label: 'Aylık akdi faiz oranı', type: 'number', default: 3.75, min: 0, step: 0.01, suffix: '%', help: 'Bankanızın ekstre veya teklifindeki aylık oranı girin.' },
+      { key: 'extraRate', label: 'Faiz üzerindeki ek yük', type: 'number', default: 0, min: 0, max: 100, step: 0.01, suffix: '%', help: 'Vergi ve benzeri ek yükleri biliyorsanız faiz tutarı üzerine oran olarak ekleyin; bilmiyorsanız 0 bırakın.' },
       { key: 'months', label: 'Kapatma süresi', type: 'number', default: 12, min: 1, max: 60, suffix: 'ay' },
     ],
     calculate: (v) => {
-      const d = n(v.debt), r = n(v.rate), m = Math.max(1, n(v.months)), pay = payment(d, r, m), total = pay * m
+      const debt = Math.max(0, n(v.debt))
+      const baseRate = Math.max(0, n(v.rate))
+      const extraRate = Math.max(0, n(v.extraRate))
+      const months = Math.max(1, Math.round(n(v.months)))
+      const effectiveRate = baseRate * (1 + extraRate / 100)
+      const installment = payment(debt, effectiveRate, months)
+      const total = installment * months
+      const financingCost = Math.max(0, total - debt)
+      let balance = debt
+      const rows = []
+      for (let month = 1; month <= months; month++) {
+        const interestAndCharges = balance * effectiveRate / 100
+        const principal = Math.min(balance, Math.max(0, installment - interestAndCharges))
+        balance = Math.max(0, balance - principal)
+        rows.push([`${month}. ay`, money(installment), money(principal), money(interestAndCharges), money(balance)])
+      }
       return result(
-        [item('Aylık ödeme', money(pay), 'primary'), item('Toplam ödeme', money(total)), item('Faiz maliyeti', money(total - d), 'warning')],
-        [item('Borç', money(d)), item('Tahmini süre', `${integer(m)} ay`), item('Borç artışı', percent(d ? ((total - d) / d) * 100 : 0))],
-        'Gerçek kart faizi, vergi ve asgari ödeme koşulları bankaya göre değişebilir.'
+        [item('Tahmini aylık taksit', money(installment), 'primary'), item('Toplam ödeme', money(total)), item('Finansman maliyeti', money(financingCost), 'warning')],
+        [item('Girilen aylık faiz', percent(baseRate)), item('Efektif aylık oran', percent(effectiveRate)), item('Borç artışı', percent(debt ? financingCost / debt * 100 : 0))],
+        'Bu sonuç kredi kartı ekstresi değildir. Borcun eşit taksitli kapatıldığı varsayımsal bir senaryodur; banka teklifi, asgari ödeme, gecikme, ücret ve vergiler farklı sonuç oluşturabilir.',
+        { headers: ['Dönem', 'Taksit', 'Ana para', 'Faiz + ek yük', 'Kalan borç'], rows }
       )
     },
+    formula: 'Aylık taksit, eşit taksitli borç kapatma formülüyle hesaplanır. Girilen aylık faiz oranı, “faiz üzerindeki ek yük” oranıyla çarpılarak efektif aylık oran oluşturulur. Her dönemde faiz ve ek yük kalan borç üzerinden hesaplanır; taksitin kalan kısmı ana paradan düşülür.',
+    guide: {
+      intro: 'Bu araç, kredi kartı dönem borcunun bankayla yapılmış gerçek bir yapılandırma sözleşmesi olmadan, seçilen faiz ve vadede eşit taksitlerle kapatılması hâlinde oluşabilecek yaklaşık ödeme planını gösterir. Asgari ödeme düzeni, yeni harcamalar ve gecikme faizi modele dahil değildir.',
+      evaluate: 'Sonucu bankanızın sunduğu yapılandırma veya borç transferi teklifiyle aynı vade üzerinden karşılaştırın. Bankanın aylık akdi faizini, vergi ve ücretleri ayrı ayrı açıklayıp açıklamadığını kontrol edin. Efektif aylık oran ile toplam finansman maliyetini birlikte değerlendirin.',
+    },
+    faqs: [
+      { q: 'Bu hesap banka ekstresiyle aynı sonucu verir mi?', a: 'Hayır. Araç eşit taksitli varsayımsal bir kapatma planı üretir. Ekstre hesabında dönem borcu, asgari ödeme, yeni harcamalar, gecikme ve bankaya özgü vergi veya ücretler etkili olabilir.' },
+      { q: 'Aylık faiz oranını nereden bulmalıyım?', a: 'Kendi bankanızın ekstre, sözleşme veya yapılandırma teklifindeki aylık akdi faiz oranını kullanın. TCMB oranları bankaların uygulayabileceği azami sınırları gösterir; banka daha düşük oran uygulayabilir.' },
+      { q: 'Faiz üzerindeki ek yük alanına ne yazılmalı?', a: 'Bankanız faiz tutarı üzerinden vergi, fon veya benzeri ek yük uyguluyorsa toplam oranı yazın. Kesin oranı bilmiyorsanız alanı sıfır bırakıp sonucu yalnızca temel faiz simülasyonu olarak değerlendirin.' },
+    ],
+    sources: [
+      { label: 'TCMB — Kredi kartı işlemlerinde uygulanacak azami faiz oranları', url: 'https://www.tcmb.gov.tr/wps/wcm/connect/TR/TCMB+TR/Main+Menu/Istatistikler/Bankacilik+Verileri/Kredi_Karti_Islemlerinde_Uygulanacak_Azami_Faiz_Oranlari' },
+    ],
   },
 {
     slug: 'kredi-yapilandirma-hesaplama', title: 'Kredi Yapılandırma Hesaplama', shortTitle: 'Yapılandırma', category: 'finans', icon: 'refresh', badge: 'Trend', trend: true,
