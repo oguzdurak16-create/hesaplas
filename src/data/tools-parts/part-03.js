@@ -2,17 +2,36 @@ import { n, money, number, integer, percent, daysBetween, addDays, formatDate, p
 
 export const toolsPart03 = [
 {
-    slug: 'kira-artis-hesaplama', title: 'Kira Artış Hesaplama', shortTitle: 'Kira Artışı', category: 'ev-yasam', icon: 'house', badge: 'Gündem', trend: true,
-    description: 'Mevcut kira ve uygulanacak artış oranıyla yeni kira tutarını, aylık ve yıllık farkı hesaplayın.',
-    keywords: ['kira artış hesaplama', 'kira zammı', 'tüfe kira artışı'],
+    slug: 'kira-artis-hesaplama', title: 'Kira Artış Oranı ve Yeni Kira Hesaplama', shortTitle: 'Kira Artışı', category: 'ev-yasam', icon: 'house', badge: 'Gündem', trend: true,
+    description: 'Mevcut kira, sözleşme yenileme tarihi ve uygulanacak artış oranıyla yeni aylık kirayı ve yıllık farkı hesaplayın.',
+    keywords: ['kira artış hesaplama', 'kira zammı hesaplama', 'TÜFE kira artışı', 'Temmuz 2026 kira artış oranı', 'yeni kira hesaplama'],
+    updatedAt: '2026-07-27',
     fields: [
       { key: 'rent', label: 'Mevcut aylık kira', type: 'number', default: 20000, min: 0, suffix: 'TL' },
-      { key: 'rate', label: 'Uygulanacak artış oranı', type: 'number', default: 32.03, min: 0, step: 0.01, suffix: '%', help: 'Sözleşme yenileme ayındaki resmi oranı kontrol ederek güncelleyin.' },
+      { key: 'renewalDate', label: 'Sözleşme yenileme tarihi', type: 'date', default: '2026-07-01', help: 'Oran, yenileme tarihinin bulunduğu aya göre kontrol edilmelidir.' },
+      { key: 'rate', label: 'Uygulanacak artış oranı', type: 'number', default: 32.03, min: 0, step: 0.01, suffix: '%', help: 'Temmuz 2026 yenilemeleri için Haziran 2026 TÜFE on iki aylık ortalaması varsayılan girilmiştir.' },
     ],
     calculate: (v) => {
-      const rent = n(v.rent), rate = n(v.rate), increase = rent * rate / 100, next = rent + increase
-      return result([item('Yeni aylık kira', money(next), 'primary'), item('Aylık artış', money(increase), 'warning'), item('Yıllık ek maliyet', money(increase * 12))], [item('Mevcut kira', money(rent)), item('Artış oranı', percent(rate)), item('Yeni yıllık kira', money(next * 12))], 'Resmi tavan oranı sözleşme yenileme ayına göre değişir.')
+      const rent = Math.max(0, n(v.rent)), rate = Math.max(0, n(v.rate)), increase = rent * rate / 100, next = rent + increase
+      return result(
+        [item('Yeni aylık kira', money(next), 'primary'), item('Aylık artış', money(increase), 'warning'), item('Yıllık ek maliyet', money(increase * 12))],
+        [item('Mevcut kira', money(rent)), item('Artış oranı', percent(rate)), item('Yeni yıllık kira', money(next * 12)), item('Yenileme tarihi', formatDate(v.renewalDate))],
+        'Varsayılan yüzde 32,03 oranı yalnızca Temmuz 2026 yenilemeleri için Haziran 2026 on iki aylık ortalama TÜFE verisine dayanır. Sözleşme türü, yenileme ayı ve özel hukuki durumlar sonucu değiştirebilir.'
+      )
     },
+    formula: 'Yeni aylık kira = mevcut aylık kira × (1 + artış oranı / 100). Aylık fark, yeni kira ile mevcut kira arasındaki tutardır; yıllık ek maliyet aylık farkın on iki ile çarpılmasıyla gösterilir.',
+    guide: {
+      intro: 'Kira artışında kullanılacak oran, sözleşmenin yenilendiği aya göre değişir. Bu araç oranı otomatik hukuk kararı olarak belirlemez; kullanıcı tarafından girilen oranı parasal sonuca dönüştürür. Temmuz 2026 için varsayılan yüzde 32,03, TÜİK’in Haziran 2026 on iki aylık ortalamalara göre TÜFE değişimidir.',
+      evaluate: 'Yenileme ayınızı ve sözleşmede yazan artış hükmünü kontrol edin. Sonucu yalnızca “yeni kira” olarak değil, aylık fark ve bir yıllık toplam ek maliyet üzerinden de değerlendirin. Uyuşmazlık durumunda sözleşme ve somut olay için hukuki görüş alınmalıdır.',
+    },
+    faqs: [
+      { q: 'Temmuz 2026 kira artış oranı neden yüzde 32,03?', a: 'TÜİK’in Haziran 2026 tüketici fiyat endeksi bülteninde on iki aylık ortalamalara göre değişim yüzde 32,03 olarak açıklanmıştır. Bu değer Temmuz 2026 yenileme hesabında referans olarak kullanılabilir.' },
+      { q: 'Bu oran her kira sözleşmesine otomatik uygulanır mı?', a: 'Hayır. Sözleşme türü, yenileme tarihi, sözleşme hükmü ve hukuki istisnalar sonucu etkileyebilir. Araç yalnızca girdiğiniz oranla matematiksel hesap yapar.' },
+      { q: 'Yenileme ayım değişirse ne yapmalıyım?', a: 'Yenileme ayından önce yayımlanan son TÜİK bültenindeki ilgili on iki aylık ortalama değeri kontrol edip oran alanını güncelleyin.' },
+    ],
+    sources: [
+      { label: 'TÜİK — Tüketici Fiyat Endeksi, Haziran 2026', url: 'https://veriportali.tuik.gov.tr/tr/press/58289/metadata' },
+    ],
   },
 {
     slug: 'yakit-tuketimi-hesaplama', title: 'Yakıt Tüketimi Hesaplama', shortTitle: 'Yakıt', category: 'ev-yasam', icon: 'fuel', badge: 'Trend', trend: true,
