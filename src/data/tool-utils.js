@@ -18,7 +18,11 @@ export const addDays = (date, days) => {
   d.setDate(d.getDate() + days)
   return d
 }
-export const formatDate = (date) => new Intl.DateTimeFormat('tr-TR', { day: 'numeric', month: 'long', year: 'numeric' }).format(date)
+export const formatDate = (date) => {
+  const parsed = date instanceof Date ? date : new Date(`${date}T12:00:00`)
+  if (Number.isNaN(parsed.getTime())) return 'Geçersiz tarih'
+  return new Intl.DateTimeFormat('tr-TR', { day: 'numeric', month: 'long', year: 'numeric' }).format(parsed)
+}
 export const payment = (principal, monthlyRate, months) => {
   const r = monthlyRate / 100
   if (!months) return 0
