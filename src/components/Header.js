@@ -3,16 +3,15 @@
 import { useCallback, useEffect, useState } from 'react'
 import Link from 'next/link'
 import Icon from './Icon'
-import ThemeToggle from './ThemeToggle'
 import ToolSearchDialog from './ToolSearchDialog'
 
 const links = [
-  { name: 'Finans', href: '/tum-araclar/#finans' },
-  { name: 'Maaş', href: '/tum-araclar/#maas-vergi' },
-  { name: 'Ev & Yaşam', href: '/tum-araclar/#ev-yasam' },
-  { name: 'Sağlık', href: '/tum-araclar/#saglik' },
-  { name: 'Eğitim', href: '/tum-araclar/#egitim' },
-  { name: 'Teknoloji', href: '/tum-araclar/#teknoloji' },
+  { name: 'Finans', href: '/tum-araclar/?category=finans#araclar' },
+  { name: 'Maaş', href: '/tum-araclar/?category=maas-vergi#araclar' },
+  { name: 'Ev & Yaşam', href: '/tum-araclar/?category=ev-yasam#araclar' },
+  { name: 'Sağlık', href: '/tum-araclar/?category=saglik#araclar' },
+  { name: 'Eğitim', href: '/tum-araclar/?category=egitim#araclar' },
+  { name: 'Teknoloji', href: '/tum-araclar/?category=teknoloji#araclar' },
 ]
 
 const allToolsButtonStyle = {
@@ -46,11 +45,10 @@ export default function Header() {
             <span>hesaplas<strong>.com</strong></span>
           </Link>
           <nav className="desktop-nav" aria-label="Ana menü">
-            {links.map((link) => <Link key={link.href} href={link.href}>{link.name}</Link>)}
+            {links.map((link) => <a key={link.href} href={link.href}>{link.name}</a>)}
           </nav>
           <div className="header-actions">
             <button className="header-search-button" type="button" onClick={() => setSearchOpen(true)}><Icon name="search" size="sm" /><span>Araç ara</span><kbd>Ctrl K</kbd></button>
-            <ThemeToggle />
             <Link className="all-tools-button" style={allToolsButtonStyle} href="/tum-araclar/"><Icon name="grid" size="sm" /> <span>Tüm araçlar</span></Link>
             <button className="menu-button" onClick={() => setOpen(!open)} aria-expanded={open} aria-label="Menüyü aç veya kapat"><Icon name={open ? 'close' : 'menu'} /></button>
           </div>
@@ -58,7 +56,7 @@ export default function Header() {
         {open && (
           <nav className="mobile-nav" aria-label="Mobil menü">
             <button type="button" className="mobile-search-link" onClick={() => { setOpen(false); setSearchOpen(true) }}><Icon name="search" /> Araç ara</button>
-            {links.map((link) => <Link key={link.href} href={link.href} onClick={() => setOpen(false)}>{link.name}<Icon name="arrow" size="sm" /></Link>)}
+            {links.map((link) => <a key={link.href} href={link.href} onClick={() => setOpen(false)}>{link.name}<Icon name="arrow" size="sm" /></a>)}
             <Link href="/tum-araclar/" onClick={() => setOpen(false)}>Tüm hesaplama araçları<Icon name="grid" size="sm" /></Link>
           </nav>
         )}
