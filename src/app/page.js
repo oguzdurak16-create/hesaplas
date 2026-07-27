@@ -1,12 +1,11 @@
 import Link from 'next/link'
 import Script from 'next/script'
 import ToolExplorer from '@/components/ToolExplorer'
-import ToolCard from '@/components/ToolCard'
 import Icon from '@/components/Icon'
 import RecentTools from '@/components/RecentTools'
 import SearchLauncher from '@/components/SearchLauncher'
 import FavoriteTools from '@/components/FavoriteTools'
-import { categories, trendingTools, tools } from '@/data/tools'
+import { categories, tools } from '@/data/tools'
 import { createMetadata, SITE_URL } from '@/lib/seo'
 
 export const metadata = createMetadata({
@@ -19,52 +18,36 @@ export const metadata = createMetadata({
 const HOME_UI_CSS = `
   .v6-home{overflow:hidden;background:linear-gradient(180deg,#f7f9fd 0,#fff 640px);}
   .v6-home .container,.site-header .container{width:min(1400px,calc(100% - 64px));}
-  .site-header{background:color-mix(in srgb,var(--paper) 91%,transparent);}
+  .site-header{background:rgba(255,255,255,.94);}
   .header-inner{height:72px;gap:20px;}
   .brand{font-size:1.23rem;}
   .desktop-nav{gap:3px;margin-left:6px;}
   .desktop-nav a{padding:9px 11px;font-size:.78rem;}
-  .header-search-button{min-width:220px;background:var(--paper);}
+  .header-search-button{min-width:220px;background:#fff;}
   .all-tools-button{height:43px;border-radius:13px!important;}
 
-  .v6-hero{position:relative;padding:68px 0 54px;border-bottom:1px solid #e7edf6;}
-  .v6-hero:before{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at 15% 20%,rgba(37,99,235,.12),transparent 28%),radial-gradient(circle at 82% 10%,rgba(91,69,216,.1),transparent 25%);}
-  .v6-hero-grid{position:relative;display:grid;grid-template-columns:minmax(0,1.08fr) minmax(420px,.72fr);align-items:center;gap:64px;}
-  .v6-badge{width:fit-content;display:inline-flex;align-items:center;gap:8px;padding:7px 11px;border:1px solid #d8e2f1;border-radius:999px;color:#40516a;background:rgba(255,255,255,.78);box-shadow:0 8px 25px rgba(33,56,94,.06);font-size:.7rem;font-weight:820;}
+  .v6-hero{position:relative;padding:82px 0 64px;border-bottom:1px solid #e7edf6;}
+  .v6-hero:before{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at 15% 20%,rgba(37,99,235,.12),transparent 28%),radial-gradient(circle at 82% 10%,rgba(91,69,216,.08),transparent 25%);}
+  .v6-hero-grid{position:relative;display:block;}
+  .v6-hero-copy{max-width:1040px;}
+  .v6-badge{width:fit-content;display:inline-flex;align-items:center;gap:8px;padding:7px 11px;border:1px solid #d8e2f1;border-radius:999px;color:#40516a;background:rgba(255,255,255,.86);box-shadow:0 8px 25px rgba(33,56,94,.06);font-size:.7rem;font-weight:820;}
   .v6-badge .icon{color:#2563eb;}
-  .v6-hero-copy h1{max-width:850px;margin-top:20px;color:#101827;font-size:clamp(3.25rem,5.2vw,5.45rem);font-weight:890;line-height:.98;letter-spacing:-.067em;}
+  .v6-hero-copy h1{max-width:930px;margin-top:20px;color:#101827;font-size:clamp(3.25rem,5.2vw,5.45rem);font-weight:890;line-height:.98;letter-spacing:-.067em;}
   .v6-hero-copy h1 em{color:#2563eb;font-style:normal;}
-  .v6-hero-copy>p{max-width:720px;margin-top:23px;color:#617086;font-size:1rem;line-height:1.75;}
-  .v6-hero .hero-search{width:min(720px,100%);height:62px;margin-top:27px;border:1px solid #d8e2f1;color:#6d7b8f;background:#fff;box-shadow:0 18px 48px rgba(30,56,98,.11);}
+  .v6-hero-copy>p{max-width:760px;margin-top:23px;color:#617086;font-size:1rem;line-height:1.75;}
+  .v6-hero .hero-search{width:min(760px,100%);height:62px;margin-top:27px;border:1px solid #d8e2f1;color:#6d7b8f;background:#fff;box-shadow:0 18px 48px rgba(30,56,98,.11);}
   .v6-hero .hero-search:hover{border-color:#9bb8ec;background:#fff;box-shadow:0 22px 55px rgba(37,99,235,.14);}
   .v6-hero .hero-search .icon{color:#2563eb;}
   .v6-hero .hero-search kbd{border-color:#dbe3ee;color:#6d7b8f;background:#f5f7fa;}
   .v6-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px;}
-  .v6-actions .button.glass{color:#26364e;border-color:#d9e2ee;background:rgba(255,255,255,.72);}
+  .v6-actions .button.glass{color:#26364e;border-color:#d9e2ee;background:rgba(255,255,255,.82);}
   .v6-actions .button.glass:hover{background:#fff;}
-  .v6-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;max-width:720px;margin-top:25px;}
-  .v6-stat{display:grid;grid-template-columns:39px 1fr;align-items:center;gap:10px;padding:12px 13px;border:1px solid #e0e7f1;border-radius:14px;background:rgba(255,255,255,.68);}
+  .v6-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;max-width:900px;margin-top:28px;}
+  .v6-stat{display:grid;grid-template-columns:39px 1fr;align-items:center;gap:10px;padding:12px 13px;border:1px solid #e0e7f1;border-radius:14px;background:rgba(255,255,255,.78);}
   .v6-stat>span{width:39px;height:39px;display:grid;place-items:center;border-radius:11px;color:#2563eb;background:#eaf1ff;}
   .v6-stat div{display:grid;line-height:1.25;}
   .v6-stat strong{color:#172238;font-size:.78rem;}
   .v6-stat small{margin-top:2px;color:#748297;font-size:.61rem;}
-
-  .v6-spotlight{overflow:hidden;border:1px solid rgba(255,255,255,.1);border-radius:25px;color:#fff;background:linear-gradient(150deg,#0b1423 0%,#142744 65%,#183056 100%);box-shadow:0 35px 90px rgba(13,29,57,.24);}
-  .v6-spotlight-head{display:flex;align-items:flex-start;justify-content:space-between;gap:15px;padding:22px 22px 17px;border-bottom:1px solid rgba(255,255,255,.08);}
-  .v6-spotlight-head h2{margin-top:4px;font-size:1.18rem;letter-spacing:-.025em;}
-  .v6-live{display:flex;align-items:center;gap:7px;padding:5px 8px;border-radius:999px;color:#95e7d1;background:rgba(55,210,165,.09);font-size:.62rem;font-weight:820;}
-  .v6-live i{width:7px;height:7px;border-radius:50%;background:#4ee5bf;box-shadow:0 0 0 4px rgba(78,229,191,.09);}
-  .v6-spotlight-tools{display:grid;}
-  .v6-spotlight .tool-card{min-height:78px;grid-template-columns:28px 40px 1fr 18px;align-items:center;gap:11px;padding:11px 18px;border:0;border-bottom:1px solid rgba(255,255,255,.075);border-radius:0;color:#fff;background:transparent;box-shadow:none;}
-  .v6-spotlight .tool-card:hover{transform:none;background:rgba(255,255,255,.055);box-shadow:none;}
-  .v6-spotlight .tool-card:before{display:none;}
-  .v6-spotlight .tool-card-icon{width:40px;height:40px;border-radius:12px;color:#0a1423;background:#75e5f2;}
-  .v6-spotlight .tool-card-meta{display:none;}
-  .v6-spotlight .tool-card-top strong{color:#edf4ff;font-size:.8rem;}
-  .v6-spotlight .card-arrow,.v6-spotlight .tool-rank{color:#7c8fa9;}
-  .v6-spotlight-foot{display:flex;align-items:center;justify-content:space-between;gap:15px;min-height:52px;padding:0 20px;color:#8fa0b7;font-size:.65rem;}
-  .v6-spotlight-foot span{display:flex;align-items:center;gap:7px;}
-  .v6-spotlight-foot a{color:#9eeaf2;font-weight:800;}
 
   .v6-category-wrap{position:relative;margin-top:-1px;padding:18px 0 20px;border-bottom:1px solid #e5ebf4;background:#fff;}
   .v6-categories{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:9px;}
@@ -91,15 +74,12 @@ const HOME_UI_CSS = `
 
   @media(max-width:1220px){
     .v6-home .container,.site-header .container{width:min(100% - 44px,1180px);}
-    .v6-hero-grid{grid-template-columns:minmax(0,1fr) 390px;gap:38px;}
     .v6-hero-copy h1{font-size:clamp(3rem,5vw,4.5rem);}
     .v6-categories{grid-template-columns:repeat(4,minmax(0,1fr));}
     .v6-home .tool-grid-cards{grid-template-columns:repeat(2,minmax(0,1fr));}
   }
   @media(max-width:980px){
     .v6-hero{padding-top:52px;}
-    .v6-hero-grid{grid-template-columns:1fr;}
-    .v6-spotlight{max-width:760px;}
     .v6-stats{max-width:none;}
     .v6-categories{grid-template-columns:repeat(3,minmax(0,1fr));}
   }
@@ -113,8 +93,6 @@ const HOME_UI_CSS = `
     .v6-actions .button{width:100%;}
     .v6-stats{grid-template-columns:1fr;}
     .v6-stat{min-height:60px;}
-    .v6-spotlight{border-radius:20px;}
-    .v6-spotlight .tool-card{grid-template-columns:25px 37px 1fr 17px;padding:10px 12px;}
     .v6-category-wrap{overflow:auto;padding:14px 0;}
     .v6-categories{width:max-content;display:flex;gap:8px;}
     .v6-category{width:175px;min-height:66px;}
@@ -147,18 +125,12 @@ export default function HomePage() {
             <div className="v6-stat"><span><Icon name="shield" /></span><div><strong>Tarayıcıda hesaplama</strong><small>Verileriniz cihazınızda kalır</small></div></div>
           </div>
         </div>
-
-        <aside className="v6-spotlight" aria-label="Öne çıkan hesaplama araçları">
-          <div className="v6-spotlight-head"><div><span className="eyebrow light">Öne çıkanlar</span><h2>Bugünün hızlı araçları</h2></div><span className="v6-live"><i/> Güncel</span></div>
-          <div className="v6-spotlight-tools">{trendingTools.slice(0,5).map((tool,index)=><ToolCard key={tool.slug} tool={tool} compact rank={index+1}/>)}</div>
-          <div className="v6-spotlight-foot"><span><Icon name="command" size="sm" /> Ctrl + K ile her yerden arayın</span><Link href="/tum-araclar/">Tümünü gör</Link></div>
-        </aside>
       </div>
     </section>
 
     <section className="v6-category-wrap" aria-label="Hesaplama kategorileri">
       <div className="container v6-categories">
-        {categories.map((cat)=><Link href={`/tum-araclar/#${cat.id}`} key={cat.id} className={`v6-category category-${cat.id}`}><span><Icon name={cat.icon}/></span><div><strong>{cat.name}</strong><small>{tools.filter(t=>t.category===cat.id).length} ücretsiz araç</small></div><Icon name="arrow" size="sm"/></Link>)}
+        {categories.map((cat)=><Link href={`/tum-araclar/?category=${cat.id}#araclar`} key={cat.id} className={`v6-category category-${cat.id}`}><span><Icon name={cat.icon}/></span><div><strong>{cat.name}</strong><small>{tools.filter(t=>t.category===cat.id).length} ücretsiz araç</small></div><Icon name="arrow" size="sm"/></Link>)}
       </div>
     </section>
 
@@ -168,7 +140,7 @@ export default function HomePage() {
       <RecentTools />
 
       <section className="featured-section">
-        <div className="featured-copy"><span className="eyebrow light">Karar ekranı</span><h2>Yalnızca sonucu değil, farkı da görün.</h2><p>Hesaplama araçları ana sonuçla birlikte toplam maliyeti, oranı, farkı ve gerekli ayrıntıları tek ekranda sunar.</p><div className="featured-actions"><Link href="/kira-artis-hesaplama/" className="button white">Kira artışı hesapla <Icon name="arrow" size="sm"/></Link><Link href="/kar-marji-hesaplama/" className="button glass">Kâr marjı hesapla</Link></div></div>
+        <div className="featured-copy"><span className="eyebrow">Karar ekranı</span><h2>Yalnızca sonucu değil, farkı da görün.</h2><p>Hesaplama araçları ana sonuçla birlikte toplam maliyeti, oranı, farkı ve gerekli ayrıntıları tek ekranda sunar.</p><div className="featured-actions"><Link href="/kira-artis-hesaplama/" className="button white">Kira artışı hesapla <Icon name="arrow" size="sm"/></Link><Link href="/kar-marji-hesaplama/" className="button glass">Kâr marjı hesapla</Link></div></div>
         <div className="decision-preview"><div className="preview-top"><span>Örnek karar özeti</span><i>Canlı</i></div><div className="preview-main"><small>Yeni aylık kira</small><strong>26.406 TL</strong><span className="preview-change">+6.406 TL / ay</span></div><div className="preview-grid"><div><small>Yıllık fark</small><b>76.872 TL</b></div><div><small>Artış</small><b>%32,03</b></div></div><div className="preview-bar"><i style={{width:'68%'}}/></div></div>
       </section>
 
