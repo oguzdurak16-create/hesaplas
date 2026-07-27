@@ -20,8 +20,9 @@ export default function ToolExplorer({ initialLimit = 12, showHeading = true }) 
     const params = new URLSearchParams(window.location.search)
     const q = params.get('q')
     if (q) setQuery(q)
-    const hash = window.location.hash.replace('#', '')
-    if (categories.some((item) => item.id === hash)) setCategory(hash)
+
+    const requestedCategory = params.get('category') || window.location.hash.replace('#', '')
+    if (categories.some((item) => item.id === requestedCategory)) setCategory(requestedCategory)
   }, [])
 
   const filtered = useMemo(() => {
@@ -44,12 +45,13 @@ export default function ToolExplorer({ initialLimit = 12, showHeading = true }) 
   const updateCategory = (value) => {
     setCategory(value)
     const url = new URL(window.location.href)
-    url.hash = value === 'all' ? '' : value
+    value === 'all' ? url.searchParams.delete('category') : url.searchParams.set('category', value)
+    url.hash = 'araclar'
     window.history.replaceState({}, '', `${url.pathname}${url.search}${url.hash}`)
   }
 
   return (
-    <section className="explorer-section">
+    <section className="explorer-section" id="araclar">
       {showHeading && <div className="section-heading"><div><span className="eyebrow">Araç kütüphanesi</span><h2>İhtiyacınız olan hesabı bulun</h2><p>Arayın, kategori seçin veya öne çıkan araçlardan başlayın.</p></div><span className="tool-count"><strong>{tools.length}</strong> ücretsiz araç</span></div>}
       <div className="explorer-shell">
         <aside className="explorer-sidebar">
