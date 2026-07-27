@@ -2,32 +2,47 @@ import { n, money, number, integer, percent, daysBetween, addDays, formatDate, p
 
 export const toolsPart01 = [
 {
-    slug: 'kredi-hesaplama', title: 'Kredi Hesaplama', shortTitle: 'Kredi', category: 'finans', icon: 'landmark', badge: 'Popüler', trend: true,
-    description: 'Kredi tutarı, aylık faiz ve vadeye göre taksit, toplam geri ödeme ve örnek ödeme planını hesaplayın.',
-    keywords: ['kredi hesaplama', 'kredi taksit hesaplama', 'faiz hesaplama', 'ödeme planı'],
+    slug: 'kredi-hesaplama', title: 'Kredi Taksit ve Ödeme Planı Hesaplama', shortTitle: 'Kredi', category: 'finans', icon: 'landmark', badge: 'Popüler', trend: true,
+    description: 'Kredi tutarı, aylık faiz, vade ve tek seferlik masraflara göre taksit, toplam geri ödeme ve dönemsel ödeme planını hesaplayın.',
+    keywords: ['kredi hesaplama', 'kredi taksit hesaplama', 'kredi ödeme planı', 'toplam kredi maliyeti', 'aylık faiz hesaplama'],
+    updatedAt: '2026-07-27',
     fields: [
       { key: 'principal', label: 'Kredi tutarı', type: 'number', default: 250000, min: 1000, suffix: 'TL' },
       { key: 'rate', label: 'Aylık faiz oranı', type: 'number', default: 3.49, min: 0, step: 0.01, suffix: '%' },
       { key: 'months', label: 'Vade', type: 'number', default: 24, min: 1, max: 120, suffix: 'ay' },
+      { key: 'fees', label: 'Tek seferlik toplam masraf', type: 'number', default: 0, min: 0, suffix: 'TL', help: 'Tahsis, ekspertiz, sigorta veya bilinen diğer peşin masrafları toplam olarak girin.' },
     ],
     calculate: (v) => {
-      const p = n(v.principal), r = n(v.rate), m = Math.max(1, n(v.months))
-      const pay = payment(p, r, m), total = pay * m, interest = total - p
-      let balance = p
+      const principal = Math.max(0, n(v.principal)), rate = Math.max(0, n(v.rate)), months = Math.max(1, Math.round(n(v.months))), fees = Math.max(0, n(v.fees))
+      const installment = payment(principal, rate, months)
+      const installmentTotal = installment * months
+      const total = installmentTotal + fees
+      const financingCost = Math.max(0, total - principal)
+      let balance = principal
       const rows = []
-      for (let i = 1; i <= Math.min(m, 12); i++) {
-        const interestPart = balance * (r / 100)
-        const principalPart = pay - interestPart
+      for (let month = 1; month <= months; month++) {
+        const interestPart = balance * rate / 100
+        const principalPart = Math.min(balance, Math.max(0, installment - interestPart))
         balance = Math.max(0, balance - principalPart)
-        rows.push([`${i}. ay`, money(pay), money(principalPart), money(interestPart), money(balance)])
+        rows.push([`${month}. ay`, money(installment), money(principalPart), money(interestPart), money(balance)])
       }
       return result(
-        [item('Aylık taksit', money(pay), 'primary'), item('Toplam geri ödeme', money(total)), item('Toplam faiz', money(interest), 'warning')],
-        [item('Ana para', money(p)), item('Vade', `${integer(m)} ay`), item('Aylık oran', percent(r))],
-        'Hesaplama masraf, sigorta ve banka özel vergilerini içermez.',
+        [item('Aylık taksit', money(installment), 'primary'), item('Toplam geri ödeme', money(total)), item('Toplam finansman maliyeti', money(financingCost), 'warning')],
+        [item('Ana para', money(principal)), item('Taksit toplamı', money(installmentTotal)), item('Tek seferlik masraflar', money(fees)), item('Vade', `${integer(months)} ay`), item('Aylık oran', percent(rate))],
+        'Hesaplama eşit taksitli standart ödeme planıdır. Bankanın faiz üzerinden uyguladığı vergi, sigorta ve diğer masraflar yalnızca masraf alanına doğru girildiği ölçüde toplam maliyete yansır.',
         { headers: ['Dönem', 'Taksit', 'Ana para', 'Faiz', 'Kalan'], rows }
       )
     },
+    formula: 'Aylık taksit, anüite formülüyle kredi tutarı, aylık faiz oranı ve vade kullanılarak hesaplanır. Her dönemin faizi kalan ana para üzerinden bulunur; taksitin faizden kalan kısmı ana parayı azaltır. Toplam geri ödeme, tüm taksitlerin toplamına girilen tek seferlik masrafların eklenmesiyle gösterilir.',
+    guide: {
+      intro: 'Bu araç bankadan alınan teklifin taksit ve toplam maliyetini ortak bir hesap mantığıyla incelemek için tasarlanmıştır. Faiz oranını aylık olarak girer ve eşit taksitli ödeme planı üretir. Banka teklifindeki masraf ve sigorta bedelleri otomatik bilinmediği için ayrı alana kullanıcı tarafından eklenir.',
+      evaluate: 'Kredi tekliflerini yalnızca aylık taksite göre karşılaştırmayın. Aynı ana para ve vadede toplam geri ödeme, tek seferlik masraflar ve toplam finansman maliyetini birlikte inceleyin. Bankanın verdiği yıllık maliyet oranı ile araçtaki varsayımların aynı kalemleri içerip içermediğini kontrol edin.',
+    },
+    faqs: [
+      { q: 'Aylık faiz oranı mı yıllık oran mı girilmeli?', a: 'Bu araç aylık faiz oranı kullanır. Banka teklifinizde oran yıllık verilmişse doğrudan aylık alana yazmayın.' },
+      { q: 'Masraflar taksite ekleniyor mu?', a: 'Tek seferlik masraf alanı toplam geri ödemeye eklenir ancak kredi ana parasına dağıtılıp faizlendirilmez. Banka masrafı krediden finanse ediyorsa ana para tutarını buna göre düzenleyin.' },
+      { q: 'Ödeme planı banka planıyla neden farklı olabilir?', a: 'Vergi, sigorta, tahsis ücreti, yuvarlama, ilk ödeme tarihi ve bankaya özgü hesaplama yöntemleri küçük veya önemli farklar oluşturabilir.' },
+    ],
   },
 {
     slug: 'kredi-karti-borc', title: 'Kredi Kartı Borcu Kapatma ve Taksit Simülasyonu', shortTitle: 'Kart Borcu', category: 'finans', icon: 'credit-card', badge: 'Çok Aranan', trend: true,
@@ -79,23 +94,50 @@ export const toolsPart01 = [
     ],
   },
 {
-    slug: 'kredi-yapilandirma-hesaplama', title: 'Kredi Yapılandırma Hesaplama', shortTitle: 'Yapılandırma', category: 'finans', icon: 'refresh', badge: 'Trend', trend: true,
-    description: 'Mevcut borcu yeni faiz ve vade ile yapılandırdığınızda taksit ve toplam maliyet nasıl değişir hesaplayın.',
-    keywords: ['kredi yapılandırma hesaplama', 'borç yapılandırma', 'yeni taksit hesaplama'],
+    slug: 'kredi-yapilandirma-hesaplama', title: 'Kredi Borcu Yapılandırma Karşılaştırması', shortTitle: 'Yapılandırma', category: 'finans', icon: 'refresh', badge: 'Trend', trend: true,
+    description: 'Mevcut ödeme planını yeni faiz, vade ve masraf senaryosuyla karşılaştırarak aylık taksit ve toplam maliyet farkını hesaplayın.',
+    keywords: ['kredi yapılandırma hesaplama', 'borç yapılandırma', 'kredi refinansman karşılaştırma', 'yeni taksit hesaplama', 'yapılandırma maliyeti'],
+    updatedAt: '2026-07-27',
     fields: [
-      { key: 'debt', label: 'Kalan borç', type: 'number', default: 150000, min: 100, suffix: 'TL' },
+      { key: 'debt', label: 'Yapılandırılacak kalan borç', type: 'number', default: 150000, min: 100, suffix: 'TL' },
       { key: 'oldPayment', label: 'Mevcut aylık ödeme', type: 'number', default: 18000, min: 0, suffix: 'TL' },
+      { key: 'oldMonths', label: 'Mevcut kalan vade', type: 'number', default: 10, min: 1, max: 120, suffix: 'ay' },
       { key: 'newRate', label: 'Yeni aylık faiz', type: 'number', default: 3.29, min: 0, step: 0.01, suffix: '%' },
       { key: 'newMonths', label: 'Yeni vade', type: 'number', default: 18, min: 1, max: 120, suffix: 'ay' },
+      { key: 'newFees', label: 'Yeni yapılandırma masrafları', type: 'number', default: 0, min: 0, suffix: 'TL' },
     ],
     calculate: (v) => {
-      const d = n(v.debt), old = n(v.oldPayment), r = n(v.newRate), m = Math.max(1, n(v.newMonths)), pay = payment(d, r, m), total = pay * m
+      const debt = Math.max(0, n(v.debt)), oldPayment = Math.max(0, n(v.oldPayment)), oldMonths = Math.max(1, Math.round(n(v.oldMonths))), rate = Math.max(0, n(v.newRate)), months = Math.max(1, Math.round(n(v.newMonths))), fees = Math.max(0, n(v.newFees))
+      const newPayment = payment(debt, rate, months)
+      const oldRemainingTotal = oldPayment * oldMonths
+      const newInstallmentTotal = newPayment * months
+      const newTotal = newInstallmentTotal + fees
+      const totalDifference = newTotal - oldRemainingTotal
+      let balance = debt
+      const rows = []
+      for (let month = 1; month <= months; month++) {
+        const interestPart = balance * rate / 100
+        const principalPart = Math.min(balance, Math.max(0, newPayment - interestPart))
+        balance = Math.max(0, balance - principalPart)
+        rows.push([`${month}. ay`, money(newPayment), money(principalPart), money(interestPart), money(balance)])
+      }
       return result(
-        [item('Yeni aylık taksit', money(pay), 'primary'), item('Aylık fark', money(pay - old), pay <= old ? 'success' : 'warning'), item('Toplam yeni ödeme', money(total))],
-        [item('Toplam finansman maliyeti', money(total - d)), item('Taksit değişimi', percent(old ? ((pay - old) / old) * 100 : 0)), item('Yeni vade', `${integer(m)} ay`)],
-        'Yapılandırma masrafı ve erken kapama koşulları dahil değildir.'
+        [item('Yeni aylık taksit', money(newPayment), 'primary'), item('Aylık taksit farkı', money(newPayment - oldPayment), newPayment <= oldPayment ? 'success' : 'warning'), item('Toplam plan farkı', money(Math.abs(totalDifference)), totalDifference <= 0 ? 'success' : 'warning')],
+        [item('Mevcut kalan ödeme toplamı', money(oldRemainingTotal)), item('Yeni toplam ödeme', money(newTotal)), item('Yeni finansman maliyeti', money(Math.max(0, newTotal - debt))), item('Yeni masraflar', money(fees)), item('Toplam fark yönü', totalDifference <= 0 ? 'Yeni plan daha düşük' : 'Yeni plan daha yüksek')],
+        'Karşılaştırma, mevcut plan için aylık ödeme × kalan ay yaklaşımını kullanır. Erken kapama tutarı, değişken faiz, ara ödeme, sigorta iadesi ve bankanın kesin yapılandırma masrafları sonucu değiştirebilir.',
+        { headers: ['Dönem', 'Yeni taksit', 'Ana para', 'Faiz', 'Kalan borç'], rows }
       )
     },
+    formula: 'Mevcut planda kalan toplam ödeme, mevcut taksit ile kalan ay sayısının çarpımıdır. Yeni taksit, kalan borç için seçilen aylık faiz ve vadeyle anüite formülünden hesaplanır. Yeni toplam ödeme, taksit toplamına yapılandırma masraflarının eklenmesiyle bulunur; iki plan arasındaki fark ayrıca gösterilir.',
+    guide: {
+      intro: 'Yapılandırma kararı yalnızca aylık taksitin düşmesine göre verilmemelidir. Vadenin uzaması aylık ödemeyi azaltırken toplam geri ödemeyi artırabilir. Bu araç mevcut planın yaklaşık kalan ödeme toplamıyla yeni senaryoyu aynı ekranda karşılaştırır.',
+      evaluate: 'Bankadan güncel erken kapama tutarını ve yeni teklifin tüm masraflarını alın. Mevcut kalan ay sayısını doğru girin. Yeni aylık taksit daha düşük olsa bile toplam plan farkı pozitifse vade uzaması nedeniyle daha fazla ödeme yapılıyor olabilir.',
+    },
+    faqs: [
+      { q: 'Düşük yeni taksit her zaman avantajlı mı?', a: 'Hayır. Vade uzadığında aylık taksit düşebilir ancak toplam geri ödeme ve finansman maliyeti artabilir.' },
+      { q: 'Mevcut kalan borç ile kalan taksit toplamı aynı mı?', a: 'Genellikle aynı değildir. Kalan taksit toplamı gelecekte ödenecek faizleri de içerir; yapılandırılacak borç için bankanın erken kapama veya kalan ana para tutarını kullanın.' },
+      { q: 'Yapılandırma masrafları nereye ekleniyor?', a: 'Girdiğiniz tek seferlik masraflar yeni toplam ödeme hesabına eklenir, ancak taksit ana parasına dağıtılıp faizlendirilmez.' },
+    ],
   },
 {
     slug: 'mevduat-faiz-hesaplama', title: 'Mevduat Faiz Hesaplama', shortTitle: 'Mevduat Faizi', category: 'finans', icon: 'piggy-bank', badge: 'Trend', trend: true,
