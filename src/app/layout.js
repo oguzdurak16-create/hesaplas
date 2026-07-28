@@ -64,7 +64,7 @@ export default function RootLayout({ children }) {
         <Script id="ga-config" strategy="afterInteractive" dangerouslySetInnerHTML={{ __html: `gtag('js',new Date());gtag('config','${GA_ID}',{anonymize_ip:true});` }} />
         <Header />
         <main>{children}</main>
-        <AdSlot slot={process.env.NEXT_PUBLIC_ADSENSE_CONTENT_SLOT} />
+        <AdSlot slot={process.env.NEXT_PUBLIC_ADSENSE_CONTENT_SLOT} afterSelector=".calculator-layout" />
         <Footer />
         <CookieConsent />
         <MobileDock />
