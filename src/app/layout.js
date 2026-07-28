@@ -12,6 +12,7 @@ import Footer from '@/components/Footer'
 import CookieConsent from '@/components/CookieConsent'
 import MobileDock from '@/components/MobileDock'
 import ModernWebFeatures from '@/components/ModernWebFeatures'
+import AdSlot from '@/components/AdSlot'
 import { SITE_NAME, SITE_URL } from '@/lib/seo'
 
 const GA_ID = 'G-BDVJ5W4E3E'
@@ -63,6 +64,7 @@ export default function RootLayout({ children }) {
         <Script id="ga-config" strategy="afterInteractive" dangerouslySetInnerHTML={{ __html: `gtag('js',new Date());gtag('config','${GA_ID}',{anonymize_ip:true});` }} />
         <Header />
         <main>{children}</main>
+        <AdSlot slot={process.env.NEXT_PUBLIC_ADSENSE_CONTENT_SLOT} />
         <Footer />
         <CookieConsent />
         <MobileDock />
