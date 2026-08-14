@@ -7,6 +7,7 @@ import Icon from '@/components/Icon'
 import FavoriteButton from '@/components/FavoriteButton'
 import { categories, toolMap, tools } from '@/data/tools'
 import { createMetadata, SITE_URL } from '@/lib/seo'
+import { isIndexableTool } from '@/lib/indexFocus'
 
 const categoryContent = {
   finans: {
@@ -55,7 +56,13 @@ export const dynamicParams = false
 export function generateMetadata({ params }) {
   const tool = toolMap[params.slug]
   if (!tool) return {}
-  return createMetadata({ title: tool.title, description: tool.description, path: `/${tool.slug}/`, keywords: tool.keywords })
+  return createMetadata({
+    title: tool.title,
+    description: tool.description,
+    path: `/${tool.slug}/`,
+    keywords: tool.keywords,
+    noIndex: !isIndexableTool(tool.slug),
+  })
 }
 
 export default function ToolPage({ params }) {
