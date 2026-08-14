@@ -57,7 +57,7 @@ export function generateMetadata({ params }) {
   const tool = toolMap[params.slug]
   if (!tool) return {}
   return createMetadata({
-    title: tool.title,
+    title: tool.seoTitle || tool.title,
     description: tool.description,
     path: `/${tool.slug}/`,
     keywords: tool.keywords,
@@ -135,6 +135,7 @@ export default function ToolPage({ params }) {
           <p>{guide.intro}</p>
           <h3>Hangi bilgiler kullanılır?</h3>
           <p>{inputLabels.length ? `Hesaplama için ${inputLabels.join(', ')} alanları kullanılır. Her alanı kendi senaryonuza göre değiştirdiğinizde sonuç aynı formül üzerinden yeniden hesaplanır.` : 'Araç, gerekli hesaplama verilerini kendi ekranında toplar ve sonucu tarayıcıda üretir.'}</p>
+          {!!tool.example && <><h3>Örnek hesaplama</h3><div className="v7-formula"><span>Örnek senaryo</span><p>{tool.example}</p></div></>}
           <h3>Sonucu nasıl değerlendirmelisiniz?</h3>
           <p>{guide.evaluate}</p>
           <h3>Senaryo karşılaştırma</h3>

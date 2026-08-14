@@ -7,6 +7,7 @@ import { toolsPart06 } from './tools-parts/part-06.js'
 import { toolsPart07 } from './tools-parts/part-07.js'
 import { toolsPart08 } from './tools-parts/part-08.js'
 import { toolsPart09 } from './tools-parts/part-09.js'
+import { focusEditorial } from './focus-editorial.js'
 
 export const categories = [
   { id: 'finans', name: 'Finans', icon: 'wallet', description: 'Kredi, faiz, yatırım ve borç araçları' },
@@ -31,7 +32,40 @@ export const tools = [
 ]
 
 const DEFAULT_UPDATED_AT = '2026-07-17'
-tools.forEach((tool) => { if (!tool.updatedAt) tool.updatedAt = DEFAULT_UPDATED_AT })
+
+tools.forEach((tool) => {
+  const editorial = focusEditorial[tool.slug]
+  if (editorial) {
+    const { guide, faqs, sources, fieldOverrides, ...plain } = editorial
+    Object.assign(tool, plain)
+
+    if (guide) tool.guide = { ...(tool.guide || {}), ...guide }
+
+    if (faqs) {
+      const seen = new Set()
+      tool.faqs = [...faqs, ...(tool.faqs || [])].filter((row) => {
+        if (seen.has(row.q)) return false
+        seen.add(row.q)
+        return true
+      }).slice(0, 6)
+    }
+
+    if (sources) {
+      const seen = new Set()
+      tool.sources = [...(tool.sources || []), ...sources].filter((source) => {
+        if (seen.has(source.url)) return false
+        seen.add(source.url)
+        return true
+      })
+    }
+
+    if (fieldOverrides) {
+      tool.fields = tool.fields.map((field) => fieldOverrides[field.key] ? { ...field, ...fieldOverrides[field.key] } : field)
+    }
+  }
+
+  if (!tool.updatedAt) tool.updatedAt = DEFAULT_UPDATED_AT
+})
 
 export const toolMap = Object.fromEntries(tools.map((tool) => [tool.slug, tool]))
 export const trendingTools = tools.filter((tool) => tool.trend).sort((a, b) => (a.trendRank ?? 999) - (b.trendRank ?? 999))
