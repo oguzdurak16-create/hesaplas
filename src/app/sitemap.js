@@ -1,7 +1,8 @@
 import { tools } from '@/data/tools'
 import { SITE_URL } from '@/lib/seo'
+import { isIndexableTool } from '@/lib/indexFocus'
 
-const TECHNICAL_UPDATED = '2026-08-05'
+const TECHNICAL_UPDATED = '2026-08-14'
 
 function latestDate(value) {
   if (!value) return TECHNICAL_UPDATED
@@ -27,11 +28,13 @@ export default function sitemap() {
       changeFrequency: item.changeFrequency,
       priority: item.priority,
     })),
-    ...tools.map((tool) => ({
-      url: `${SITE_URL}/${tool.slug}/`,
-      lastModified: latestDate(tool.updatedAt),
-      changeFrequency: 'monthly',
-      priority: tool.trend ? 0.9 : 0.7,
-    })),
+    ...tools
+      .filter((tool) => isIndexableTool(tool.slug))
+      .map((tool) => ({
+        url: `${SITE_URL}/${tool.slug}/`,
+        lastModified: latestDate(tool.updatedAt),
+        changeFrequency: 'monthly',
+        priority: tool.trend ? 0.9 : 0.7,
+      })),
   ]
 }
