@@ -64,6 +64,14 @@ tools.forEach((tool) => {
     }
   }
 
+  if (tool.slug === 'kira-artis-hesaplama') {
+    const calculate = tool.calculate
+    tool.calculate = (values) => ({
+      ...calculate(values),
+      note: 'Artış oranı otomatik güncellenmez. Yenileme ayınız için TÜİK tarafından yayımlanan 12 aylık ortalama oranını kontrol edip alana girin. Temmuz 2026 için %32,03 yalnızca örnek referanstır.',
+    })
+  }
+
   if (!tool.updatedAt) tool.updatedAt = DEFAULT_UPDATED_AT
 })
 
