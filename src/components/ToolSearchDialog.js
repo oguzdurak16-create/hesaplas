@@ -40,7 +40,12 @@ export default function ToolSearchDialog({ open, onClose }) {
   if (!open) return null
   return <div className="search-dialog-backdrop" onMouseDown={onClose}>
     <section className="search-dialog" role="dialog" aria-modal="true" aria-label="Hesaplama aracı ara" onMouseDown={(e) => e.stopPropagation()}>
-      <div className="dialog-search"><Icon name="search" /><input ref={inputRef} value={query} onChange={(e) => { setQuery(e.target.value); setActive(0) }} onKeyDown={keyDown} placeholder="Ne hesaplamak istiyorsunuz?" /><kbd>ESC</kbd></div>
+      <div className="dialog-search">
+        <Icon name="search" />
+        <input ref={inputRef} value={query} onChange={(e) => { setQuery(e.target.value); setActive(0) }} onKeyDown={keyDown} placeholder="Ne hesaplamak istiyorsunuz?" />
+        <kbd>ESC</kbd>
+        <button type="button" className="dialog-close" onClick={onClose} aria-label="Aramayı kapat" title="Kapat"><Icon name="close" /></button>
+      </div>
       <div className="dialog-caption"><span>{query ? `${results.length} sonuç` : 'Öne çıkan araçlar'}</span><small>↑↓ gezin · Enter aç</small></div>
       <div className="dialog-results">
         {results.map((tool, index) => {

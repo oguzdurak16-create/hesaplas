@@ -1,0 +1,87 @@
+/* Final responsive guardrails — loaded last on purpose */
+html,body{max-width:100%;overflow-x:hidden}
+main,.page-bg,.v6-home{width:100%;max-width:100%;overflow-x:clip}
+.container,.tool-page-container{margin-left:auto!important;margin-right:auto!important;max-width:100%}
+.tool-page-hero,.calculator-layout,.calculator-form-card,.result-card,.scenario-card,.payment-table-card,.v7-content-intro,.v7-guide-card,.v7-facts-card,.content-layout,.seo-article,.faq-card,.related-section,.tool-grid-cards,.tool-card{min-width:0;max-width:100%}
+.tool-hero-copy,.result-card-head>div,.summary-item,.result-list>div,.scenario-grid article{min-width:0}
+.tool-hero-copy h1,.tool-hero-copy>p,.summary-item strong,.result-list strong,.seo-article,.faq-card{overflow-wrap:anywhere;word-break:normal}
+input,select,button{max-width:100%}
+.fields-grid,.summary-grid,.calculator-actions{min-width:0}
+.table-scroll{max-width:100%;-webkit-overflow-scrolling:touch}
+
+/* Search dialog gets an explicit close control on touch devices as well as desktop. */
+.dialog-search{position:relative}
+.dialog-close{width:38px;height:38px;display:grid;place-items:center;flex:0 0 38px;border:1px solid var(--line);border-radius:11px;color:var(--ink-2);background:var(--surface);transition:.18s ease}
+.dialog-close:hover{color:var(--primary);border-color:#b7c8e3;background:var(--primary-soft)}
+
+@media(max-width:900px){
+  .tool-page-container{width:calc(100% - 24px)!important}
+  .tool-page-hero,.calculator-layout,.v7-content-intro,.content-layout{width:100%;margin-left:auto!important;margin-right:auto!important}
+  .calculator-layout{gap:14px!important}
+  .result-card{width:100%}
+}
+
+@media(max-width:640px){
+  body{padding-bottom:72px}
+  .container{width:calc(100% - 20px)!important}
+  .tool-page-container{width:calc(100% - 16px)!important;padding-left:0!important;padding-right:0!important}
+
+  .tool-page-hero{display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;text-align:center!important;padding:18px 16px!important;gap:12px!important}
+  .tool-hero-icon{margin:0 auto!important}
+  .tool-hero-copy{width:100%;text-align:center}
+  .tool-hero-copy h1{width:100%;max-width:100%;font-size:clamp(1.65rem,8.5vw,2rem)!important;line-height:1.08!important;letter-spacing:-.035em!important}
+  .tool-hero-copy>p{width:100%;max-width:34rem;margin-left:auto!important;margin-right:auto!important;font-size:.82rem!important;line-height:1.6!important}
+  .tool-hero-meta,.v7-trust-row{justify-content:center!important;align-items:center!important;width:100%}
+  .updated-label{white-space:normal;text-align:center}
+
+  .calculator-form-card,.result-card,.scenario-card,.payment-table-card,.v7-guide-card,.v7-facts-card,.seo-article,.faq-card{width:100%!important;padding:16px!important;margin-left:auto!important;margin-right:auto!important;border-radius:16px!important}
+  .fields-grid,.summary-grid,.calculator-actions{grid-template-columns:1fr!important;width:100%}
+  .calculator-actions{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  .input-wrap,.field-group select{width:100%!important;max-width:100%!important}
+  .input-wrap input{min-width:0!important;width:100%!important;font-size:16px!important}
+  .field-group select{font-size:16px!important}
+
+  .result-card-head{display:grid!important;grid-template-columns:minmax(0,1fr) auto!important;align-items:start!important;gap:10px!important}
+  .result-card-head h2{font-size:1.06rem!important;overflow-wrap:anywhere}
+  .copy-button{white-space:nowrap;align-self:start}
+  .summary-item{width:100%;min-height:78px!important;display:grid!important;grid-template-columns:1fr!important;align-content:center!important;text-align:center!important}
+  .summary-item span,.summary-item strong{text-align:center!important;max-width:100%!important}
+  .summary-item strong{font-size:clamp(1.18rem,7vw,1.6rem)!important;line-height:1.2!important}
+  .result-list>div{display:grid!important;grid-template-columns:minmax(0,1fr)!important;gap:4px!important;text-align:center!important}
+  .result-list span,.result-list strong{max-width:100%!important;text-align:center!important}
+
+  .v7-content-intro,.content-layout,.related-section{width:100%;margin-left:auto!important;margin-right:auto!important}
+  .v7-guide-card,.v7-facts-card,.seo-article,.faq-card{text-align:left}
+  .tool-grid-cards{width:100%;grid-template-columns:1fr!important}
+  .tool-card{width:100%;margin-left:auto;margin-right:auto}
+
+  .breadcrumb{max-width:100%;margin-left:auto!important;margin-right:auto!important;padding-left:2px!important;padding-right:2px!important;scrollbar-width:none}
+  .breadcrumb::-webkit-scrollbar{display:none}
+
+  .search-dialog-backdrop{align-items:stretch!important;padding:0!important;background:rgba(5,11,21,.72)}
+  .search-dialog{width:100%!important;max-width:none!important;height:100dvh;max-height:100dvh;margin:0!important;border:0!important;border-radius:0!important;display:grid;grid-template-rows:auto auto minmax(0,1fr) auto;overflow:hidden}
+  .dialog-search{height:auto!important;min-height:68px;padding:calc(env(safe-area-inset-top) + 10px) 12px 10px!important;gap:10px!important}
+  .dialog-search .icon{font-size:1.15rem}
+  .dialog-search input{font-size:16px!important}
+  .dialog-search kbd{display:none!important}
+  .dialog-close{display:grid;width:42px;height:42px;flex-basis:42px;border-radius:13px;font-size:1.1rem}
+  .dialog-caption{padding:10px 14px 7px!important}
+  .dialog-caption small{display:none}
+  .dialog-results{min-height:0;overflow-y:auto;padding:6px 8px calc(10px + env(safe-area-inset-bottom))!important;-webkit-overflow-scrolling:touch}
+  .dialog-results>button{width:100%;min-height:64px;grid-template-columns:40px minmax(0,1fr) 18px!important;gap:10px!important;padding:8px!important}
+  .dialog-results strong{font-size:.8rem}
+  .dialog-results small{font-size:.64rem}
+  .dialog-footer{min-height:56px;padding:8px 14px calc(8px + env(safe-area-inset-bottom))!important}
+  .dialog-footer button{width:100%;min-height:40px;border:1px solid var(--line);border-radius:11px;background:var(--paper)}
+
+  .mobile-nav{max-height:calc(100dvh - 66px);overflow-y:auto;padding-left:12px!important;padding-right:12px!important}
+}
+
+@media(max-width:390px){
+  .container{width:calc(100% - 16px)!important}
+  .tool-page-container{width:calc(100% - 12px)!important}
+  .calculator-form-card,.result-card,.scenario-card,.payment-table-card,.v7-guide-card,.v7-facts-card,.seo-article,.faq-card{padding:14px!important}
+  .calculator-actions{grid-template-columns:1fr!important}
+  .result-card-head{grid-template-columns:1fr!important}
+  .copy-button{width:100%;justify-content:center}
+}
