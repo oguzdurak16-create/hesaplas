@@ -8,6 +8,7 @@ import { toolsPart07 } from './tools-parts/part-07.js'
 import { toolsPart08 } from './tools-parts/part-08.js'
 import { toolsPart09 } from './tools-parts/part-09.js'
 import { focusEditorial } from './focus-editorial.js'
+import { applyRegulatoryFieldOverrides } from './regulatory.js'
 
 export const categories = [
   { id: 'finans', name: 'Finans', icon: 'wallet', description: 'Kredi, faiz, yatırım ve borç araçları' },
@@ -63,6 +64,11 @@ tools.forEach((tool) => {
       tool.fields = tool.fields.map((field) => fieldOverrides[field.key] ? { ...field, ...fieldOverrides[field.key] } : field)
     }
   }
+
+  // Regulation-sensitive defaults are applied last so one verified config
+  // remains authoritative even when legacy tool definitions still carry
+  // fallback values.
+  applyRegulatoryFieldOverrides(tool)
 
   if (tool.slug === 'kira-artis-hesaplama') {
     const calculate = tool.calculate
