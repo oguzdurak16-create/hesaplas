@@ -12,7 +12,7 @@ export function createMetadata({ title, description, path = '/', keywords = [], 
   const url = absoluteUrl(path)
   const fullTitle = title.includes(SITE_NAME) ? title : `${title} | ${SITE_NAME}`
   const robots = noIndex
-    ? { index: false, follow: false }
+    ? { index: false, follow: true }
     : {
         index: true,
         follow: true,
