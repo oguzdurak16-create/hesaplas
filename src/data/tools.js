@@ -8,6 +8,7 @@ import { toolsPart07 } from './tools-parts/part-07.js'
 import { toolsPart08 } from './tools-parts/part-08.js'
 import { toolsPart09 } from './tools-parts/part-09.js'
 import { focusEditorial } from './focus-editorial.js'
+import { searchRecovery } from './search-recovery.js'
 import { applyRegulatoryFieldOverrides } from './regulatory.js'
 
 export const categories = [
@@ -34,36 +35,40 @@ export const tools = [
 
 const DEFAULT_UPDATED_AT = '2026-07-17'
 
-tools.forEach((tool) => {
-  const editorial = focusEditorial[tool.slug]
-  if (editorial) {
-    const { guide, faqs, sources, fieldOverrides, ...plain } = editorial
-    Object.assign(tool, plain)
+function mergeEditorial(tool, editorial) {
+  if (!editorial) return
 
-    if (guide) tool.guide = { ...(tool.guide || {}), ...guide }
+  const { guide, faqs, sources, fieldOverrides, ...plain } = editorial
+  Object.assign(tool, plain)
 
-    if (faqs) {
-      const seen = new Set()
-      tool.faqs = [...faqs, ...(tool.faqs || [])].filter((row) => {
-        if (seen.has(row.q)) return false
-        seen.add(row.q)
-        return true
-      }).slice(0, 6)
-    }
+  if (guide) tool.guide = { ...(tool.guide || {}), ...guide }
 
-    if (sources) {
-      const seen = new Set()
-      tool.sources = [...(tool.sources || []), ...sources].filter((source) => {
-        if (seen.has(source.url)) return false
-        seen.add(source.url)
-        return true
-      })
-    }
-
-    if (fieldOverrides) {
-      tool.fields = tool.fields.map((field) => fieldOverrides[field.key] ? { ...field, ...fieldOverrides[field.key] } : field)
-    }
+  if (faqs) {
+    const seen = new Set()
+    tool.faqs = [...faqs, ...(tool.faqs || [])].filter((row) => {
+      if (seen.has(row.q)) return false
+      seen.add(row.q)
+      return true
+    }).slice(0, 6)
   }
+
+  if (sources) {
+    const seen = new Set()
+    tool.sources = [...(tool.sources || []), ...sources].filter((source) => {
+      if (seen.has(source.url)) return false
+      seen.add(source.url)
+      return true
+    })
+  }
+
+  if (fieldOverrides) {
+    tool.fields = tool.fields.map((field) => fieldOverrides[field.key] ? { ...field, ...fieldOverrides[field.key] } : field)
+  }
+}
+
+tools.forEach((tool) => {
+  mergeEditorial(tool, focusEditorial[tool.slug])
+  mergeEditorial(tool, searchRecovery[tool.slug])
 
   // Regulation-sensitive defaults are applied last so one verified config
   // remains authoritative even when legacy tool definitions still carry
