@@ -42,8 +42,11 @@ export const viewport = { width: 'device-width', initialScale: 1, themeColor: '#
 
 export default function RootLayout({ children }) {
   const website = {
-    '@context': 'https://schema.org', '@type': 'WebSite', name: SITE_NAME, url: SITE_URL, inLanguage: 'tr-TR',
-    potentialAction: { '@type': 'SearchAction', target: `${SITE_URL}/tum-araclar/?q={search_term_string}`, 'query-input': 'required name=search_term_string' },
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: SITE_NAME,
+    url: SITE_URL,
+    inLanguage: 'tr-TR',
   }
   return (
     <html lang="tr" data-theme="light">
