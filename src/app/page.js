@@ -130,7 +130,7 @@ export default function HomePage() {
 
     <section className="v6-category-wrap" aria-label="Hesaplama kategorileri">
       <div className="container v6-categories">
-        {categories.map((cat)=><Link href={`/tum-araclar/?category=${cat.id}#araclar`} key={cat.id} className={`v6-category category-${cat.id}`}><span><Icon name={cat.icon}/></span><div><strong>{cat.name}</strong><small>{tools.filter(t=>t.category===cat.id).length} ücretsiz araç</small></div><Icon name="arrow" size="sm"/></Link>)}
+        {categories.map((cat)=><Link href={`/tum-araclar/#${cat.id}`} key={cat.id} className={`v6-category category-${cat.id}`}><span><Icon name={cat.icon}/></span><div><strong>{cat.name}</strong><small>{tools.filter(t=>t.category===cat.id).length} ücretsiz araç</small></div><Icon name="arrow" size="sm"/></Link>)}
       </div>
     </section>
 
