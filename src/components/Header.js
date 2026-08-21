@@ -6,12 +6,12 @@ import Icon from './Icon'
 import ToolSearchDialog from './ToolSearchDialog'
 
 const links = [
-  { name: 'Finans', href: '/tum-araclar/?category=finans#araclar' },
-  { name: 'Maaş', href: '/tum-araclar/?category=maas-vergi#araclar' },
-  { name: 'Ev & Yaşam', href: '/tum-araclar/?category=ev-yasam#araclar' },
-  { name: 'Sağlık', href: '/tum-araclar/?category=saglik#araclar' },
-  { name: 'Eğitim', href: '/tum-araclar/?category=egitim#araclar' },
-  { name: 'Teknoloji', href: '/tum-araclar/?category=teknoloji#araclar' },
+  { name: 'Finans', href: '/tum-araclar/#finans' },
+  { name: 'Maaş', href: '/tum-araclar/#maas-vergi' },
+  { name: 'Ev & Yaşam', href: '/tum-araclar/#ev-yasam' },
+  { name: 'Sağlık', href: '/tum-araclar/#saglik' },
+  { name: 'Eğitim', href: '/tum-araclar/#egitim' },
+  { name: 'Teknoloji', href: '/tum-araclar/#teknoloji' },
 ]
 
 const allToolsButtonStyle = {
