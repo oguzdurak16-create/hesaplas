@@ -2,7 +2,7 @@ import { tools } from '@/data/tools'
 import { SITE_URL } from '@/lib/seo'
 import { isIndexableTool } from '@/lib/indexFocus'
 
-const TECHNICAL_UPDATED = '2026-08-14'
+const TECHNICAL_UPDATED = '2026-08-21'
 
 function latestDate(value) {
   if (!value) return TECHNICAL_UPDATED
