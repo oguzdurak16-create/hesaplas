@@ -21,8 +21,21 @@ export default function ToolExplorer({ initialLimit = 12, showHeading = true }) 
     const q = params.get('q')
     if (q) setQuery(q)
 
-    const requestedCategory = params.get('category') || window.location.hash.replace('#', '')
-    if (categories.some((item) => item.id === requestedCategory)) setCategory(requestedCategory)
+    const categoryParam = params.get('category')
+    const hashCategory = window.location.hash.replace('#', '')
+    const requestedCategory = categoryParam || hashCategory
+    const hasValidCategory = categories.some((item) => item.id === requestedCategory)
+    if (hasValidCategory) setCategory(requestedCategory)
+
+    // Eski ?category= bağlantılarını geriye dönük destekle, ardından aynı
+    // filtreyi fragment ile temiz URL'ye taşı. Fragment sunucuya gönderilmez;
+    // böylece kategori filtreleri arama motorlarında ayrı kopya URL üretmez.
+    if (categoryParam) {
+      const url = new URL(window.location.href)
+      url.searchParams.delete('category')
+      if (hasValidCategory) url.hash = requestedCategory
+      window.history.replaceState({}, '', `${url.pathname}${url.search}${url.hash}`)
+    }
   }, [])
 
   const filtered = useMemo(() => {
@@ -45,8 +58,8 @@ export default function ToolExplorer({ initialLimit = 12, showHeading = true }) 
   const updateCategory = (value) => {
     setCategory(value)
     const url = new URL(window.location.href)
-    value === 'all' ? url.searchParams.delete('category') : url.searchParams.set('category', value)
-    url.hash = 'araclar'
+    url.searchParams.delete('category')
+    url.hash = value === 'all' ? 'araclar' : value
     window.history.replaceState({}, '', `${url.pathname}${url.search}${url.hash}`)
   }
 
