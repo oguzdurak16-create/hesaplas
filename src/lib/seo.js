@@ -8,8 +8,21 @@ export function absoluteUrl(path = '') {
   return `${SITE_URL}${normalizedPath}`
 }
 
+export function canonicalUrl(path = '') {
+  const rawPath = path || '/'
+  const normalizedPath = rawPath.startsWith('/') ? rawPath : `/${rawPath}`
+  const url = new URL(normalizedPath, `${SITE_URL}/`)
+
+  // Canonical adresler filtre/arama parametrelerinden ve fragmentlerden bağımsızdır.
+  url.search = ''
+  url.hash = ''
+  if (url.pathname !== '/' && !url.pathname.endsWith('/')) url.pathname = `${url.pathname}/`
+
+  return url.toString()
+}
+
 export function createMetadata({ title, description, path = '/', keywords = [], noIndex = false }) {
-  const url = absoluteUrl(path)
+  const url = canonicalUrl(path)
   const fullTitle = title.includes(SITE_NAME) ? title : `${title} | ${SITE_NAME}`
   const robots = noIndex
     ? { index: false, follow: true }
