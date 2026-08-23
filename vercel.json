@@ -2,5 +2,29 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "framework": "nextjs",
   "installCommand": "npm ci --no-audit --no-fund",
-  "buildCommand": "npm run build"
+  "buildCommand": "npm run build",
+  "redirects": [
+    {
+      "source": "/tum-araclar/",
+      "has": [
+        {
+          "type": "query",
+          "key": "category"
+        }
+      ],
+      "destination": "/tum-araclar/",
+      "permanent": true
+    },
+    {
+      "source": "/tum-araclar/",
+      "has": [
+        {
+          "type": "query",
+          "key": "q"
+        }
+      ],
+      "destination": "/tum-araclar/",
+      "permanent": true
+    }
+  ]
 }
