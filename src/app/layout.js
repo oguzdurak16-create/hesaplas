@@ -20,7 +20,6 @@ import { SITE_NAME, SITE_URL } from '@/lib/seo'
 
 const GA_ID = 'G-BDVJ5W4E3E'
 const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || ''
-const IS_VERCEL = process.env.VERCEL === '1'
 const withBase = (path) => `${BASE_PATH}${path}`
 const speculationRules = {
   prerender: [{
@@ -75,10 +74,6 @@ export default function RootLayout({ children }) {
             __html: `window.dataLayer=window.dataLayer||[];window.gtag=window.gtag||function(){window.dataLayer.push(arguments)};window.gtag('js',new Date());window.gtag('config','${GA_ID}',{anonymize_ip:true,send_page_view:false});`,
           }}
         />
-        {IS_VERCEL && <>
-          <Script id="vercel-analytics-bootstrap" strategy="afterInteractive" dangerouslySetInnerHTML={{ __html: `window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments);};` }} />
-          <Script id="vercel-analytics" src="/_vercel/insights/script.js" strategy="afterInteractive" />
-        </>}
         <AnalyticsTracker gaId={GA_ID} />
         <Header />
         <main>{children}</main>
