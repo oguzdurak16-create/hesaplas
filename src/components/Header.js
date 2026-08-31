@@ -6,12 +6,12 @@ import Icon from './Icon'
 import ToolSearchDialog from './ToolSearchDialog'
 
 const links = [
-  { name: 'Finans', href: '/tum-araclar/#finans' },
-  { name: 'Maaş', href: '/tum-araclar/#maas-vergi' },
-  { name: 'Ev & Yaşam', href: '/tum-araclar/#ev-yasam' },
-  { name: 'Sağlık', href: '/tum-araclar/#saglik' },
-  { name: 'Eğitim', href: '/tum-araclar/#egitim' },
-  { name: 'Teknoloji', href: '/tum-araclar/#teknoloji' },
+  { name: 'Finans', href: '/kategori/finans/' },
+  { name: 'Maaş', href: '/kategori/maas-vergi/' },
+  { name: 'Ev & Yaşam', href: '/kategori/ev-yasam/' },
+  { name: 'Sağlık', href: '/kategori/saglik/' },
+  { name: 'Eğitim', href: '/kategori/egitim/' },
+  { name: 'Teknoloji', href: '/kategori/teknoloji/' },
 ]
 
 const allToolsButtonStyle = {
@@ -45,7 +45,7 @@ export default function Header() {
             <span>hesaplas<strong>.com</strong></span>
           </Link>
           <nav className="desktop-nav" aria-label="Ana menü">
-            {links.map((link) => <a key={link.href} href={link.href}>{link.name}</a>)}
+            {links.map((link) => <Link key={link.href} href={link.href}>{link.name}</Link>)}
           </nav>
           <div className="header-actions">
             <button className="header-search-button" type="button" onClick={() => setSearchOpen(true)}><Icon name="search" size="sm" /><span>Araç ara</span><kbd>Ctrl K</kbd></button>
@@ -56,7 +56,8 @@ export default function Header() {
         {open && (
           <nav className="mobile-nav" aria-label="Mobil menü">
             <button type="button" className="mobile-search-link" onClick={() => { setOpen(false); setSearchOpen(true) }}><Icon name="search" /> Araç ara</button>
-            {links.map((link) => <a key={link.href} href={link.href} onClick={() => setOpen(false)}>{link.name}<Icon name="arrow" size="sm" /></a>)}
+            {links.map((link) => <Link key={link.href} href={link.href} onClick={() => setOpen(false)}>{link.name}<Icon name="arrow" size="sm" /></Link>)}
+            <Link href="/kategori/pratik/" onClick={() => setOpen(false)}>Pratik<Icon name="arrow" size="sm" /></Link>
             <Link href="/tum-araclar/" onClick={() => setOpen(false)}>Tüm hesaplama araçları<Icon name="grid" size="sm" /></Link>
           </nav>
         )}
