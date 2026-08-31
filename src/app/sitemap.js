@@ -9,11 +9,6 @@ function toolUpdatedAt(tool) {
   return tool.updatedAt || FALLBACK_TOOL_UPDATED
 }
 
-function categoryUpdatedAt(categoryId) {
-  const dates = tools.filter((tool) => tool.category === categoryId).map(toolUpdatedAt).sort()
-  return dates.at(-1) || SITE_UPDATED
-}
-
 export default function sitemap() {
   const fixed = [
     { path: '/', priority: 1, changeFrequency: 'weekly' },
@@ -35,7 +30,7 @@ export default function sitemap() {
     })),
     ...categories.map((category) => ({
       url: `${SITE_URL}/kategori/${category.id}/`,
-      lastModified: categoryUpdatedAt(category.id),
+      lastModified: SITE_UPDATED,
       changeFrequency: 'weekly',
       priority: 0.85,
     })),
