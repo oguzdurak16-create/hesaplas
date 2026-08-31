@@ -1,12 +1,17 @@
-import { tools } from '@/data/tools'
+import { categories, tools } from '@/data/tools'
 import { SITE_URL } from '@/lib/seo'
 import { isIndexableTool } from '@/lib/indexFocus'
 
-const TECHNICAL_UPDATED = '2026-08-21'
+const SITE_UPDATED = '2026-09-01'
+const FALLBACK_TOOL_UPDATED = '2026-07-17'
 
-function latestDate(value) {
-  if (!value) return TECHNICAL_UPDATED
-  return String(value) > TECHNICAL_UPDATED ? value : TECHNICAL_UPDATED
+function toolUpdatedAt(tool) {
+  return tool.updatedAt || FALLBACK_TOOL_UPDATED
+}
+
+function categoryUpdatedAt(categoryId) {
+  const dates = tools.filter((tool) => tool.category === categoryId).map(toolUpdatedAt).sort()
+  return dates.at(-1) || SITE_UPDATED
 }
 
 export default function sitemap() {
@@ -24,15 +29,21 @@ export default function sitemap() {
   return [
     ...fixed.map((item) => ({
       url: `${SITE_URL}${item.path}`,
-      lastModified: TECHNICAL_UPDATED,
+      lastModified: SITE_UPDATED,
       changeFrequency: item.changeFrequency,
       priority: item.priority,
+    })),
+    ...categories.map((category) => ({
+      url: `${SITE_URL}/kategori/${category.id}/`,
+      lastModified: categoryUpdatedAt(category.id),
+      changeFrequency: 'weekly',
+      priority: 0.85,
     })),
     ...tools
       .filter((tool) => isIndexableTool(tool.slug))
       .map((tool) => ({
         url: `${SITE_URL}/${tool.slug}/`,
-        lastModified: latestDate(tool.updatedAt),
+        lastModified: toolUpdatedAt(tool),
         changeFrequency: 'monthly',
         priority: tool.trend ? 0.9 : 0.7,
       })),
