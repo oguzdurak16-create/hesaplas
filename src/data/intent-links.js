@@ -55,6 +55,23 @@ export const categoryIntentLinks = {
       description: 'Cihaz gücü, günlük kullanım ve birim enerji fiyatıyla aylık kWh ve yaklaşık maliyeti bulun.',
     },
   ],
+  egitim: [
+    {
+      slug: 'yks-tyt-net-hesaplama',
+      title: 'TYT ham net hesabı',
+      description: 'Türkçe, Sosyal, Matematik ve Fen doğru-yanlışlarından ders netlerini ve toplam TYT netini hesaplayın.',
+    },
+    {
+      slug: 'lgs-net-hesaplama',
+      title: 'LGS ders ve toplam net hesabı',
+      description: 'Alt testlerdeki doğru-yanlışlardan sözel, sayısal ve genel LGS ham netlerini ayrı görün.',
+    },
+    {
+      slug: 'kpss-net-hesaplama',
+      title: 'KPSS Genel Yetenek ve Genel Kültür neti',
+      description: 'Doğru ve yanlış sayılarından iki testin netini ve toplam KPSS ham netini hesaplayın.',
+    },
+  ],
 }
 
 export const relatedToolSlugs = {
@@ -68,4 +85,7 @@ export const relatedToolSlugs = {
   'kira-artis-hesaplama': ['yakit-tuketimi-hesaplama', 'elektrik-tuketimi-hesaplama'],
   'yakit-tuketimi-hesaplama': ['kira-artis-hesaplama', 'elektrik-tuketimi-hesaplama'],
   'elektrik-tuketimi-hesaplama': ['kira-artis-hesaplama', 'yakit-tuketimi-hesaplama'],
+  'yks-tyt-net-hesaplama': ['lgs-net-hesaplama', 'kpss-net-hesaplama'],
+  'lgs-net-hesaplama': ['yks-tyt-net-hesaplama', 'kpss-net-hesaplama'],
+  'kpss-net-hesaplama': ['yks-tyt-net-hesaplama', 'lgs-net-hesaplama'],
 }
