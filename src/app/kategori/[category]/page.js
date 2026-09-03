@@ -4,6 +4,7 @@ import Script from 'next/script'
 import ToolCard from '@/components/ToolCard'
 import Icon from '@/components/Icon'
 import { categories, tools } from '@/data/tools'
+import { categoryIntentLinks } from '@/data/intent-links'
 import { createMetadata, SITE_URL } from '@/lib/seo'
 
 const categorySeo = {
@@ -61,13 +62,22 @@ const CATEGORY_CSS = `
   .category-hub-count span{font-size:.72rem;color:#728198;}
   .category-hub-grid{margin-top:32px;}
   .category-hub-grid .tool-grid-cards{grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;}
+  .category-intent{margin-top:34px;padding:28px;border:1px solid #e1e8f1;border-radius:22px;background:#fff;}
+  .category-intent h2{margin:8px 0 8px;}
+  .category-intent>p{max-width:820px;color:#65758b;line-height:1.7;}
+  .category-intent-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:18px;}
+  .category-intent-card{display:block;padding:18px;border:1px solid #e3eaf3;border-radius:16px;background:#f9fbfd;transition:transform .15s ease,border-color .15s ease;}
+  .category-intent-card:hover{transform:translateY(-2px);border-color:#c8d5e5;}
+  .category-intent-card strong{display:block;margin-bottom:7px;font-size:.95rem;}
+  .category-intent-card span{display:block;color:#68788e;font-size:.78rem;line-height:1.6;}
+  .category-intent-card em{display:inline-block;margin-top:10px;font-style:normal;font-size:.72rem;font-weight:800;}
   .category-hub-note{margin-top:34px;padding:26px;border:1px solid #e1e8f1;border-radius:20px;background:#fff;}
   .category-hub-note h2{margin-bottom:10px;}
   .category-hub-note p{color:#65758b;line-height:1.75;}
   .category-switch{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px;}
   .category-switch a{padding:9px 12px;border:1px solid #dde5ef;border-radius:999px;background:#f8fafc;font-size:.75rem;font-weight:750;}
   @media(max-width:980px){.category-hub-grid .tool-grid-cards{grid-template-columns:repeat(2,minmax(0,1fr));}}
-  @media(max-width:720px){.category-hub{padding-top:30px}.category-hub-hero{grid-template-columns:1fr;padding:24px}.category-hub-count{text-align:left}.category-hub-grid .tool-grid-cards{grid-template-columns:1fr;}}
+  @media(max-width:720px){.category-hub{padding-top:30px}.category-hub-hero{grid-template-columns:1fr;padding:24px}.category-hub-count{text-align:left}.category-hub-grid .tool-grid-cards{grid-template-columns:1fr}.category-intent-grid{grid-template-columns:1fr;}}
 `
 
 export function generateStaticParams() {
@@ -94,6 +104,7 @@ export default function CategoryPage({ params }) {
   if (!category || !seo) notFound()
 
   const categoryTools = tools.filter((tool) => tool.category === category.id)
+  const intentLinks = (categoryIntentLinks[category.id] || []).filter((item) => categoryTools.some((tool) => tool.slug === item.slug))
   const schema = {
     '@context': 'https://schema.org',
     '@type': 'CollectionPage',
@@ -127,6 +138,19 @@ export default function CategoryPage({ params }) {
           <div className="category-hub-count"><strong>{categoryTools.length}</strong><span>ücretsiz hesaplama aracı</span></div>
         </header>
 
+        {!!intentLinks.length && <section className="category-intent" aria-label={`${category.name} hesaplama rehberi`}>
+          <span className="eyebrow">Hangi araç ne zaman?</span>
+          <h2>İhtiyacınıza göre doğru hesaplamadan başlayın</h2>
+          <p>Aynı kategorideki araçlar benzer görünse de farklı kararları cevaplar. Aşağıdaki başlangıç noktaları, aradığınız sonuca doğrudan gitmenizi sağlar.</p>
+          <div className="category-intent-grid">
+            {intentLinks.map((item) => <Link className="category-intent-card" href={`/${item.slug}/`} key={item.slug}>
+              <strong>{item.title}</strong>
+              <span>{item.description}</span>
+              <em>Hesaplamayı aç →</em>
+            </Link>)}
+          </div>
+        </section>}
+
         <section className="category-hub-grid" aria-label={`${category.name} araçları`}>
           <div className="tool-grid-cards">{categoryTools.map((tool) => <ToolCard key={tool.slug} tool={tool} />)}</div>
         </section>
@@ -134,7 +158,7 @@ export default function CategoryPage({ params }) {
         <section className="category-hub-note">
           <span className="eyebrow">Hesaplas.com</span>
           <h2>{category.name} hesaplarını tek yerde karşılaştırın</h2>
-          <p>{seo.description} Her araç kendi sayfasında formül açıklaması, örnek senaryo, sık sorulan sorular ve ilgili hesaplamalara doğrudan bağlantılar içerir.</p>
+          <p>{seo.description} Her araç kendi sayfasında formül açıklaması, örnek senaryo, sık sorulan sorular ve aynı karar zincirindeki ilgili hesaplamalara doğrudan bağlantılar içerir.</p>
           <div className="category-switch">
             {categories.filter((item) => item.id !== category.id).map((item) => <Link key={item.id} href={`/kategori/${item.id}/`}>{item.name}</Link>)}
           </div>
