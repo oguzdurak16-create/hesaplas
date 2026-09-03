@@ -9,6 +9,7 @@ import { toolsPart08 } from './tools-parts/part-08.js'
 import { toolsPart09 } from './tools-parts/part-09.js'
 import { focusEditorial } from './focus-editorial.js'
 import { searchRecovery } from './search-recovery.js'
+import { indexRecovery } from './index-recovery.js'
 import { applyRegulatoryFieldOverrides } from './regulatory.js'
 
 export const categories = [
@@ -69,6 +70,7 @@ function mergeEditorial(tool, editorial) {
 tools.forEach((tool) => {
   mergeEditorial(tool, focusEditorial[tool.slug])
   mergeEditorial(tool, searchRecovery[tool.slug])
+  mergeEditorial(tool, indexRecovery[tool.slug])
 
   // Regulation-sensitive defaults are applied last so one verified config
   // remains authoritative even when legacy tool definitions still carry
