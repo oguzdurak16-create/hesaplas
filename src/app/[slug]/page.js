@@ -6,6 +6,7 @@ import ToolCard from '@/components/ToolCard'
 import Icon from '@/components/Icon'
 import FavoriteButton from '@/components/FavoriteButton'
 import { categories, toolMap, tools } from '@/data/tools'
+import { relatedToolSlugs } from '@/data/intent-links'
 import { createMetadata, SITE_URL } from '@/lib/seo'
 import { isIndexableTool } from '@/lib/indexFocus'
 
@@ -70,7 +71,9 @@ export default function ToolPage({ params }) {
   if (!tool) notFound()
 
   const category = categories.find((item) => item.id === tool.category)
-  const related = tools.filter((item) => item.category === tool.category && item.slug !== tool.slug).slice(0, 3)
+  const mappedRelated = (relatedToolSlugs[tool.slug] || []).map((slug) => toolMap[slug]).filter(Boolean)
+  const fallbackRelated = tools.filter((item) => item.category === tool.category && item.slug !== tool.slug && !mappedRelated.some((mapped) => mapped.slug === item.slug))
+  const related = [...mappedRelated, ...fallbackRelated].slice(0, 3)
   const guide = { ...categoryContent[tool.category], ...(tool.guide || {}) }
   const formulaText = tool.formula || `${tool.fields.map((field) => field.label).join(', ')} değerleri aracın formülünde birlikte kullanılır. Alanlardan birini değiştirdiğinizde sonuç otomatik olarak yeniden hesaplanır.`
   const inputLabels = tool.fields.map((field) => field.label)
@@ -88,14 +91,14 @@ export default function ToolPage({ params }) {
       { '@type': 'WebApplication', name: tool.title, url: `${SITE_URL}/${tool.slug}/`, applicationCategory: applicationCategories[tool.category], operatingSystem: 'Any', browserRequirements: 'JavaScript', offers: { '@type': 'Offer', price: '0', priceCurrency: 'TRY' }, description: tool.description, inLanguage: 'tr-TR', dateModified: tool.updatedAt },
       { '@type': 'HowTo', name: `${tool.title} nasıl yapılır?`, description: tool.description, totalTime: 'PT1M', step: [{ '@type': 'HowToStep', position: 1, name: 'Değerleri girin', text: tool.fields.length ? inputLabels.join(', ') : 'Gerekli değerleri girin' }, { '@type': 'HowToStep', position: 2, name: 'Sonucu inceleyin', text: 'Hesaplanan ana sonuçları ve ayrıntıları karşılaştırın.' }] },
       { '@type': 'FAQPage', mainEntity: faq.map((row) => ({ '@type': 'Question', name: row.q, acceptedAnswer: { '@type': 'Answer', text: row.a } })) },
-      { '@type': 'BreadcrumbList', itemListElement: [{ '@type': 'ListItem', position: 1, name: 'Ana Sayfa', item: SITE_URL }, { '@type': 'ListItem', position: 2, name: category?.name, item: `${SITE_URL}/tum-araclar/#${tool.category}` }, { '@type': 'ListItem', position: 3, name: tool.title, item: `${SITE_URL}/${tool.slug}/` }] },
+      { '@type': 'BreadcrumbList', itemListElement: [{ '@type': 'ListItem', position: 1, name: 'Ana Sayfa', item: SITE_URL }, { '@type': 'ListItem', position: 2, name: category?.name, item: `${SITE_URL}/kategori/${tool.category}/` }, { '@type': 'ListItem', position: 3, name: tool.title, item: `${SITE_URL}/${tool.slug}/` }] },
     ],
   }
 
   return <div className="page-bg v7-tool-page">
     <Script id={`${tool.slug}-schema`} type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
     <div className="container tool-page-container">
-      <nav className="breadcrumb"><Link href="/">Ana sayfa</Link><span>/</span><Link href={`/tum-araclar/#${tool.category}`}>{category?.name}</Link><span>/</span><strong>{tool.shortTitle}</strong></nav>
+      <nav className="breadcrumb"><Link href="/">Ana sayfa</Link><span>/</span><Link href={`/kategori/${tool.category}/`}>{category?.name}</Link><span>/</span><strong>{tool.shortTitle}</strong></nav>
 
       <header className={`tool-page-hero category-${tool.category}`}>
         <span className="tool-hero-icon"><Icon name={tool.icon} size="lg" /></span>
@@ -150,7 +153,7 @@ export default function ToolPage({ params }) {
       </section>
 
       {!!related.length && <section className="related-section">
-        <div className="section-heading"><div><span className="eyebrow">Benzer ihtiyaçlar</span><h2>İlgili hesaplama araçları</h2></div><Link className="text-link" href="/tum-araclar/">Tüm araçlar →</Link></div>
+        <div className="section-heading"><div><span className="eyebrow">Aynı kararın devamı</span><h2>Bu hesaplamadan sonra bakabileceğiniz araçlar</h2></div><Link className="text-link" href={`/kategori/${tool.category}/`}>{category?.name} araçları →</Link></div>
         <div className="tool-grid-cards">{related.map((item) => <ToolCard key={item.slug} tool={item} />)}</div>
       </section>}
     </div>
