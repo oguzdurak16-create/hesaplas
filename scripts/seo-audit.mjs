@@ -50,6 +50,10 @@ function isCalculatorPath(pathname) {
   return !fixedNonCalculatorPaths.has(pathname) && !pathname.startsWith('/kategori/')
 }
 
+function requireSchemaType(html, schemaType, urlString, label) {
+  if (!html.includes(schemaType)) error(`${label} has no ${schemaType} schema: ${urlString}`)
+}
+
 if (!fs.existsSync(OUT_DIR)) error('Static export directory "out" is missing.')
 else if (!fs.existsSync(SITEMAP_PATH)) error('out/sitemap.xml is missing.')
 
@@ -84,9 +88,17 @@ if (errors.length === 0) {
     if (description && description.length < 70) warn(`Short meta description (${description.length} chars): ${urlString}`)
     if (title.includes('2025') && !title.includes(CURRENT_YEAR)) warn(`Possibly stale year in title: ${urlString} -> ${title}`)
 
-    if (isCalculatorPath(url.pathname) && !html.includes('FAQPage')) warn(`Indexable calculator has no FAQPage schema: ${urlString}`)
-    if (isCalculatorPath(url.pathname) && !html.includes('dateModified')) warn(`Indexable calculator has no dateModified schema: ${urlString}`)
-    if (url.pathname.startsWith('/kategori/') && !html.includes('CollectionPage')) error(`Category hub has no CollectionPage schema: ${urlString}`)
+    if (isCalculatorPath(url.pathname)) {
+      requireSchemaType(html, 'WebApplication', urlString, 'Indexable calculator')
+      requireSchemaType(html, 'BreadcrumbList', urlString, 'Indexable calculator')
+      requireSchemaType(html, 'FAQPage', urlString, 'Indexable calculator')
+      if (!html.includes('dateModified')) error(`Indexable calculator has no dateModified schema: ${urlString}`)
+    }
+
+    if (url.pathname.startsWith('/kategori/')) {
+      requireSchemaType(html, 'CollectionPage', urlString, 'Category hub')
+      requireSchemaType(html, 'ItemList', urlString, 'Category hub')
+    }
   }
 
   const sitemapSet = new Set(sitemapUrls)
