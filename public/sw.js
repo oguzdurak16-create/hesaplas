@@ -1,4 +1,4 @@
-const CACHE_NAME = 'hesaplas-v5-pages-20260720'
+const CACHE_NAME = 'hesaplas-v6-pages-20260906'
 const scopeUrl = new URL(self.registration.scope)
 const BASE_PATH = scopeUrl.pathname.replace(/\/$/, '')
 const withBase = (path) => `${BASE_PATH}${path}`
