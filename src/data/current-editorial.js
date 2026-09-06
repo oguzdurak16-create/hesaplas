@@ -28,4 +28,36 @@ export const currentEditorial = {
       rate: { default: 31.79, help: 'Eylül 2026 yenilemeleri için TÜİK’in 12 aylık ortalama TÜFE değişimi %31,79’dur. Farklı yenileme ayında oranı güncelleyin.' },
     },
   },
+  'kredi-karti-borc': {
+    title: 'Kredi Kartı Yapılandırma ve Borç Taksit Hesaplama 2026',
+    shortTitle: 'Kart Yapılandırma',
+    seoTitle: 'Kredi Kartı Yapılandırma Hesaplama 2026 - Taksit ve Toplam Ödeme',
+    description: 'Kredi kartı borcunuzu yapılandırma faiz ve vadeye göre hesaplayın; aylık taksiti, toplam ödemeyi ve finansman maliyetini görün. 29 Ocak 2026 tarihli özel BDDK başvuru süresi sona ermiştir.',
+    keywords: ['kredi kartı yapılandırma hesaplama', 'kredi kartı borç yapılandırma hesaplama', 'kredi kartı borcu yapılandırma', 'kredi kartı taksit hesaplama', 'kredi kartı yapılandırma faizi 2026'],
+    updatedAt: '2026-09-06',
+    trendRank: 1,
+    replaceSources: true,
+    example: 'Örnek: 100.000 TL kart borcu, aylık %3,11 faiz ve 24 ay vade seçildiğinde, faiz üzerindeki ek yük alanı 0 bırakılırsa yaklaşık aylık taksit 5.975 TL ve toplam ödeme 143.398 TL olur. Bankanız faiz üzerine vergi veya başka yük uyguluyorsa ilgili oranı ayrıca girin.',
+    guide: {
+      intro: '29 Ocak 2026 tarihli 11366 sayılı BDDK kararı, karar tarihindeki şartları taşıyan bireysel kredi kartı borçları için başvurunun üç ay içinde yapılması koşuluyla en fazla 48 aya kadar yeniden yapılandırma imkânı tanıdı. Bu özel başvuru penceresi artık sona ermiştir. Sayfadaki hesaplayıcı, mevcut bir yapılandırma planını veya bankanızın yeni teklifini matematiksel olarak karşılaştırmak için kullanılabilir.',
+      evaluate: 'TCMB’ye göre 11366 sayılı karar kapsamındaki kredi kartı yapılandırmalarında aylık akdi faiz oranı aylık referans oran olan %3,11’i aşamaz. Bankanız daha düşük oran uygulayabilir. Hesaplamada bankanızın gerçek faizini, vadeyi ve varsa faiz üzerindeki ek yükü kullanın; özel BDDK başvuru hakkı ile mevcut banka teklifini birbirinden ayırın.',
+    },
+    faqs: [
+      { q: '2026 kredi kartı yapılandırma faizi en fazla kaç?', a: 'TCMB, 29 Ocak 2026 tarihli 11366 sayılı BDDK kararı kapsamındaki kredi kartı yapılandırmalarında aylık akdi faiz oranının aylık referans oran olan %3,11’i aşamayacağını belirtir.' },
+      { q: 'Kredi kartı borcu en fazla kaç ay yapılandırılabiliyordu?', a: '11366 sayılı BDDK kararı, şartları taşıyan bireysel kredi kartı borçları için en fazla 48 ay vade öngördü.' },
+      { q: '29 Ocak 2026 yapılandırma başvurusu hâlâ açık mı?', a: 'Hayır. Kararda başvurunun karar tarihinden itibaren üç ay içinde yapılması şartı vardı; bu özel başvuru süresi sona ermiştir.' },
+      { q: 'Mevcut banka yapılandırma teklifimi burada hesaplayabilir miyim?', a: 'Evet. Borç tutarını, bankanın verdiği aylık faizi, vadeyi ve varsa faiz üzerindeki ek yükü girerek taksit ve toplam ödeme karşılaştırması yapabilirsiniz.' },
+      { q: 'Faiz üzerindeki ek yük alanına ne yazmalıyım?', a: 'Bankanızın teklif veya ödeme planında faiz üzerine uygulanan vergi, fon ya da benzeri ek yük varsa toplam oranı girin. Kesin oranı bilmiyorsanız 0 bırakıp sonucu yalnız temel faiz simülasyonu olarak okuyun.' },
+      { q: 'Kredi kartı yapılandırma ile normal kart faizi aynı mı?', a: 'Hayır. Yapılandırma ayrı bir ödeme planıdır. TCMB, ilgili BDDK kararları kapsamındaki yapılandırmalar için aylık akdi faizi referans oranla sınırlar; normal kart borcuna uygulanan azami oranlar dönem borcu dilimine göre ayrıca belirlenir.' },
+    ],
+    sources: [
+      { label: 'BDDK — 29.01.2026 tarihli 11366 sayılı Kurul Kararı', url: 'https://www.bddk.org.tr/Mevzuat/DokumanGetir/1325' },
+      { label: 'TCMB — Kredi kartı işlemlerinde uygulanacak azami faiz oranları', url: 'https://www.tcmb.gov.tr/wps/wcm/connect/TR/TCMB+TR/Main+Menu/Istatistikler/Bankacilik+Verileri/Kredi_Karti_Islemlerinde_Uygulanacak_Azami_Faiz_Oranlari' },
+    ],
+    fieldOverrides: {
+      rate: { default: 3.11, help: '11366 sayılı BDDK kararı kapsamındaki kredi kartı yapılandırmalarında aylık akdi faiz %3,11 referans oranını aşamaz. Mevcut banka teklifiniz daha düşükse teklif oranını girin.' },
+      months: { default: 24, max: 48, help: '11366 sayılı BDDK kararı kapsamındaki azami vade 48 aydı. Mevcut banka teklifinizdeki vadeyi girin.' },
+      extraRate: { default: 0, help: 'Bankanızın teklifinde faiz üzerine uygulanan vergi, fon veya benzeri ek yük varsa toplam oranı girin. Kesin oranı bilmiyorsanız 0 bırakın.' },
+    },
+  },
 }
