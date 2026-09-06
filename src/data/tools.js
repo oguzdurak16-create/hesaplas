@@ -10,6 +10,7 @@ import { toolsPart09 } from './tools-parts/part-09.js'
 import { focusEditorial } from './focus-editorial.js'
 import { searchRecovery } from './search-recovery.js'
 import { indexRecovery } from './index-recovery.js'
+import { currentEditorial } from './current-editorial.js'
 import { applyRegulatoryFieldOverrides } from './regulatory.js'
 
 export const categories = [
@@ -71,6 +72,7 @@ tools.forEach((tool) => {
   mergeEditorial(tool, focusEditorial[tool.slug])
   mergeEditorial(tool, searchRecovery[tool.slug])
   mergeEditorial(tool, indexRecovery[tool.slug])
+  mergeEditorial(tool, currentEditorial[tool.slug])
 
   // Regulation-sensitive defaults are applied last so one verified config
   // remains authoritative even when legacy tool definitions still carry
@@ -81,7 +83,7 @@ tools.forEach((tool) => {
     const calculate = tool.calculate
     tool.calculate = (values) => ({
       ...calculate(values),
-      note: 'Artış oranı otomatik güncellenmez. Yenileme ayınız için TÜİK tarafından yayımlanan 12 aylık ortalama oranını kontrol edip alana girin. Temmuz 2026 için %32,03 yalnızca örnek referanstır.',
+      note: 'Eylül 2026 yenilemeleri için TÜİK Ağustos 2026 on iki aylık ortalama TÜFE değişimi %31,79’dur. Farklı bir yenileme ayı için o aya karşılık gelen güncel TÜİK oranını kontrol edip alana girin.',
     })
   }
 
