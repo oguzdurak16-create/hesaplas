@@ -45,7 +45,14 @@ export default function ToolExplorer({ initialLimit = 12, showHeading = true }) 
       const text = normalize(`${tool.title} ${tool.shortTitle || ''} ${tool.description} ${tool.keywords.join(' ')} ${tool.badge || ''}`)
       return tokens.every((token) => text.includes(token))
     })
-    return [...found].sort((a, b) => sort === 'az' ? a.title.localeCompare(b.title, 'tr') : Number(!!b.trend) - Number(!!a.trend))
+    return [...found].sort((a, b) => {
+      if (sort === 'az') return a.title.localeCompare(b.title, 'tr')
+      const trendDiff = Number(!!b.trend) - Number(!!a.trend)
+      if (trendDiff) return trendDiff
+      const rankDiff = (a.trendRank ?? 999) - (b.trendRank ?? 999)
+      if (rankDiff) return rankDiff
+      return a.title.localeCompare(b.title, 'tr')
+    })
   }, [query, category, sort])
 
   const visible = query || category !== 'all' || initialLimit >= tools.length ? filtered : filtered.slice(0, initialLimit)
