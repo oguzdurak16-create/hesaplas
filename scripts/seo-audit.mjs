@@ -4,6 +4,7 @@ import path from 'node:path'
 const OUT_DIR = path.join(process.cwd(), 'out')
 const SITEMAP_PATH = path.join(OUT_DIR, 'sitemap.xml')
 const EXPECTED_ORIGIN = 'https://www.hesaplas.com'
+const EXPECTED_OG_IMAGE = `${EXPECTED_ORIGIN}/og-image.jpg`
 const CURRENT_YEAR = '2026'
 const errors = []
 const warnings = []
@@ -79,6 +80,9 @@ if (errors.length === 0) {
     const robots = (getAttribute(extractTag(html, 'meta', 'name', 'robots'), 'content') || '').toLowerCase()
     const title = html.match(/<title>([^<]*)<\/title>/i)?.[1]?.trim() || ''
     const description = getAttribute(extractTag(html, 'meta', 'name', 'description'), 'content') || ''
+    const ogImage = getAttribute(extractTag(html, 'meta', 'property', 'og:image'), 'content') || ''
+    const twitterImage = getAttribute(extractTag(html, 'meta', 'name', 'twitter:image'), 'content') || ''
+    const twitterCard = (getAttribute(extractTag(html, 'meta', 'name', 'twitter:card'), 'content') || '').toLowerCase()
 
     if (!canonical) error(`Missing canonical: ${urlString}`)
     else if (canonical !== urlString) error(`Canonical mismatch: ${urlString} -> ${canonical}`)
@@ -87,6 +91,9 @@ if (errors.length === 0) {
     if (!description) error(`Missing meta description: ${urlString}`)
     if (description && description.length < 70) warn(`Short meta description (${description.length} chars): ${urlString}`)
     if (title.includes('2025') && !title.includes(CURRENT_YEAR)) warn(`Possibly stale year in title: ${urlString} -> ${title}`)
+    if (ogImage !== EXPECTED_OG_IMAGE) error(`Wrong or missing og:image: ${urlString} -> ${ogImage || 'missing'}`)
+    if (twitterImage !== EXPECTED_OG_IMAGE) error(`Wrong or missing twitter:image: ${urlString} -> ${twitterImage || 'missing'}`)
+    if (twitterCard !== 'summary_large_image') error(`Wrong or missing twitter:card: ${urlString} -> ${twitterCard || 'missing'}`)
 
     if (isCalculatorPath(url.pathname)) {
       requireSchemaType(html, 'WebApplication', urlString, 'Indexable calculator')
