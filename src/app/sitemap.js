@@ -2,7 +2,7 @@ import { categories, tools } from '@/data/tools'
 import { SITE_URL } from '@/lib/seo'
 import { isIndexableTool } from '@/lib/indexFocus'
 
-const SITE_UPDATED = '2026-09-03'
+const SITE_UPDATED = '2026-09-06'
 const FALLBACK_TOOL_UPDATED = '2026-07-17'
 
 function toolUpdatedAt(tool) {
@@ -39,7 +39,7 @@ export default function sitemap() {
       .map((tool) => ({
         url: `${SITE_URL}/${tool.slug}/`,
         lastModified: toolUpdatedAt(tool),
-        changeFrequency: 'monthly',
+        changeFrequency: tool.trend ? 'weekly' : 'monthly',
         priority: tool.trend ? 0.9 : 0.7,
       })),
   ]
