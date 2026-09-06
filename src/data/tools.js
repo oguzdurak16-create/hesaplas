@@ -88,6 +88,14 @@ tools.forEach((tool) => {
     })
   }
 
+  if (tool.slug === 'kredi-karti-borc') {
+    const calculate = tool.calculate
+    tool.calculate = (values) => ({
+      ...calculate(values),
+      note: '29 Ocak 2026 tarihli 11366 sayılı BDDK kararının özel başvuru süresi sona ermiştir. Bu sonuç mevcut bir banka teklifini veya devam eden yapılandırma planını karşılaştırmak içindir. Karar kapsamındaki yapılandırmalarda aylık akdi faiz TCMB referans oranı olan %3,11’i aşamaz; bankanızın gerçek teklif oranı ve ek yükleri farklı olabilir.',
+    })
+  }
+
   if (!tool.updatedAt) tool.updatedAt = DEFAULT_UPDATED_AT
 })
 
