@@ -1,6 +1,6 @@
 export const SITE_NAME = 'Hesaplas.com'
 export const SITE_URL = 'https://www.hesaplas.com'
-export const DEFAULT_OG_IMAGE = '/logo-512.png'
+export const DEFAULT_OG_IMAGE = '/og-image.jpg'
 
 export function absoluteUrl(path = '') {
   if (!path || path === '/') return `${SITE_URL}/`
