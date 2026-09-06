@@ -7,8 +7,8 @@ export const categoryIntentLinks = {
     },
     {
       slug: 'kredi-karti-borc',
-      title: 'Kredi kartı borcunu kapatma senaryosu',
-      description: 'Kart borcunu seçtiğiniz faiz ve vadede eşit taksitli bir kapatma planı olarak simüle edin.',
+      title: 'Kredi kartı yapılandırma hesaplama',
+      description: 'Kart borcunuzu yapılandırma faiz ve vadeye göre hesaplayın; aylık taksit, toplam ödeme ve finansman maliyetini görün.',
     },
     {
       slug: 'kredi-yapilandirma-hesaplama',
@@ -41,8 +41,8 @@ export const categoryIntentLinks = {
   'ev-yasam': [
     {
       slug: 'kira-artis-hesaplama',
-      title: 'Yeni kira ve yıllık fark',
-      description: 'Mevcut kira ve yenileme döneminiz için kullanacağınız artış oranıyla yeni aylık kirayı görün.',
+      title: 'Eylül 2026 kira artış oranı ve yeni kira',
+      description: 'Eylül 2026 için %31,79 TÜFE 12 aylık ortalama oranıyla yeni aylık kirayı ve yıllık farkı hesaplayın.',
     },
     {
       slug: 'yakit-tuketimi-hesaplama',
