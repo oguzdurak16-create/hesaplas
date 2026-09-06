@@ -40,7 +40,7 @@ const DEFAULT_UPDATED_AT = '2026-07-17'
 function mergeEditorial(tool, editorial) {
   if (!editorial) return
 
-  const { guide, faqs, sources, fieldOverrides, ...plain } = editorial
+  const { guide, faqs, sources, fieldOverrides, replaceSources = false, ...plain } = editorial
   Object.assign(tool, plain)
 
   if (guide) tool.guide = { ...(tool.guide || {}), ...guide }
@@ -56,7 +56,8 @@ function mergeEditorial(tool, editorial) {
 
   if (sources) {
     const seen = new Set()
-    tool.sources = [...(tool.sources || []), ...sources].filter((source) => {
+    const sourceRows = replaceSources ? sources : [...(tool.sources || []), ...sources]
+    tool.sources = sourceRows.filter((source) => {
       if (seen.has(source.url)) return false
       seen.add(source.url)
       return true
