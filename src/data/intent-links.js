@@ -95,6 +95,28 @@ export const categoryIntentLinks = {
       description: 'Tüketim, kWh fiyatı, mesafe ve şarj kaybına göre yolculuk ve 100 km maliyetini hesaplayın.',
     },
   ],
+  pratik: [
+    {
+      slug: 'yuzde-hesaplama',
+      title: 'Yüzde nasıl hesaplanır?',
+      description: 'Bir sayının yüzdesini, yüzde ekleme-çıkarma sonucunu ve iki sayı arasındaki yüzde değişimi hesaplayın.',
+    },
+    {
+      slug: 'indirim-hesaplama',
+      title: 'İndirimli fiyat hesaplama',
+      description: 'Etiket fiyatı ve indirim oranından indirim tutarını ve yeni satış fiyatını hesaplayın.',
+    },
+    {
+      slug: 'trafik-cezasi-indirim-hesaplama',
+      title: 'Trafik cezası indirimli ödeme',
+      description: 'Ceza tutarı ve geçerli indirim oranıyla yaklaşık indirimli ödeme tutarını görün.',
+    },
+    {
+      slug: 'tarih-farki-hesaplama',
+      title: 'İki tarih arasındaki fark',
+      description: 'İki tarih arasındaki gün, hafta ve süre farkını hızlıca hesaplayın.',
+    },
+  ],
   egitim: [
     {
       slug: 'yks-tyt-net-hesaplama',
@@ -131,6 +153,10 @@ export const relatedToolSlugs = {
   'elektrik-tuketimi-hesaplama': ['gunes-paneli-geri-donus-hesaplama', 'yakit-tuketimi-hesaplama', 'kira-artis-hesaplama'],
   'tapu-harci-hesaplama': ['emlakci-komisyonu-hesaplama', 'kira-artis-hesaplama', 'kredi-hesaplama'],
   'emlakci-komisyonu-hesaplama': ['tapu-harci-hesaplama', 'kira-artis-hesaplama', 'kredi-hesaplama'],
+  'yuzde-hesaplama': ['indirim-hesaplama', 'trafik-cezasi-indirim-hesaplama', 'birim-fiyat-hesaplama'],
+  'indirim-hesaplama': ['yuzde-hesaplama', 'trafik-cezasi-indirim-hesaplama', 'birim-fiyat-hesaplama'],
+  'trafik-cezasi-indirim-hesaplama': ['yuzde-hesaplama', 'indirim-hesaplama', 'tarih-farki-hesaplama'],
+  'tarih-farki-hesaplama': ['yas-hesaplama', 'yuzde-hesaplama', 'trafik-cezasi-indirim-hesaplama'],
   'yks-tyt-net-hesaplama': ['lgs-net-hesaplama', 'kpss-net-hesaplama'],
   'lgs-net-hesaplama': ['yks-tyt-net-hesaplama', 'kpss-net-hesaplama'],
   'kpss-net-hesaplama': ['yks-tyt-net-hesaplama', 'lgs-net-hesaplama'],
