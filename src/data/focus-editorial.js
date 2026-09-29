@@ -2,7 +2,17 @@ export const focusEditorial = {
   'kredi-hesaplama': {
     seoTitle: 'Kredi Hesaplama 2026 - Taksit ve Toplam Geri Ödeme',
     description: 'Kredi tutarı, aylık faiz, vade ve masraflarla aylık taksiti, toplam geri ödemeyi, finansman maliyetini ve ödeme planını hesaplayın.',
-    updatedAt: '2026-08-14',
+    updatedAt: '2026-09-29',
+    searchIntent: {
+      heading: 'Kredi taksiti nasıl hesaplanır?',
+      answer: 'Kredi tutarı, aylık faiz oranı ve vade birlikte kullanılır. Eşit taksitli planda faiz ve ana para payı her ay değişse de taksit sabit kalır; toplam geri ödeme ise taksitlerin toplamına girdiğiniz masrafların eklenmesiyle bulunur.',
+      steps: [
+        'Kullanmak istediğiniz kredi tutarını girin.',
+        'Bankanın aylık faiz oranını ve vadeyi ay olarak yazın.',
+        'Varsa tahsis, ekspertiz veya diğer tek seferlik masrafları ekleyin.',
+        'Aylık taksit kadar toplam geri ödeme ve finansman maliyetini de karşılaştırın.',
+      ],
+    },
     example: 'Örnek: 250.000 TL kredi, aylık %3,49 faiz ve 24 ay vade seçildiğinde araç eşit taksit formülüyle aylık ödemeyi hesaplar; ayrıca tüm taksitlerin toplamını, faiz yükünü ve girdiğiniz tek seferlik masrafları ayrı gösterir. Banka tekliflerini karşılaştırırken aynı ana para ve vade ile senaryo oluşturun.',
     guide: {
       intro: 'Kredi hesabında yalnızca aylık taksite bakmak yanıltıcı olabilir. Bu araç ana para, aylık faiz, vade ve bilinen tek seferlik masrafları aynı ekranda birleştirerek taksit yükünü ve toplam geri ödemeyi karşılaştırılabilir hale getirir.',
@@ -26,7 +36,17 @@ export const focusEditorial = {
   'kredi-yapilandirma-hesaplama': {
     seoTitle: 'Kredi Yapılandırma Hesaplama 2026 - Eski ve Yeni Plan Karşılaştırma',
     description: 'Kalan kredi borcunuzu yeni faiz ve vadeyle yapılandırdığınızda aylık taksit ve toplam maliyetin mevcut plana göre nasıl değişeceğini hesaplayın.',
-    updatedAt: '2026-08-14',
+    updatedAt: '2026-09-29',
+    searchIntent: {
+      heading: 'Kredi yapılandırma hesabı nasıl yapılır?',
+      answer: 'Mevcut kredinin kalan borcu ve kalan ödeme yükü, yeni faiz-vade teklifiyle karşılaştırılır. Daha düşük aylık taksit her zaman daha düşük toplam maliyet anlamına gelmez.',
+      steps: [
+        'Bankadan kalan ana para veya erken kapama tutarını öğrenin.',
+        'Mevcut kalan taksit ve toplam ödeme bilgilerini girin.',
+        'Yeni faiz, yeni vade ve varsa yapılandırma masraflarını ekleyin.',
+        'Aylık taksit farkının yanında toplam maliyet farkını kontrol edin.',
+      ],
+    },
     example: 'Örnek: 150.000 TL kalan borç için mevcut 10 taksit ile yeni 18 aylık yapılandırmayı karşılaştırabilirsiniz. Araç yeni aylık taksiti, yeni toplam ödemeyi ve mevcut plandan farkı aynı sonuç ekranında gösterir.',
     guide: {
       intro: 'Yapılandırma kararında amaç yalnızca taksiti düşürmek değil, kalan borcun toplam maliyetini anlamaktır. Daha uzun vade aylık ödemeyi azaltırken toplam faiz yükünü artırabilir.',
@@ -39,7 +59,17 @@ export const focusEditorial = {
   'mevduat-faiz-hesaplama': {
     seoTitle: 'Mevduat Faiz Hesaplama 2026 - Net Vadeli Mevduat Getirisi',
     description: 'Anapara, yıllık brüt faiz, vade günü ve stopaj oranına göre brüt faiz, vergi kesintisi, net kazanç ve vade sonu tutarını hesaplayın.',
-    updatedAt: '2026-08-14',
+    updatedAt: '2026-09-29',
+    searchIntent: {
+      heading: 'Mevduat faizi nasıl hesaplanır?',
+      answer: 'Brüt mevduat faizi, anapara × yıllık faiz oranı × vade günü / 365 yaklaşımıyla bulunur. Net kazanç için brüt faizden girdiğiniz stopaj kesintisi düşülür ve kalan tutar anaparaya eklenir.',
+      steps: [
+        'Anaparanızı ve bankanın verdiği yıllık brüt faiz oranını girin.',
+        'Vade gününü bankadaki ürününüzle aynı seçin.',
+        'Ürününüz için geçerli stopaj oranını girin.',
+        'Brüt faiz yerine net kazanç ve vade sonu tutarı karşılaştırın.',
+      ],
+    },
     example: 'Örnek: 250.000 TL anapara için bankanızın verdiği yıllık brüt faiz oranını, vade gününü ve o vadeye uygulanan stopaj oranını girin. Araç brüt faizden stopajı düşerek net kazancı ve vade sonu toplamını gösterir.',
     guide: {
       intro: 'Vadeli mevduat karşılaştırırken bankaların ilan ettiği brüt faiz oranı tek başına yeterli değildir. Vade günü ve stopaj oranı net getiriyi doğrudan etkiler.',
@@ -56,7 +86,17 @@ export const focusEditorial = {
   'maas-hesaplama': {
     seoTitle: '2026 Brüt Net Maaş Hesaplama - Net Ücret Tahmini',
     description: '2026 SGK prime esas kazanç sınırı, çalışan primleri, gelir vergisi oranı ve istisna tutarlarıyla tek aylık yaklaşık brüt-net maaş hesabı yapın.',
-    updatedAt: '2026-08-14',
+    updatedAt: '2026-09-29',
+    searchIntent: {
+      heading: 'Brüt maaştan net maaş nasıl hesaplanır?',
+      answer: 'Brüt ücretten çalışan SGK ve işsizlik primi düşülür; kalan vergi matrahına seçtiğiniz gelir vergisi oranı uygulanır. Gelir ve damga vergisi istisnaları düşüldükten sonra yaklaşık net ücret bulunur. Bu araç tek aylık tahmindir.',
+      steps: [
+        'Aylık brüt ücretinizi girin.',
+        'Kümülatif matrahınıza uygun gelir vergisi oranını seçin.',
+        'SGK, işsizlik ve vergi istisnası alanlarını bordronuzla kontrol edin.',
+        'Net ücret kadar kesinti kalemlerini de ayrı ayrı inceleyin.',
+      ],
+    },
     example: 'Örnek: Aylık 75.000 TL brüt ücret için araç önce SGK ve işsizlik primi matrahını, ardından gelir vergisi matrahını hesaplar. Seçtiğiniz gelir vergisi oranı ve girdiğiniz istisnalar uygulandıktan sonra yaklaşık net ücret gösterilir. Bu hesap tam yıllık bordro simülasyonu değildir.',
     guide: {
       intro: '2026 maaş aracında SGK prime esas kazanç üst sınırı 297.270 TL olarak tanımlıdır. Gelir vergisinde ise kullanıcının kümülatif matrahına karşılık gelen oranı seçmesi gerekir; araç vergi dilimine hangi ayda geçtiğinizi otomatik tahmin etmez.',
@@ -70,7 +110,17 @@ export const focusEditorial = {
   'zam-hesaplama': {
     seoTitle: 'Maaş Zam Hesaplama 2026 - Yüzde Zam ve Yeni Maaş',
     description: 'Eski maaş ve zam yüzdesinden yeni maaşı, aylık ve yıllık artış tutarını hesaplayın; maaş farkını saniyeler içinde görün.',
-    updatedAt: '2026-08-14',
+    updatedAt: '2026-09-29',
+    searchIntent: {
+      heading: 'Yüzde zam nasıl hesaplanır?',
+      answer: 'Zam tutarı = mevcut tutar × zam oranı / 100. Yeni tutar ise mevcut tutara zam tutarının eklenmesiyle bulunur. Aynı yöntem maaş, fiyat, kira veya başka bir parasal değer için kullanılabilir.',
+      steps: [
+        'Mevcut maaş veya fiyatı girin.',
+        'Uygulanacak zam yüzdesini yazın.',
+        'Aylık artış tutarı ile yeni toplamı birlikte kontrol edin.',
+        'Maaş hesabında brüt ve net tutarın aynı olmadığını dikkate alın.',
+      ],
+    },
     example: 'Örnek: 50.000 TL maaşa %25 zam uygulandığında artış 12.500 TL, yeni maaş 62.500 TL olur. Araç aylık farkın yanında bu farkın 12 aylık karşılığını da gösterir.',
     guide: {
       intro: 'Zam hesabı, mevcut tutarın belirli bir yüzde kadar artırılmasıdır. Araç maaş dışında kira, fiyat, bütçe veya ücret gibi herhangi bir tutarın yüzdesel artışını hesaplamak için de kullanılabilir.',
@@ -80,7 +130,17 @@ export const focusEditorial = {
   'kidem-tazminati': {
     seoTitle: 'Kıdem Tazminatı Hesaplama 2026 - Güncel Tavan ve Net Tahmin',
     description: 'İşe giriş ve ayrılış tarihi, giydirilmiş brüt ücret ve 2026 ikinci yarı kıdem tazminatı tavanıyla yaklaşık brüt ve damga vergisi sonrası kıdem tutarını hesaplayın.',
-    updatedAt: '2026-08-14',
+    updatedAt: '2026-09-29',
+    searchIntent: {
+      heading: 'Kıdem tazminatı nasıl hesaplanır?',
+      answer: 'Yaklaşık hesapta hizmet süresi, giydirilmiş brüt ücret ve ayrılış tarihindeki kıdem tazminatı tavanı birlikte değerlendirilir. Bir yıllık hesap tabanı, giydirilmiş brüt ücret ile geçerli tavanın düşük olanıdır.',
+      steps: [
+        'İşe giriş ve işten ayrılış tarihlerinizi girin.',
+        'Düzenli yan hakları içeren giydirilmiş brüt ücreti yazın.',
+        'Ayrılış dönemindeki güncel kıdem tazminatı tavanını kontrol edin.',
+        'Brüt tahmin ile damga vergisi sonrası net tahmini ayrı inceleyin.',
+      ],
+    },
     example: 'Örnek: Giydirilmiş brüt ücreti 90.000 TL olan çalışanda 1 Temmuz–31 Aralık 2026 dönemi için bir hizmet yılı hesabında ücret yerine 73.729,87 TL tavan esas alınır. Araç toplam hizmet gününü oransal yıla çevirir ve damga vergisi sonrası tahmini gösterir.',
     guide: {
       intro: 'Kıdem tazminatında hesap tabanı, giydirilmiş brüt ücret ile geçerli dönem tavanından düşük olan tutardır. 1 Temmuz–31 Aralık 2026 için resmî tavan 73.729,87 TL’dir. Araç tutarı hesaplar; kıdeme hak kazanıp kazanmadığınızı hukuken belirlemez.',
@@ -94,7 +154,17 @@ export const focusEditorial = {
   'kira-artis-hesaplama': {
     seoTitle: 'Kira Artış Oranı Hesaplama 2026 - Yeni Kira ve TÜFE',
     description: 'Mevcut kira ve sözleşme yenileme ayınız için geçerli TÜFE 12 aylık ortalama oranını girerek yeni aylık kirayı ve yıllık farkı hesaplayın.',
-    updatedAt: '2026-08-14',
+    updatedAt: '2026-09-29',
+    searchIntent: {
+      heading: 'Kira artış oranı nasıl hesaplanır?',
+      answer: 'Yeni kira = mevcut kira × (1 + artış oranı / 100). Konut ve çatılı iş yeri yenilemelerinde ilgili ay için TÜİK’in on iki aylık ortalamalara göre TÜFE değişimi kontrol edilmelidir; oran yenileme ayına göre değişir.',
+      steps: [
+        'Mevcut aylık kira bedelini girin.',
+        'Sözleşmenin yenilendiği ayı belirleyin.',
+        'O ay için geçerli TÜİK 12 aylık ortalama oranını kontrol edin.',
+        'Yeni aylık kira ile 12 aylık ek maliyeti birlikte görün.',
+      ],
+    },
     example: 'Örnek: 20.000 TL kira ve %32,03 artış oranı kullanılırsa aylık artış 6.406 TL, yeni kira 26.406 TL olur. %32,03 oranı Temmuz 2026 yenilemelerine ait örnektir; farklı yenileme aylarında TÜİK’in o dönem için yayımladığı oran girilmelidir.',
     guide: {
       intro: 'Kira artışında kullanılacak TÜFE 12 aylık ortalama oranı sözleşmenin yenilendiği aya göre değişir. Araç oranı hukuken otomatik seçmek yerine kullanıcıdan alır; böylece eski bir oranı “güncel” diye uygulama riskini azaltır.',
@@ -112,7 +182,16 @@ export const focusEditorial = {
   'kdv-hesaplama': {
     seoTitle: 'KDV Hesaplama 2026 - KDV Dahil ve Hariç Hesaplama',
     description: 'KDV hariç tutara vergi ekleyin veya KDV dahil fiyatın içindeki matrah ve KDV tutarını %1, %10, %20 ya da kendi oranınızla ayırın.',
-    updatedAt: '2026-08-14',
+    updatedAt: '2026-09-29',
+    searchIntent: {
+      heading: 'KDV dahil ve KDV hariç nasıl hesaplanır?',
+      answer: 'KDV hariç tutardan dahil fiyat için matrah × (1 + oran / 100) kullanılır. KDV dahil fiyattan matrah bulmak için toplam tutar (1 + oran / 100) değerine bölünür.',
+      steps: [
+        'İşlemin KDV dahil mi yoksa KDV hariç mi olduğunu seçin.',
+        'Tutarı ve uygulanacak KDV oranını girin.',
+        'KDV tutarı, matrah ve toplam sonucu ayrı kontrol edin.',
+      ],
+    },
     example: 'Örnek: KDV hariç 10.000 TL tutara %20 oran uygulandığında KDV 2.000 TL ve KDV dahil toplam 12.000 TL olur. KDV dahil tutardan geriye hesapta ise matrah, toplam tutarın 1 + oran/100 değerine bölünmesiyle bulunur.',
     guide: {
       intro: 'KDV hesabında “hariçten dahile” ve “dahilden harice” işlemleri farklıdır. Hariç tutarda vergi matraha eklenir; dahil tutarda ise vergi doğrudan toplamın yüzde 20’si alınarak ayrılamaz, matrah ters formülle bulunmalıdır.',
@@ -129,7 +208,17 @@ export const focusEditorial = {
   'yakit-tuketimi-hesaplama': {
     seoTitle: 'Yakıt Tüketimi Hesaplama - 100 KM ve Kilometre Maliyeti',
     description: 'Gidilen mesafe, tüketilen litre ve yakıt fiyatıyla 100 km tüketimini, kilometre başı maliyeti ve toplam yol masrafını hesaplayın.',
-    updatedAt: '2026-08-14',
+    updatedAt: '2026-09-29',
+    searchIntent: {
+      heading: '100 km yakıt tüketimi nasıl hesaplanır?',
+      answer: 'Tüketilen litre, gidilen kilometreye bölünüp 100 ile çarpılır. Kilometre maliyeti için toplam yakıt harcaması gidilen kilometreye bölünür.',
+      steps: [
+        'Dolumlar arasında gidilen gerçek kilometreyi girin.',
+        'Bu mesafede tüketilen litre miktarını yazın.',
+        'Litre fiyatını ekleyerek toplam yol maliyetini hesaplayın.',
+        'Tek ölçüm yerine birkaç dolumun ortalamasını karşılaştırın.',
+      ],
+    },
     example: 'Örnek: 500 km’de 32 litre yakıt tüketen araç 100 km’de 6,4 litre yakar. Litre fiyatı 50 TL ise toplam yakıt maliyeti 1.600 TL, kilometre maliyeti 3,20 TL olur.',
     guide: {
       intro: 'Gerçek yakıt tüketimini ölçmenin en pratik yolu, iki dolum arasında gidilen kilometreyi ve tekrar depoyu doldurmak için alınan litreyi kullanmaktır. Araç bu iki değerden litre/100 km tüketimini çıkarır.',
@@ -138,6 +227,82 @@ export const focusEditorial = {
     faqs: [
       { q: '100 km yakıt tüketimi nasıl hesaplanır?', a: 'Tüketilen litre, gidilen kilometreye bölünür ve 100 ile çarpılır. Örneğin 32 litre / 500 km × 100 = 6,4 L/100 km.' },
       { q: 'Kilometre başı yakıt maliyeti nasıl bulunur?', a: 'Toplam alınan yakıtın TL maliyeti gidilen kilometreye bölünür.' },
+    ],
+  },
+  'tapu-harci-hesaplama': {
+    seoTitle: 'Tapu Harcı Hesaplama 2026 - Alıcı ve Satıcı Tapu Masrafı',
+    description: 'Gayrimenkul satış bedeli, toplam tapu harcı oranı ve alıcı payına göre toplam harcı, alıcı-satıcı paylarını ve alıcının yaklaşık masrafını hesaplayın.',
+    updatedAt: '2026-09-29',
+    formula: 'Toplam tapu harcı = beyan edilen satış bedeli × toplam harç oranı. Alıcı ve satıcı payları seçilen dağılıma göre ayrılır.',
+    searchIntent: {
+      heading: 'Tapu harcı nasıl hesaplanır?',
+      answer: 'Toplam tapu harcı, beyan edilen satış bedelinin girilen toplam harç oranıyla çarpılmasıyla bulunur. Ardından alıcı ve satıcı payı seçtiğiniz dağılıma göre ayrılır.',
+      steps: [
+        'Tapuda beyan edilecek satış bedelini girin.',
+        'İşleminiz için geçerli toplam harç oranını kontrol edin.',
+        'Alıcı ve satıcı arasındaki harç paylaşım oranını seçin.',
+        'Varsa alıcının diğer masraflarını ekleyip toplam yükü görün.',
+      ],
+    },
+    example: 'Örnek: 3.500.000 TL beyan bedeli ve toplam %4 harç oranında toplam tapu harcı 140.000 TL olur. Paylaşım %50-%50 ise alıcı ve satıcı için 70.000 TL düşer.',
+    guide: {
+      intro: 'Tapu masrafında satış bedeli ile uygulanacak harç oranı temel belirleyicidir. Araç toplam harcı ve seçtiğiniz paylaşım oranına göre alıcı-satıcı paylarını ayrı gösterir.',
+      evaluate: 'Beyan değeri, döner sermaye veya hizmet bedelleri ve işleme özgü istisnalar nihai ödemeyi değiştirebilir. Hesaplama sonucunu tapu işlemi öncesinde resmî tahakkukla karşılaştırın.',
+    },
+    faqs: [
+      { q: 'Tapu harcı nasıl hesaplanır?', a: 'Beyan edilen satış bedeli toplam harç oranıyla çarpılır. Ortaya çıkan toplam harç, seçilen alıcı-satıcı paylaşımına göre bölünür.' },
+      { q: 'Tapu harcı dışında başka masraf olabilir mi?', a: 'Evet. Döner sermaye veya işleme özgü başka bedeller bulunabilir. Araç harç hesabını ve girdiğiniz ek alıcı masraflarını gösterir.' },
+    ],
+  },
+  'trafik-cezasi-indirim-hesaplama': {
+    seoTitle: 'Trafik Cezası İndirim Hesaplama - Erken Ödeme Tutarı',
+    description: 'Trafik veya idari para cezası tutarı ile geçerli peşin ödeme indirim oranını girerek indirim tutarını ve ödenecek yaklaşık tutarı hesaplayın.',
+    updatedAt: '2026-09-29',
+    formula: 'İndirim tutarı = ceza tutarı × indirim oranı / 100. İndirimli ödeme = ceza tutarı − indirim tutarı.',
+    searchIntent: {
+      heading: 'Trafik cezası indirimi nasıl hesaplanır?',
+      answer: 'Ceza tutarı, geçerli indirim oranıyla çarpılarak indirim miktarı bulunur; bu tutar normal cezadan düşülerek indirimli ödeme hesaplanır. İndirim hakkı ve ödeme süresi ceza kaydından ayrıca doğrulanmalıdır.',
+      steps: [
+        'Tebliğ edilen normal ceza tutarını girin.',
+        'Ceza kaydınız için geçerli indirim oranını kontrol edip yazın.',
+        'İndirim tutarı ile ödenecek yeni tutarı karşılaştırın.',
+        'Son ödeme süresi ve uygunluğu e-Devlet veya yetkili kurum ekranından doğrulayın.',
+      ],
+    },
+    example: 'Örnek: 5.000 TL cezada %25 indirim oranı girildiğinde indirim 1.250 TL, yaklaşık ödeme 3.750 TL olur.',
+    guide: {
+      intro: 'Ceza indirimi hesabı, tebliğ edilen normal tutardan girdiğiniz peşin ödeme indirim oranını düşürür. Araç ödeme süresinin veya indirim hakkının hukuken oluşup oluşmadığını belirlemez.',
+      evaluate: 'İndirim oranı, ödeme süresi ve kapsam cezanın türüne ve güncel mevzuata göre değişebilir. Nihai ödeme için resmî ceza kaydındaki tutarı ve son tarihi esas alın.',
+    },
+    faqs: [
+      { q: 'Trafik cezası indirimli tutarı nasıl bulunur?', a: 'Normal ceza tutarından, ceza tutarı × indirim oranı / 100 formülüyle bulunan indirim düşülür.' },
+      { q: 'Her trafik cezasında aynı indirim oranı mı uygulanır?', a: 'Araç oranı kullanıcıdan alır. Uygulanabilecek oran ve süreyi güncel ceza kaydınız ve resmî mevzuattan kontrol etmelisiniz.' },
+    ],
+  },
+  'yuzde-hesaplama': {
+    seoTitle: 'Yüzde Hesaplama - Yüzde Değişim ve Oran Hesaplama',
+    description: 'Bir sayının belirli yüzdesini, yüzde ekleme-çıkarma sonucunu, iki sayı arasındaki yüzde değişimi ve birbirine oranını tek ekranda hesaplayın.',
+    updatedAt: '2026-09-29',
+    formula: 'Bir sayının yüzdesi = ana sayı × yüzde / 100. Yüzde değişim = (yeni değer − eski değer) / eski değer × 100.',
+    searchIntent: {
+      heading: 'Yüzde nasıl hesaplanır?',
+      answer: 'Bir sayının belirli yüzdesi, sayı ile yüzde oranının çarpılıp 100’e bölünmesiyle bulunur. İki değer arasındaki yüzde değişim ise farkın ilk değere bölünüp 100 ile çarpılmasıdır.',
+      steps: [
+        'Ana sayıyı girin.',
+        'Hesaplamak istediğiniz yüzde oranını yazın.',
+        'Yüzde karşılığını, yüzde eklenmiş ve çıkarılmış sonucu görün.',
+        'İkinci bir sayı girerek yüzde değişim ve oranı da karşılaştırın.',
+      ],
+    },
+    example: 'Örnek: 1.000 sayısının %20’si 200’dür; %20 eklenmiş değer 1.200, %20 çıkarılmış değer 800 olur. 1.000’den 1.250’ye değişim ise %25 artıştır.',
+    guide: {
+      intro: 'Yüzde hesabında “bir sayının yüzdesi” ile “iki sayı arasındaki yüzde değişim” farklı işlemlerdir. Bu araç iki sonucu da aynı ekranda ayırarak gösterir.',
+      evaluate: 'Yüzde değişim hesabında başlangıç değeri paydadır; bu nedenle hangi sayının eski, hangisinin yeni değer olduğu sonucu değiştirir.',
+    },
+    faqs: [
+      { q: 'Bir sayının yüzde 20’si nasıl bulunur?', a: 'Sayı 20 ile çarpılır ve 100’e bölünür. Örneğin 1.000 × 20 / 100 = 200.' },
+      { q: 'Yüzde artış nasıl hesaplanır?', a: 'Yeni değerden eski değer çıkarılır; fark eski değere bölünür ve 100 ile çarpılır.' },
+      { q: 'Yüzde düşüş nasıl hesaplanır?', a: 'Eski değerden yeni değer çıkarılır; fark eski değere bölünür ve 100 ile çarpılır.' },
     ],
   },
 }

@@ -9,22 +9,22 @@ import { createMetadata, SITE_URL } from '@/lib/seo'
 
 const categorySeo = {
   finans: {
-    title: 'Finans Hesaplama Araçları',
-    description: 'Kredi, faiz, borç, birikim, kâr marjı ve yatırım kararları için ücretsiz finans hesaplama araçlarını tek sayfada kullanın.',
-    intro: 'Kredi taksitinden mevduat getirisine, borç yapılandırmadan kâr marjına kadar para kararlarını aynı yerde karşılaştırın.',
-    keywords: ['finans hesaplama', 'kredi hesaplama', 'faiz hesaplama', 'borç hesaplama'],
+    title: 'Finans Hesaplama Araçları 2026 - Kredi, Faiz ve Borç',
+    description: 'Kredi taksiti, kredi kartı borcu, yapılandırma, mevduat faizi, bileşik faiz ve satın alma gücü için ücretsiz finans hesaplama araçlarını kullanın.',
+    intro: 'Kredi taksitinden kredi kartı borcuna, yapılandırmadan mevduat net getirisine kadar temel para kararlarını aynı yerde karşılaştırın.',
+    keywords: ['finans hesaplama', 'kredi hesaplama 2026', 'kredi kartı borcu hesaplama', 'mevduat faiz hesaplama', 'faiz hesaplama'],
   },
   'maas-vergi': {
-    title: 'Maaş ve Vergi Hesaplama Araçları',
-    description: 'Maaş, zam, kıdem, ihbar, fazla mesai, vergi ve çalışma hayatı hesaplarını ücretsiz araçlarla hızlıca yapın.',
-    intro: 'Ücret, zam, tazminat ve vergi hesaplarını aynı kurallı akışta inceleyin; farklı senaryoları kolayca karşılaştırın.',
-    keywords: ['maaş hesaplama', 'vergi hesaplama', 'kıdem hesaplama', 'zam hesaplama'],
+    title: 'Maaş ve Vergi Hesaplama Araçları 2026',
+    description: '2026 brüt-net maaş, zam, kıdem, ihbar, fazla mesai, KDV ve vergi hesaplarını ücretsiz araçlarla hızlıca yapın.',
+    intro: 'Brütten nete maaş, zam, kıdem ve ihbar tazminatı ile KDV gibi ücret-vergi hesaplarını aynı merkezde inceleyin.',
+    keywords: ['maaş hesaplama 2026', 'brüt net maaş hesaplama', 'kıdem tazminatı hesaplama 2026', 'KDV hesaplama', 'zam hesaplama'],
   },
   'ev-yasam': {
-    title: 'Ev ve Yaşam Hesaplama Araçları',
-    description: 'Kira, yakıt, elektrik, emlak, ulaşım ve günlük yaşam giderleri için ücretsiz hesaplama araçlarını kullanın.',
-    intro: 'Ev bütçesi ve günlük giderlerde aylık ve yıllık etkileri görün; farklı tüketim ve fiyat senaryolarını karşılaştırın.',
-    keywords: ['kira hesaplama', 'yakıt hesaplama', 'elektrik hesaplama', 'ev gideri hesaplama'],
+    title: 'Ev ve Yaşam Hesaplama Araçları - Kira, Yakıt ve Tapu',
+    description: 'Kira artışı, yakıt tüketimi, elektrik maliyeti, tapu harcı, emlakçı komisyonu ve EV şarj giderleri için ücretsiz hesaplama araçlarını kullanın.',
+    intro: 'Kira yenilemesinden tapu masrafına, yakıt ve elektrik giderinden elektrikli araç şarjına kadar ev ve yaşam maliyetlerini karşılaştırın.',
+    keywords: ['kira artış hesaplama', 'yakıt tüketimi hesaplama', 'tapu harcı hesaplama', 'elektrik maliyeti hesaplama', 'emlakçı komisyonu'],
   },
   saglik: {
     title: 'Sağlık Hesaplama Araçları',
@@ -105,22 +105,37 @@ export default function CategoryPage({ params }) {
 
   const categoryTools = tools.filter((tool) => tool.category === category.id)
   const intentLinks = (categoryIntentLinks[category.id] || []).filter((item) => categoryTools.some((tool) => tool.slug === item.slug))
+  const categoryUrl = `${SITE_URL}/kategori/${category.id}/`
   const schema = {
     '@context': 'https://schema.org',
-    '@type': 'CollectionPage',
-    name: seo.title,
-    description: seo.description,
-    url: `${SITE_URL}/kategori/${category.id}/`,
-    inLanguage: 'tr-TR',
-    mainEntity: {
-      '@type': 'ItemList',
-      itemListElement: categoryTools.map((tool, index) => ({
-        '@type': 'ListItem',
-        position: index + 1,
-        name: tool.title,
-        url: `${SITE_URL}/${tool.slug}/`,
-      })),
-    },
+    '@graph': [
+      {
+        '@type': 'CollectionPage',
+        '@id': `${categoryUrl}#page`,
+        name: seo.title,
+        description: seo.description,
+        url: categoryUrl,
+        inLanguage: 'tr-TR',
+        dateModified: '2026-09-29',
+        mainEntity: {
+          '@type': 'ItemList',
+          itemListElement: categoryTools.map((tool, index) => ({
+            '@type': 'ListItem',
+            position: index + 1,
+            name: tool.title,
+            url: `${SITE_URL}/${tool.slug}/`,
+          })),
+        },
+      },
+      {
+        '@type': 'BreadcrumbList',
+        itemListElement: [
+          { '@type': 'ListItem', position: 1, name: 'Ana Sayfa', item: SITE_URL },
+          { '@type': 'ListItem', position: 2, name: 'Tüm Araçlar', item: `${SITE_URL}/tum-araclar/` },
+          { '@type': 'ListItem', position: 3, name: category.name, item: categoryUrl },
+        ],
+      },
+    ],
   }
 
   return (

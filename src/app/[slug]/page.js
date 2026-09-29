@@ -85,11 +85,17 @@ export default function ToolPage({ params }) {
   ]
   const faq = [...(tool.faqs || []), ...defaultFaq].slice(0, 5)
   const updatedLabel = new Intl.DateTimeFormat('tr-TR', { day: 'numeric', month: 'long', year: 'numeric' }).format(new Date(`${tool.updatedAt}T12:00:00`))
+  const howToSteps = tool.searchIntent?.steps?.length
+    ? tool.searchIntent.steps.map((step, index) => ({ '@type': 'HowToStep', position: index + 1, name: `Adım ${index + 1}`, text: step }))
+    : [
+        { '@type': 'HowToStep', position: 1, name: 'Değerleri girin', text: tool.fields.length ? inputLabels.join(', ') : 'Gerekli değerleri girin' },
+        { '@type': 'HowToStep', position: 2, name: 'Sonucu inceleyin', text: 'Hesaplanan ana sonuçları ve ayrıntıları karşılaştırın.' },
+      ]
 
   const schema = {
     '@context': 'https://schema.org', '@graph': [
       { '@type': 'WebApplication', name: tool.title, url: `${SITE_URL}/${tool.slug}/`, applicationCategory: applicationCategories[tool.category], operatingSystem: 'Any', browserRequirements: 'JavaScript', offers: { '@type': 'Offer', price: '0', priceCurrency: 'TRY' }, description: tool.description, inLanguage: 'tr-TR', dateModified: tool.updatedAt },
-      { '@type': 'HowTo', name: `${tool.title} nasıl yapılır?`, description: tool.description, totalTime: 'PT1M', step: [{ '@type': 'HowToStep', position: 1, name: 'Değerleri girin', text: tool.fields.length ? inputLabels.join(', ') : 'Gerekli değerleri girin' }, { '@type': 'HowToStep', position: 2, name: 'Sonucu inceleyin', text: 'Hesaplanan ana sonuçları ve ayrıntıları karşılaştırın.' }] },
+      { '@type': 'HowTo', name: tool.searchIntent?.heading || `${tool.title} nasıl yapılır?`, description: tool.searchIntent?.answer || tool.description, totalTime: 'PT1M', step: howToSteps },
       { '@type': 'FAQPage', mainEntity: faq.map((row) => ({ '@type': 'Question', name: row.q, acceptedAnswer: { '@type': 'Answer', text: row.a } })) },
       { '@type': 'BreadcrumbList', itemListElement: [{ '@type': 'ListItem', position: 1, name: 'Ana Sayfa', item: SITE_URL }, { '@type': 'ListItem', position: 2, name: category?.name, item: `${SITE_URL}/kategori/${tool.category}/` }, { '@type': 'ListItem', position: 3, name: tool.title, item: `${SITE_URL}/${tool.slug}/` }] },
     ],
