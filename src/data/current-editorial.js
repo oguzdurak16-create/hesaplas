@@ -4,7 +4,7 @@ export const currentEditorial = {
     seoTitle: 'Eylül 2026 Kira Artış Oranı Hesaplama - %31,79 TÜFE',
     description: 'Eylül 2026 kira artış oranı %31,79. Mevcut kira üzerinden aylık artışı, yeni kira bedelini ve yıllık farkı hesaplayın.',
     keywords: ['Eylül 2026 kira artış oranı', 'kira artış hesaplama', 'kira zammı hesaplama', 'TÜFE kira artışı', 'yeni kira hesaplama'],
-    updatedAt: '2026-09-06',
+    updatedAt: '2026-09-29',
     trendRank: 0,
     replaceSources: true,
     example: 'Örnek: 20.000 TL aylık kira için Eylül 2026 oranı %31,79 uygulandığında aylık artış 6.358 TL, yeni aylık kira 26.358 TL ve yıllık ek maliyet 76.296 TL olur.',
