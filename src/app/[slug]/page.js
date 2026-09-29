@@ -113,6 +113,17 @@ export default function ToolPage({ params }) {
 
       <CalculatorApp slug={tool.slug} />
 
+      {!!tool.searchIntent && <section className="v7-content-intro" aria-label="Aranan sorunun kısa yanıtı">
+        <article className="v7-guide-card" style={{ gridColumn: '1 / -1' }}>
+          <span className="eyebrow">Hızlı yanıt</span>
+          <h2>{tool.searchIntent.heading}</h2>
+          <p>{tool.searchIntent.answer}</p>
+          {!!tool.searchIntent.steps?.length && <div className="v7-fact-list">
+            {tool.searchIntent.steps.map((step, index) => <div key={step}><b>{index + 1}</b><span>{step}</span></div>)}
+          </div>}
+        </article>
+      </section>}
+
       <section className="v7-content-intro" aria-label="Hesaplama özeti">
         <article className="v7-guide-card">
           <span className="eyebrow">Kısa rehber</span>

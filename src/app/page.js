@@ -15,6 +15,19 @@ export const metadata = createMetadata({
   keywords: ['hesaplama araçları', 'online hesaplama', 'Eylül 2026 kira artış oranı', 'kredi kartı yapılandırma hesaplama', 'kredi hesaplama', 'maaş hesaplama'],
 })
 
+const prioritySearchLinks = [
+  { href: '/kredi-karti-borc/', label: 'Kredi kartı borcu nasıl hesaplanır?' },
+  { href: '/kredi-hesaplama/', label: '2026 kredi taksit hesaplama' },
+  { href: '/maas-hesaplama/', label: '2026 brüt net maaş hesaplama' },
+  { href: '/kira-artis-hesaplama/', label: 'Eylül 2026 kira artışı hesaplama' },
+  { href: '/kdv-hesaplama/', label: 'KDV dahil ve hariç hesaplama' },
+  { href: '/kidem-tazminati/', label: '2026 kıdem tazminatı hesaplama' },
+  { href: '/mevduat-faiz-hesaplama/', label: 'Mevduat faiz getirisi hesaplama' },
+  { href: '/zam-hesaplama/', label: 'Zam sonrası yeni maaş hesaplama' },
+  { href: '/yakit-tuketimi-hesaplama/', label: 'Yakıt tüketimi ve km maliyeti' },
+  { href: '/tapu-harci-hesaplama/', label: 'Tapu harcı hesaplama' },
+]
+
 const HOME_UI_CSS = `
   .v6-home{overflow:hidden;background:linear-gradient(180deg,#f7f9fd 0,#fff 640px);}
   .v6-home .container,.site-header .container{width:min(1400px,calc(100% - 64px));}
@@ -60,7 +73,14 @@ const HOME_UI_CSS = `
   .v6-category>.icon{color:#a4afbd;}
 
   .v6-home .home-content{padding:70px 0 100px;}
-  .v6-home .explorer-section{margin-bottom:76px;}
+  .v6-home .explorer-section{margin-bottom:38px;}
+  .priority-searches{margin:0 0 76px;padding:22px;border:1px solid #e0e7f1;border-radius:18px;background:#fff;box-shadow:0 12px 34px rgba(31,55,91,.05);}
+  .priority-searches-head{display:flex;align-items:end;justify-content:space-between;gap:24px;margin-bottom:15px;}
+  .priority-searches-head h2{margin:4px 0 0;color:#172238;font-size:1.15rem;letter-spacing:-.02em;}
+  .priority-searches-head p{max-width:620px;margin:0;color:#748297;font-size:.72rem;line-height:1.55;}
+  .priority-search-links{display:flex;flex-wrap:wrap;gap:8px;}
+  .priority-search-links a{display:inline-flex;align-items:center;min-height:38px;padding:8px 11px;border:1px solid #dfe7f2;border-radius:11px;color:#34445d;background:#f8fafd;font-size:.68rem;font-weight:760;transition:.18s ease;}
+  .priority-search-links a:hover{border-color:#9bb8ec;color:#1d4ed8;background:#fff;transform:translateY(-1px);}
   .v6-home .section-heading{margin-bottom:24px;}
   .v6-home .section-heading h2{font-size:clamp(2rem,3vw,3rem);}
   .v6-home .explorer-shell{grid-template-columns:220px minmax(0,1fr);gap:20px;}
@@ -97,6 +117,11 @@ const HOME_UI_CSS = `
     .v6-categories{width:max-content;display:flex;gap:8px;}
     .v6-category{width:175px;min-height:66px;}
     .v6-home .home-content{padding:52px 0 78px;}
+    .priority-searches{margin-bottom:52px;padding:16px;}
+    .priority-searches-head{display:block;}
+    .priority-searches-head p{margin-top:7px;}
+    .priority-search-links{display:grid;grid-template-columns:1fr;}
+    .priority-search-links a{font-size:.72rem;}
     .v6-home .tool-grid-cards{grid-template-columns:1fr;}
     .v6-home .tool-card{min-height:137px;}
   }
@@ -136,6 +161,17 @@ export default function HomePage() {
 
     <div className="container home-content">
       <ToolExplorer />
+
+      <section className="priority-searches" aria-labelledby="priority-searches-title">
+        <div className="priority-searches-head">
+          <div><span className="eyebrow">En çok aranan hesaplamalar</span><h2 id="priority-searches-title">Doğrudan ihtiyacınıza gidin</h2></div>
+          <p>Kredi, maaş, vergi ve günlük giderlerde sık aranan hesaplamalara açıklayıcı bağlantılarla hızlıca ulaşın.</p>
+        </div>
+        <div className="priority-search-links">
+          {prioritySearchLinks.map((item) => <Link key={item.href} href={item.href}>{item.label}</Link>)}
+        </div>
+      </section>
+
       <FavoriteTools />
       <RecentTools />
 

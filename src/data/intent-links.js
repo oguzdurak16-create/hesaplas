@@ -7,8 +7,8 @@ export const categoryIntentLinks = {
     },
     {
       slug: 'kredi-karti-borc',
-      title: 'Kredi kartı yapılandırma hesaplama',
-      description: 'Kart borcunuzu yapılandırma faiz ve vadeye göre hesaplayın; aylık taksit, toplam ödeme ve finansman maliyetini görün.',
+      title: 'Kredi kartı borcu nasıl hesaplanır?',
+      description: 'Kart borcunuzu aylık faiz ve vadeye göre hesaplayın; aylık taksit, toplam ödeme ve finansman maliyetini görün.',
     },
     {
       slug: 'kredi-yapilandirma-hesaplama',
