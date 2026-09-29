@@ -229,4 +229,80 @@ export const focusEditorial = {
       { q: 'Kilometre başı yakıt maliyeti nasıl bulunur?', a: 'Toplam alınan yakıtın TL maliyeti gidilen kilometreye bölünür.' },
     ],
   },
+  'tapu-harci-hesaplama': {
+    seoTitle: 'Tapu Harcı Hesaplama 2026 - Alıcı ve Satıcı Tapu Masrafı',
+    description: 'Gayrimenkul satış bedeli, toplam tapu harcı oranı ve alıcı payına göre toplam harcı, alıcı-satıcı paylarını ve alıcının yaklaşık masrafını hesaplayın.',
+    updatedAt: '2026-09-29',
+    formula: 'Toplam tapu harcı = beyan edilen satış bedeli × toplam harç oranı. Alıcı ve satıcı payları seçilen dağılıma göre ayrılır.',
+    searchIntent: {
+      heading: 'Tapu harcı nasıl hesaplanır?',
+      answer: 'Toplam tapu harcı, beyan edilen satış bedelinin girilen toplam harç oranıyla çarpılmasıyla bulunur. Ardından alıcı ve satıcı payı seçtiğiniz dağılıma göre ayrılır.',
+      steps: [
+        'Tapuda beyan edilecek satış bedelini girin.',
+        'İşleminiz için geçerli toplam harç oranını kontrol edin.',
+        'Alıcı ve satıcı arasındaki harç paylaşım oranını seçin.',
+        'Varsa alıcının diğer masraflarını ekleyip toplam yükü görün.',
+      ],
+    },
+    example: 'Örnek: 3.500.000 TL beyan bedeli ve toplam %4 harç oranında toplam tapu harcı 140.000 TL olur. Paylaşım %50-%50 ise alıcı ve satıcı için 70.000 TL düşer.',
+    guide: {
+      intro: 'Tapu masrafında satış bedeli ile uygulanacak harç oranı temel belirleyicidir. Araç toplam harcı ve seçtiğiniz paylaşım oranına göre alıcı-satıcı paylarını ayrı gösterir.',
+      evaluate: 'Beyan değeri, döner sermaye veya hizmet bedelleri ve işleme özgü istisnalar nihai ödemeyi değiştirebilir. Hesaplama sonucunu tapu işlemi öncesinde resmî tahakkukla karşılaştırın.',
+    },
+    faqs: [
+      { q: 'Tapu harcı nasıl hesaplanır?', a: 'Beyan edilen satış bedeli toplam harç oranıyla çarpılır. Ortaya çıkan toplam harç, seçilen alıcı-satıcı paylaşımına göre bölünür.' },
+      { q: 'Tapu harcı dışında başka masraf olabilir mi?', a: 'Evet. Döner sermaye veya işleme özgü başka bedeller bulunabilir. Araç harç hesabını ve girdiğiniz ek alıcı masraflarını gösterir.' },
+    ],
+  },
+  'trafik-cezasi-indirim-hesaplama': {
+    seoTitle: 'Trafik Cezası İndirim Hesaplama - Erken Ödeme Tutarı',
+    description: 'Trafik veya idari para cezası tutarı ile geçerli peşin ödeme indirim oranını girerek indirim tutarını ve ödenecek yaklaşık tutarı hesaplayın.',
+    updatedAt: '2026-09-29',
+    formula: 'İndirim tutarı = ceza tutarı × indirim oranı / 100. İndirimli ödeme = ceza tutarı − indirim tutarı.',
+    searchIntent: {
+      heading: 'Trafik cezası indirimi nasıl hesaplanır?',
+      answer: 'Ceza tutarı, geçerli indirim oranıyla çarpılarak indirim miktarı bulunur; bu tutar normal cezadan düşülerek indirimli ödeme hesaplanır. İndirim hakkı ve ödeme süresi ceza kaydından ayrıca doğrulanmalıdır.',
+      steps: [
+        'Tebliğ edilen normal ceza tutarını girin.',
+        'Ceza kaydınız için geçerli indirim oranını kontrol edip yazın.',
+        'İndirim tutarı ile ödenecek yeni tutarı karşılaştırın.',
+        'Son ödeme süresi ve uygunluğu e-Devlet veya yetkili kurum ekranından doğrulayın.',
+      ],
+    },
+    example: 'Örnek: 5.000 TL cezada %25 indirim oranı girildiğinde indirim 1.250 TL, yaklaşık ödeme 3.750 TL olur.',
+    guide: {
+      intro: 'Ceza indirimi hesabı, tebliğ edilen normal tutardan girdiğiniz peşin ödeme indirim oranını düşürür. Araç ödeme süresinin veya indirim hakkının hukuken oluşup oluşmadığını belirlemez.',
+      evaluate: 'İndirim oranı, ödeme süresi ve kapsam cezanın türüne ve güncel mevzuata göre değişebilir. Nihai ödeme için resmî ceza kaydındaki tutarı ve son tarihi esas alın.',
+    },
+    faqs: [
+      { q: 'Trafik cezası indirimli tutarı nasıl bulunur?', a: 'Normal ceza tutarından, ceza tutarı × indirim oranı / 100 formülüyle bulunan indirim düşülür.' },
+      { q: 'Her trafik cezasında aynı indirim oranı mı uygulanır?', a: 'Araç oranı kullanıcıdan alır. Uygulanabilecek oran ve süreyi güncel ceza kaydınız ve resmî mevzuattan kontrol etmelisiniz.' },
+    ],
+  },
+  'yuzde-hesaplama': {
+    seoTitle: 'Yüzde Hesaplama - Yüzde Değişim ve Oran Hesaplama',
+    description: 'Bir sayının belirli yüzdesini, yüzde ekleme-çıkarma sonucunu, iki sayı arasındaki yüzde değişimi ve birbirine oranını tek ekranda hesaplayın.',
+    updatedAt: '2026-09-29',
+    formula: 'Bir sayının yüzdesi = ana sayı × yüzde / 100. Yüzde değişim = (yeni değer − eski değer) / eski değer × 100.',
+    searchIntent: {
+      heading: 'Yüzde nasıl hesaplanır?',
+      answer: 'Bir sayının belirli yüzdesi, sayı ile yüzde oranının çarpılıp 100’e bölünmesiyle bulunur. İki değer arasındaki yüzde değişim ise farkın ilk değere bölünüp 100 ile çarpılmasıdır.',
+      steps: [
+        'Ana sayıyı girin.',
+        'Hesaplamak istediğiniz yüzde oranını yazın.',
+        'Yüzde karşılığını, yüzde eklenmiş ve çıkarılmış sonucu görün.',
+        'İkinci bir sayı girerek yüzde değişim ve oranı da karşılaştırın.',
+      ],
+    },
+    example: 'Örnek: 1.000 sayısının %20’si 200’dür; %20 eklenmiş değer 1.200, %20 çıkarılmış değer 800 olur. 1.000’den 1.250’ye değişim ise %25 artıştır.',
+    guide: {
+      intro: 'Yüzde hesabında “bir sayının yüzdesi” ile “iki sayı arasındaki yüzde değişim” farklı işlemlerdir. Bu araç iki sonucu da aynı ekranda ayırarak gösterir.',
+      evaluate: 'Yüzde değişim hesabında başlangıç değeri paydadır; bu nedenle hangi sayının eski, hangisinin yeni değer olduğu sonucu değiştirir.',
+    },
+    faqs: [
+      { q: 'Bir sayının yüzde 20’si nasıl bulunur?', a: 'Sayı 20 ile çarpılır ve 100’e bölünür. Örneğin 1.000 × 20 / 100 = 200.' },
+      { q: 'Yüzde artış nasıl hesaplanır?', a: 'Yeni değerden eski değer çıkarılır; fark eski değere bölünür ve 100 ile çarpılır.' },
+      { q: 'Yüzde düşüş nasıl hesaplanır?', a: 'Eski değerden yeni değer çıkarılır; fark eski değere bölünür ve 100 ile çarpılır.' },
+    ],
+  },
 }
