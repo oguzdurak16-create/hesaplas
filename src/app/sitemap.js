@@ -2,7 +2,7 @@ import { categories, tools } from '@/data/tools'
 import { SITE_URL } from '@/lib/seo'
 import { isIndexableTool } from '@/lib/indexFocus'
 
-const SITE_UPDATED = '2026-09-29'
+const SITE_UPDATED = '2026-10-05'
 const FALLBACK_TOOL_UPDATED = '2026-07-17'
 
 function toolUpdatedAt(tool) {

@@ -10,16 +10,16 @@ import { createMetadata, SITE_URL } from '@/lib/seo'
 
 export const metadata = createMetadata({
   title: 'Hesaplas.com - Kredi, Kira, Maaş ve Günlük Hesaplama Araçları',
-  description: 'Kredi, kredi kartı yapılandırma, Eylül 2026 kira artışı, maaş, vergi, eğitim, sağlık ve günlük ihtiyaçlar için ücretsiz online hesaplama araçları.',
+  description: 'Kredi, kredi kartı yapılandırma, Ekim 2026 kira artışı, maaş, vergi, eğitim, sağlık ve günlük ihtiyaçlar için ücretsiz online hesaplama araçları.',
   path: '/',
-  keywords: ['hesaplama araçları', 'online hesaplama', 'Eylül 2026 kira artış oranı', 'kredi kartı yapılandırma hesaplama', 'kredi hesaplama', 'maaş hesaplama'],
+  keywords: ['hesaplama araçları', 'online hesaplama', 'Ekim 2026 kira artış oranı', 'kredi kartı yapılandırma hesaplama', 'kredi hesaplama', 'maaş hesaplama'],
 })
 
 const prioritySearchLinks = [
   { href: '/kredi-karti-borc/', label: 'Kredi kartı borcu nasıl hesaplanır?' },
   { href: '/kredi-hesaplama/', label: '2026 kredi taksit hesaplama' },
   { href: '/maas-hesaplama/', label: '2026 brüt net maaş hesaplama' },
-  { href: '/kira-artis-hesaplama/', label: 'Eylül 2026 kira artışı hesaplama' },
+  { href: '/kira-artis-hesaplama/', label: 'Ekim 2026 kira artışı hesaplama' },
   { href: '/kdv-hesaplama/', label: 'KDV dahil ve hariç hesaplama' },
   { href: '/kidem-tazminati/', label: '2026 kıdem tazminatı hesaplama' },
   { href: '/mevduat-faiz-hesaplama/', label: 'Mevduat faiz getirisi hesaplama' },
@@ -176,8 +176,8 @@ export default function HomePage() {
       <RecentTools />
 
       <section className="featured-section">
-        <div className="featured-copy"><span className="eyebrow">Güncel hesaplamalar</span><h2>Aranan güncel oranları doğrudan hesaplayın.</h2><p>Eylül 2026 kira artış oranını ve kredi kartı yapılandırma teklifinizi güncel kaynaklarla ayrı ayrı kontrol edin.</p><div className="featured-actions"><Link href="/kira-artis-hesaplama/" className="button white">Eylül kira artışı <Icon name="arrow" size="sm"/></Link><Link href="/kredi-karti-borc/" className="button glass">Kredi kartı yapılandırma</Link></div></div>
-        <div className="decision-preview"><div className="preview-top"><span>Eylül 2026 kira örneği</span><i>Güncel</i></div><div className="preview-main"><small>Yeni aylık kira</small><strong>26.358 TL</strong><span className="preview-change">+6.358 TL / ay</span></div><div className="preview-grid"><div><small>Yıllık fark</small><b>76.296 TL</b></div><div><small>Artış</small><b>%31,79</b></div></div><div className="preview-bar"><i style={{width:'67%'}}/></div></div>
+        <div className="featured-copy"><span className="eyebrow">Güncel hesaplamalar</span><h2>Aranan güncel oranları doğrudan hesaplayın.</h2><p>Ekim 2026 kira artış oranını ve kredi kartı yapılandırma teklifinizi güncel kaynaklarla ayrı ayrı kontrol edin.</p><div className="featured-actions"><Link href="/kira-artis-hesaplama/" className="button white">Ekim kira artışı <Icon name="arrow" size="sm"/></Link><Link href="/kredi-karti-borc/" className="button glass">Kredi kartı yapılandırma</Link></div></div>
+        <div className="decision-preview"><div className="preview-top"><span>Ekim 2026 kira örneği</span><i>Güncel</i></div><div className="preview-main"><small>Yeni aylık kira</small><strong>26.298 TL</strong><span className="preview-change">+6.298 TL / ay</span></div><div className="preview-grid"><div><small>Yıllık fark</small><b>75.576 TL</b></div><div><small>Artış</small><b>%31,49</b></div></div><div className="preview-bar"><i style={{width:'67%'}}/></div></div>
       </section>
 
       <section className="home-info"><div><span className="eyebrow">Neden Hesaplas?</span><h2>Karmaşık formülleri sade bir karar akışına dönüştürüyoruz.</h2><p>Her araç kendi ihtiyacına göre tasarlanır; gereksiz alan, zorunlu üyelik veya gizli sonuç ekranı yoktur.</p></div><div className="info-points"><article><span><Icon name="zap"/></span><h3>Hızlı</h3><p>Sonuçlar alanları değiştirirken anında güncellenir.</p></article><article><span><Icon name="shield"/></span><h3>Gizli</h3><p>Girdiğiniz değerler hesaplama için tarayıcıda işlenir.</p></article><article><span><Icon name="sparkles"/></span><h3>Anlaşılır</h3><p>Ana sonuç, fark ve detaylar ayrı katmanlarda gösterilir.</p></article></div></section>
