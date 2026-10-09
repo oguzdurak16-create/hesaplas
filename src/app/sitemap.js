@@ -28,6 +28,7 @@ export default function sitemap() {
       changeFrequency: item.changeFrequency,
       priority: item.priority,
     })),
+    { url: `${SITE_URL}/abkant-tonaj`, lastModified: '2026-10-09', changeFrequency: 'monthly', priority: 0.75 },
     ...categories.map((category) => ({
       url: `${SITE_URL}/kategori/${category.id}/`,
       lastModified: SITE_UPDATED,

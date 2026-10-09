@@ -33,6 +33,9 @@ function getAttribute(tag, name) {
 function getHtmlForUrl(urlString) {
   const url = new URL(urlString)
   const cleanPath = decodeURIComponent(url.pathname).replace(/^\/+|\/+$/g, '')
+  // Public standalone tools such as abkant-tonaj.html have clean Pages URLs.
+  const standaloneHtml = cleanPath ? path.join(OUT_DIR, `${cleanPath}.html`) : null
+  if (standaloneHtml && fs.existsSync(standaloneHtml)) return standaloneHtml
   return cleanPath ? path.join(OUT_DIR, ...cleanPath.split('/'), 'index.html') : path.join(OUT_DIR, 'index.html')
 }
 

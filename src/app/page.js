@@ -26,6 +26,7 @@ const prioritySearchLinks = [
   { href: '/zam-hesaplama/', label: 'Zam sonrası yeni maaş hesaplama' },
   { href: '/yakit-tuketimi-hesaplama/', label: 'Yakıt tüketimi ve km maliyeti' },
   { href: '/tapu-harci-hesaplama/', label: 'Tapu harcı hesaplama' },
+  { href: '/abkant-tonaj', label: 'Abkant tonaj ve sac bükme kuvveti hesaplama' },
 ]
 
 const HOME_UI_CSS = `
