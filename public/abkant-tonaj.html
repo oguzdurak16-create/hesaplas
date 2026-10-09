@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0f172a">
+<title>Abkant Tonaj Hesaplama | Ücretsiz Sac Büküm Kuvveti – Hesaplas</title>
+<meta name="description" content="Sac kalınlığı, büküm boyu, çekme dayanımı ve V kalıp açıklığı ile hava bükme kuvvetini kN, ton-kuvvet ve kN/m olarak anında hesaplayın.">
+<link rel="canonical" href="https://www.hesaplas.com/abkant-tonaj.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Abkant Tonaj Hesaplama | Hesaplas">
+<meta property="og:description" content="Ücretsiz, hızlı ve mobil uyumlu hava bükme kuvveti hesaplayıcısı.">
+<meta property="og:url" content="https://www.hesaplas.com/abkant-tonaj.html">
+<style>
+:root{color-scheme:light;font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;--ink:#14243b;--muted:#64748b;--line:#e3e9f2;--blue:#1455d9;--navy:#101d33;--pale:#f4f7fb}
+*{box-sizing:border-box}body{margin:0;color:var(--ink);background:var(--pale);font-size:15px;line-height:1.55}a{color:var(--blue)}
+.top{background:var(--navy);color:white}.topin{max-width:1120px;margin:auto;padding:15px 24px;display:flex;justify-content:space-between;gap:12px;align-items:center}.brand{font-weight:900;letter-spacing:-.04em;font-size:20px;text-decoration:none;color:#fff}.brand span{color:#93c5fd}.back{font-size:13px;color:#e2e8f0;text-decoration:none}
+main{max-width:1120px;margin:0 auto;padding:38px 24px 70px}.eyebrow{color:#2563eb;text-transform:uppercase;font-size:11px;font-weight:800;letter-spacing:.12em}h1{font-size:clamp(30px,4vw,46px);letter-spacing:-.055em;line-height:1.14;margin:9px 0 14px}h2{font-size:20px;letter-spacing:-.025em;margin:0 0 17px}.intro{max-width:740px;margin:0;color:#53647b;font-size:16px}.chips{display:flex;flex-wrap:wrap;gap:8px;margin:23px 0 26px}.chips span{padding:6px 11px;border:1px solid #dce5f1;background:#fff;border-radius:40px;color:#42546f;font-size:12px;font-weight:650}
+.grid{display:grid;grid-template-columns:minmax(0,1.14fr) minmax(0,.86fr);gap:19px;align-items:start}.panel{background:#fff;border:1px solid var(--line);border-radius:21px;box-shadow:0 14px 40px rgba(18,42,77,.04);padding:27px}.fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:17px}.field{display:grid;gap:7px}.field label{font-size:13px;font-weight:760}input,select{width:100%;height:46px;background:#fff;color:#1f2c40;padding:10px 13px;border:1px solid #cdd8e8;border-radius:10px;font:inherit;min-width:0}input:focus,select:focus{outline:3px solid #d9e7ff;border-color:#3b82f6}.hint{font-size:11px;color:#6d7e92;line-height:1.4}.mini{margin-top:20px;padding:13px 14px;border-radius:12px;background:#f1f6fe;border:1px solid #deebfc;font-size:12px;color:#48607d}.buttons{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}button{border:0;border-radius:10px;padding:12px 16px;font:inherit;cursor:pointer;font-weight:750;background:#e9eff7;color:#21334e}button.primary{background:#195be3;color:white}button:hover{filter:brightness(.95)}button:focus-visible{outline:3px solid #8dbafc}
+.result{background:#10213d;color:white;border:0}.result h2{color:#e9f1fd}.result .biglabel{font-size:12px;color:#adc7e8;letter-spacing:.04em}.big{font-size:clamp(38px,5vw,57px);font-weight:850;letter-spacing:-.055em;line-height:1.05;margin-top:5px;white-space:nowrap}.big span{font-size:18px;font-weight:550;color:#b7ccec;letter-spacing:0}.rule{border:0;border-top:1px solid #29415f;margin:24px 0}.tiles{display:grid;grid-template-columns:1fr 1fr;gap:11px}.tile{background:#1e3555;border:1px solid #2d476a;border-radius:12px;padding:14px}.tile small{display:block;color:#adc2dc;font-size:11px}.tile strong{font-size:20px;display:block;line-height:1.5}.status{border-radius:10px;padding:11px 12px;background:#1e3555;margin-top:19px;font-size:12px;color:#deeafb}.status.warn{background:#543829;color:#ffe0c4}.status.error{background:#572b34;color:#ffe2e6}.formula{font:600 12px ui-monospace,SFMono-Regular,Consolas,monospace;white-space:normal;overflow-wrap:anywhere;color:#c3d7f5}.below{display:grid;grid-template-columns:1fr 1fr;gap:19px;margin-top:19px}.content h2{margin-bottom:11px}.content p,.content li{color:#53647b;font-size:13px}.content ul{padding-left:19px}.content li{margin:7px 0}.note{border-left:3px solid #e7a33f;padding-left:12px;margin-top:15px}.end{padding-top:23px;text-align:center;color:#6c7b90;font-size:12px}
+@media(max-width:780px){.grid,.below{grid-template-columns:1fr}main{padding:28px 16px 50px}.topin{padding:14px 16px}.panel{padding:20px}.fields{gap:13px}.big{font-size:43px}}
+@media(max-width:420px){.fields{grid-template-columns:1fr}.big{font-size:40px}.topin{align-items:start}.back{max-width:135px;text-align:right}}
+@media print{.top,.buttons,.chips,.end{display:none}.grid,.below{display:block}.panel{box-shadow:none;margin-bottom:12px;break-inside:avoid}body{background:#fff}}
+</style>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"Abkant Tonaj Hesaplama","url":"https://www.hesaplas.com/abkant-tonaj.html","applicationCategory":"EngineeringApplication","operatingSystem":"Any","inLanguage":"tr-TR","offers":{"@type":"Offer","price":"0","priceCurrency":"TRY"},"description":"Metrik hava bükme kuvveti hesaplayıcısı."}
+</script>
+</head>
+<body>
+<header class="top"><div class="topin"><a class="brand" href="/">Hesaplas<span>.com</span></a><a class="back" href="/">← Diğer hesaplama araçları</a></div></header>
+<main>
+<div class="eyebrow">Mühendislik / Sac şekillendirme</div>
+<h1>Abkant tonaj hesaplama</h1>
+<p class="intro">Sac kalınlığı, büküm uzunluğu ve V kalıp açıklığına göre <strong>hava bükme kuvvetini</strong> hesapla. Girdiler sadece tarayıcında işlenir.</p>
+<div class="chips"><span>Ücretsiz</span><span>Üyelik gerektirmez</span><span>kN · ton-kuvvet · kN/m</span><span>90° hava bükme için yaklaşık değer</span></div>
+<div class="grid">
+<section class="panel" aria-labelledby="input-title"><h2 id="input-title">Büküm bilgileri</h2>
+<div class="fields">
+<div class="field"><label for="material">Malzeme</label><select id="material"><option value="450">Yumuşak çelik (örnek Rm 450 MPa)</option><option value="600">Paslanmaz (örnek Rm 600 MPa)</option><option value="300">Alüminyum (örnek Rm 300 MPa)</option><option value="custom">Özel malzeme / manuel</option></select><div class="hint">Ön tanımlar temsili; gerçek malzeme sertifikasını kullan.</div></div>
+<div class="field"><label for="rm">Çekme dayanımı Rm (MPa)</label><input id="rm" type="number" min="50" max="2500" step="1" value="450" inputmode="decimal"><div class="hint">Akma dayanımı Re değil, çekme dayanımı Rm.</div></div>
+<div class="field"><label for="t">Sac kalınlığı t (mm)</label><input id="t" type="number" min=".1" max="100" step=".1" value="3" inputmode="decimal"><div class="hint">Gerçek sac kalınlığı.</div></div>
+<div class="field"><label for="l">Büküm uzunluğu L (mm)</label><input id="l" type="number" min="1" max="30000" step="1" value="1000" inputmode="decimal"><div class="hint">Tek seferde bükülen aktif boy.</div></div>
+<div class="field"><label for="v">V kalıp açıklığı (mm)</label><input id="v" type="number" min="1" max="500" step=".1" value="24" inputmode="decimal"><div class="hint">Omuzlar arası açıklık; tipik ilk yaklaşım ≈ 8t.</div></div>
+<div class="field"><label for="capacity">Makine nominal kapasitesi (t), isteğe bağlı</label><input id="capacity" type="number" min="0" max="10000" step=".1" placeholder="Örn. 240" inputmode="decimal"><div class="hint">Bu karşılaştırma yükleme izni değildir.</div></div>
+</div>
+<div class="mini"><strong>Önemli:</strong> Sonuçlar 90° civarında standart V kalıpla hava bükme için ampirik ön tahmindir. Dip bükme, ezme, özel kalıplar ve yüksek dayanımlı saclar için geçerli kabul edilmez.</div>
+<div class="buttons"><button type="button" class="primary" id="v8">V'yi 8 × t yap</button><button type="button" id="share">Bağlantıyı kopyala</button><button type="button" id="print">Yazdır</button></div>
+</section>
+<section class="panel result" aria-live="polite" aria-labelledby="result-title"><h2 id="result-title">Hesaplanan kuvvet</h2><div class="biglabel">Tahmini gerekli kuvvet</div><div class="big"><span id="ton">—</span> <span>ton-kuvvet</span></div><hr class="rule">
+<div class="tiles"><div class="tile"><small>Toplam kuvvet</small><strong id="kn">— kN</strong></div><div class="tile"><small>Metre başına kuvvet</small><strong id="knpm">— kN/m</strong></div><div class="tile"><small>V / t oranı</small><strong id="ratio">—</strong></div><div class="tile"><small>8 × t referansı</small><strong id="recommended">— mm</strong></div></div>
+<div class="status" id="status">Değerler güncelleniyor…</div><hr class="rule"><div class="biglabel">Kullanılan ampirik bağıntı</div><p class="formula">F (kN) = 1,42 × Rm × L × t² / (1000 × V)</p><p class="formula" id="substitution"></p>
+</section>
+</div>
+<div class="below">
+<section class="panel content"><h2>Hesaplamanın kapsamı</h2><p>Bu hesaplama 3 noktadan temaslı <strong>hava bükme</strong> işlemine yönelik yaklaşık bir kuvvet hesabıdır. Malzeme sertifikasındaki Rm değeri, gerçek kalıp V açıklığı ve aktif büküm boyu esas alınmalıdır.</p><ul><li>t iki katına çıkarsa, V sabitken kuvvet yaklaşık dört katına çıkar.</li><li>Büküm boyu iki katına çıkarsa kuvvet yaklaşık iki katına çıkar.</li><li>V kalıp açıklığı büyürse hesaplanan kuvvet azalır; iç yarıçap ve minimum flanş şartları ayrıca kontrol edilir.</li></ul></section>
+<section class="panel content"><h2>Güvenlik ve kaynaklar</h2><p>Makinenin nominal tonajı her uzunluk ve yük konumu için izin verilen kapasite değildir. Kalıp üreticisinin <strong>kN/m sınırı</strong>, yük dağılımı, parça geometrisi ve üretici tonaj grafikleri ayrıca doğrulanmalıdır.</p><p class="note">Bu sayfa üretim onayı, kalıp seçimi onayı veya makine emniyet hesabı değildir. Hesaplanan değere dayanarak operasyon planını tek başına kesinleştirmeyin.</p><p>Teknik karşılaştırma: <a href="https://online.flippingbook.com/view/772006724/241/" target="_blank" rel="noopener noreferrer">Amada hava bükme tonaj tablosu</a> ve <a href="https://www.adhmt.com/press-brake-bending-load-calculation-tonnage-and-safe-setup/" target="_blank" rel="noopener noreferrer">metrik kuvvet formülü açıklaması</a>.</p></section>
+</div>
+<div class="end">Hesaplas.com · Ücretsiz teknik ön hesaplama aracı · Ekim 2026</div>
+</main>
+<script>
+(function(){
+"use strict";
+var ids=["material","rm","t","l","v","capacity"], els={};ids.forEach(function(id){els[id]=document.getElementById(id)});
+var out=function(id,value){document.getElementById(id).textContent=value};
+var format=function(n,d){return n.toLocaleString("tr-TR",{minimumFractionDigits:d,maximumFractionDigits:d})};
+var status=document.getElementById("status");
+function pos(n,min,max){return Number.isFinite(n)&&n>=min&&n<=max}
+function recalc(){
+ var t=els.t.valueAsNumber,l=els.l.valueAsNumber,rm=els.rm.valueAsNumber,v=els.v.valueAsNumber,cap=els.capacity.valueAsNumber;
+ var valid=pos(t,.1,100)&&pos(l,1,30000)&&pos(rm,50,2500)&&pos(v,1,500);
+ if(!valid){["ton","kn","knpm","ratio","recommended","substitution"].forEach(function(id){out(id,"—")});status.textContent="Girdileri kontrol edin: kalınlık 0,1–100 mm, uzunluk 1–30.000 mm, Rm 50–2.500 MPa ve V 1–500 mm olmalı.";status.className="status error";return}
+ var kn=1.42*rm*l*t*t/(1000*v),ton=kn/9.80665,knpm=kn*1000/l,ratio=v/t;
+ out("ton",format(ton,2));out("kn",format(kn,1)+" kN");out("knpm",format(knpm,1)+" kN/m");out("ratio",format(ratio,1)+" × t");out("recommended",format(8*t,1)+" mm");
+ out("substitution","1,42 × "+format(rm,0)+" × "+format(l,0)+" × "+format(t,1)+"² / (1000 × "+format(v,1)+") = "+format(kn,1)+" kN");
+ var alerts=[];
+ if(ratio<6||ratio>12)alerts.push("V/t="+format(ratio,1)+": tipik 6–12 aralığının dışında. Özel kontrol gerekir.");
+ if(els.capacity.value.trim()!==""){if(!pos(cap,.1,10000)){alerts.push("Makine kapasitesi geçersiz.");}else if(ton>cap){alerts.push("Hesaplanan kuvvet makinenin girilen nominal tonajını aşıyor.");}else{alerts.push("Nominal kapasite daha büyük görünse de bu, kalıp/yükleme onayı değildir.");}}
+ if(!alerts.length)alerts.push("Ön tahmin hazır. Üretim öncesi makine ve kalıp kapasite tablolarını kontrol edin.");
+ status.textContent=alerts.join(" ");status.className="status"+((ratio<6||ratio>12||ton>cap&&pos(cap,.1,10000))?" warn":"");
+}
+els.material.addEventListener("change",function(){if(this.value!=="custom")els.rm.value=this.value;recalc()});
+els.rm.addEventListener("input",function(){els.material.value="custom";recalc()});
+ids.forEach(function(id){if(id!=="rm"&&id!=="material")els[id].addEventListener("input",recalc)});
+document.getElementById("v8").addEventListener("click",function(){if(pos(els.t.valueAsNumber,.1,100)){els.v.value=(els.t.valueAsNumber*8).toFixed(1);recalc()}});
+document.getElementById("print").addEventListener("click",function(){window.print()});
+document.getElementById("share").addEventListener("click",async function(){var u=new URL(location.href);ids.filter(function(k){return k!=="material"&&els[k].value.trim()!==""}).forEach(function(k){u.searchParams.set(k,els[k].value)});var msg="Bağlantı panoya kopyalandı";try{await navigator.clipboard.writeText(u.toString())}catch(e){msg="Bağlantı: "+u.toString()}status.textContent=msg;status.className="status"});
+var q=new URLSearchParams(location.search);ids.forEach(function(k){if(k!=="material"&&q.has(k))els[k].value=q.get(k)});if(q.has("rm"))els.material.value="custom";recalc();
+})();
+</script>
+</body>
+</html>
