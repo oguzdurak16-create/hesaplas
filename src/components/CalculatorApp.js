@@ -43,6 +43,7 @@ function validate(tool, values) {
     if (field.type === 'number') {
       const value = Number(String(raw ?? '').replace(',', '.'))
       if (raw === '' || !Number.isFinite(value)) fields[field.key] = 'Geçerli bir sayı girin.'
+      else if (field.integer && !Number.isSafeInteger(value)) fields[field.key] = 'Tam sayı girin.'
       else if (field.min !== undefined && value < field.min) fields[field.key] = `En az ${field.min} girilebilir.`
       else if (field.max !== undefined && value > field.max) fields[field.key] = `En fazla ${field.max} girilebilir.`
     }

@@ -1,4 +1,34 @@
 export const currentEditorial = {
+  'kredi-hesaplama': {
+    updatedAt: '2026-11-01',
+    example: 'Vergi ve masraf hariç matematiksel örnek: 12.000 TL, aylık %1 faiz ve 12 ay için eşit taksit yaklaşık 1.066,19 TL; faiz sıfırsa 1.000 TL olur. Taksit toplamı tam hassasiyetle hesaplanır; bankanın kuruş yuvarlaması fark oluşturabilir.',
+    fieldOverrides: {
+      months: { integer: true, step: 1 },
+      rate: { help: 'Aylık oranı kendi teklifinizden girin. Örnek değer piyasa teklifi değildir; vergi ve ücretler bu temel faiz oranına otomatik eklenmez.' },
+    },
+  },
+  'mevduat-faiz-hesaplama': {
+    updatedAt: '2026-11-01',
+    formula: 'Brüt faiz = anapara × yıllık brüt oran / 100 × gün / 365. Stopaj = brüt faiz × stopaj oranı / 100. Net faiz, brüt faizden stopaj çıkarılarak bulunur. Model basit faiz ve 365 günlük yıl kullanır; dönem içinde yeniden yatırıma dönüşmez.',
+    example: 'Varsayımsal örnek: 100.000 TL, yıllık brüt %36,5, 30 gün ve %10 stopaj için brüt faiz 3.000 TL, stopaj 300 TL, net kazanç 2.700 TL ve vade sonu 102.700 TL olur. Bunlar güncel faiz veya stopaj oranı iddiası değildir.',
+    fieldOverrides: {
+      days: { integer: true, step: 1 },
+      annualRate: { help: 'Bankanızın teklifindeki yıllık brüt oranı girin. Varsayılan tutar örnek senaryodur.' },
+      withholding: { default: '', help: 'Hesap türü, para birimi ve açılış/yenileme tarihine göre geçerli stopajı bankanızdan kontrol edip girin.' },
+    },
+  },
+  'bilesik-faiz-hesaplama': {
+    updatedAt: '2026-11-01',
+    formula: 'Aylık modelde her ay bakiye önce 1 + yıllık nominal oran / 1200 ile çarpılır, ardından aylık katkı eklenir. Katkı ay sonunda yapılır. Girilen yıllık oran nominaldir; efektif yıllık getiriyle aynı değildir. Vergi, komisyon ve enflasyon bu modele dahil değildir.',
+    example: 'Başlangıç 1.000 TL, nominal yıllık %12, aylık ekleme 0 TL ve 1 yıl için sonuç 1.126,83 TL olur. Faiz sıfır ve ay sonu ekleme 100 TL olduğunda aynı sürede toplam 2.200 TL’dir.',
+    fieldOverrides: { years: { integer: true, step: 1, help: 'Tam yıl girin. Model yılda 12 aylık dönem ve ay sonunda katkı kullanır.' }, annualRate: { label: 'Yıllık nominal getiri', help: 'Aylık oran, bu nominal yıllık oranın 12’ye bölünmesidir; efektif yıllık oranı doğrudan girmeyin.' } },
+    faqs: [{ q: 'Aylık katkı ne zaman ekleniyor?', a: 'Her ayın getirisi hesaplandıktan sonra ay sonunda eklenir. Ay başında katkı yapan bir planla sonuç farklıdır.' }, { q: 'Yıllık oran efektif getiri mi?', a: 'Hayır. Model nominal yıllık oranı 12’ye bölerek aylık oranı bulur. Bu nedenle %12 nominal oran, aylık bileşik hesapta yaklaşık %12,68 efektif yıllık artış verir.' }],
+  },
+  'zam-hesaplama': {
+    updatedAt: '2026-11-01',
+    description: 'Eski tutar ve zam oranından yeni tutarı, aylık artışı ve 12 aylık farkı hesaplayın. Negatif oranla indirim senaryosunu karşılaştırın.',
+    example: '50.000 TL ve %25 zam için yeni tutar 62.500 TL, aylık fark 12.500 TL ve 12 aylık fark 150.000 TL olur. %-10 oranında ise yeni tutar 45.000 TL’dir.',
+  },
   'kira-artis-hesaplama': {
     title: 'Kira Artış Hesaplama: Yeni Kira ve Yıllık Fark',
     seoTitle: 'Kira Artış Hesaplama — Yeni Kira ve Yıllık Fark',

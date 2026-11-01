@@ -27,7 +27,8 @@ export const payment = (principal, monthlyRate, months) => {
   const r = monthlyRate / 100
   if (!months) return 0
   if (!r) return principal / months
-  return principal * (r * Math.pow(1 + r, months)) / (Math.pow(1 + r, months) - 1)
+  // log1p/expm1 retain precision when the monthly rate is close to zero.
+  return principal * r / -Math.expm1(-months * Math.log1p(r))
 }
 export const result = (summary, details = [], note = '', table = null) => ({ summary, details, note, table })
 export const item = (label, value, tone = '') => ({ label, value, tone })
