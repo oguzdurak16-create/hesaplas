@@ -22,10 +22,10 @@ const GA_ID = 'G-BDVJ5W4E3E'
 const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || ''
 const withBase = (path) => `${BASE_PATH}${path}`
 const speculationRules = {
-  prerender: [{
+  prefetch: [{
     source: 'list',
     urls: ['/tum-araclar/', '/yapay-zeka-token-maliyeti/', '/elektrikli-arac-sarj-maliyeti/', '/gunes-paneli-geri-donus-hesaplama/'].map(withBase),
-    eagerness: 'moderate',
+    eagerness: 'conservative',
   }],
 }
 
@@ -75,8 +75,9 @@ export default function RootLayout({ children }) {
           }}
         />
         <AnalyticsTracker gaId={GA_ID} />
+        <a className="seo-skip-link" href="#main-content">İçeriğe geç</a>
         <Header />
-        <main>{children}</main>
+        <main id="main-content" tabIndex={-1}>{children}</main>
         <AdSlot slot={process.env.NEXT_PUBLIC_ADSENSE_CONTENT_SLOT} afterSelector=".calculator-layout" />
         <Footer />
         <CookieConsent />

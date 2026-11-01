@@ -54,7 +54,8 @@ const applicationCategories = {
 export function generateStaticParams() { return tools.map((tool) => ({ slug: tool.slug })) }
 export const dynamicParams = false
 
-export function generateMetadata({ params }) {
+export async function generateMetadata({ params }) {
+  params = await params
   const tool = toolMap[params.slug]
   if (!tool) return {}
   return createMetadata({
@@ -66,7 +67,8 @@ export function generateMetadata({ params }) {
   })
 }
 
-export default function ToolPage({ params }) {
+export default async function ToolPage({ params }) {
+  params = await params
   const tool = toolMap[params.slug]
   if (!tool) notFound()
 

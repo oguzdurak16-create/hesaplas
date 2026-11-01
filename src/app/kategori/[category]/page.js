@@ -86,7 +86,8 @@ export function generateStaticParams() {
 
 export const dynamicParams = false
 
-export function generateMetadata({ params }) {
+export async function generateMetadata({ params }) {
+  params = await params
   const category = categories.find((item) => item.id === params.category)
   const seo = categorySeo[params.category]
   if (!category || !seo) return {}
@@ -98,7 +99,8 @@ export function generateMetadata({ params }) {
   })
 }
 
-export default function CategoryPage({ params }) {
+export default async function CategoryPage({ params }) {
+  params = await params
   const category = categories.find((item) => item.id === params.category)
   const seo = categorySeo[params.category]
   if (!category || !seo) notFound()

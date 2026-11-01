@@ -10,23 +10,23 @@ import { createMetadata, SITE_URL } from '@/lib/seo'
 
 export const metadata = createMetadata({
   title: 'Hesaplas.com - Kredi, Kira, Maaş ve Günlük Hesaplama Araçları',
-  description: 'Kredi, kredi kartı yapılandırma, Ekim 2026 kira artışı, maaş, vergi, eğitim, sağlık ve günlük ihtiyaçlar için ücretsiz online hesaplama araçları.',
+  description: 'Kredi taksiti, kira artışı, brüt net maaş, KDV ve mevduat getirisini ücretsiz hesaplayın. Formülleri inceleyin, farklı tutarlarla sonuçları karşılaştırın.',
   path: '/',
-  keywords: ['hesaplama araçları', 'online hesaplama', 'Ekim 2026 kira artış oranı', 'kredi kartı yapılandırma hesaplama', 'kredi hesaplama', 'maaş hesaplama'],
+  keywords: ['hesaplama araçları', 'online hesaplama', 'kira artış hesaplama', 'kredi kartı yapılandırma hesaplama', 'kredi hesaplama', 'maaş hesaplama'],
 })
 
 const prioritySearchLinks = [
   { href: '/kredi-karti-borc/', label: 'Kredi kartı borcu nasıl hesaplanır?' },
   { href: '/kredi-hesaplama/', label: '2026 kredi taksit hesaplama' },
   { href: '/maas-hesaplama/', label: '2026 brüt net maaş hesaplama' },
-  { href: '/kira-artis-hesaplama/', label: 'Ekim 2026 kira artışı hesaplama' },
+  { href: '/kira-artis-hesaplama/', label: 'Kira artışı ve yeni kira hesaplama' },
   { href: '/kdv-hesaplama/', label: 'KDV dahil ve hariç hesaplama' },
   { href: '/kidem-tazminati/', label: '2026 kıdem tazminatı hesaplama' },
   { href: '/mevduat-faiz-hesaplama/', label: 'Mevduat faiz getirisi hesaplama' },
   { href: '/zam-hesaplama/', label: 'Zam sonrası yeni maaş hesaplama' },
   { href: '/yakit-tuketimi-hesaplama/', label: 'Yakıt tüketimi ve km maliyeti' },
   { href: '/tapu-harci-hesaplama/', label: 'Tapu harcı hesaplama' },
-  { href: '/abkant-tonaj', label: 'Abkant tonaj ve sac bükme kuvveti hesaplama' },
+  { href: '/abkant-tonaj/', label: 'Abkant tonaj ve sac bükme kuvveti hesaplama' },
 ]
 
 const HOME_UI_CSS = `
@@ -138,7 +138,7 @@ export default function HomePage() {
       <div className="container v6-hero-grid">
         <div className="v6-hero-copy">
           <span className="v6-badge"><Icon name="sparkles" size="sm" /> Ücretsiz, hızlı ve üyelik gerektirmez</span>
-          <h1>Hesaplamayı hızlandırın.<br/><em>Kararı netleştirin.</em></h1>
+          <h1>Ücretsiz online hesaplama araçları.<br/><em>Kredi, kira ve maaşı hesaplayın.</em></h1>
           <p>Kredi taksitinden kira artışına, maaş hesabından yapay zekâ maliyetine kadar günlük ve profesyonel kararlar için tek hesaplama merkezi.</p>
           <SearchLauncher />
           <div className="v6-actions">
@@ -165,7 +165,7 @@ export default function HomePage() {
 
       <section className="priority-searches" aria-labelledby="priority-searches-title">
         <div className="priority-searches-head">
-          <div><span className="eyebrow">En çok aranan hesaplamalar</span><h2 id="priority-searches-title">Doğrudan ihtiyacınıza gidin</h2></div>
+          <div><span className="eyebrow">Kredi, maaş ve günlük giderler</span><h2 id="priority-searches-title">Doğrudan ihtiyacınıza gidin</h2></div>
           <p>Kredi, maaş, vergi ve günlük giderlerde sık aranan hesaplamalara açıklayıcı bağlantılarla hızlıca ulaşın.</p>
         </div>
         <div className="priority-search-links">
@@ -177,8 +177,8 @@ export default function HomePage() {
       <RecentTools />
 
       <section className="featured-section">
-        <div className="featured-copy"><span className="eyebrow">Güncel hesaplamalar</span><h2>Aranan güncel oranları doğrudan hesaplayın.</h2><p>Ekim 2026 kira artış oranını ve kredi kartı yapılandırma teklifinizi güncel kaynaklarla ayrı ayrı kontrol edin.</p><div className="featured-actions"><Link href="/kira-artis-hesaplama/" className="button white">Ekim kira artışı <Icon name="arrow" size="sm"/></Link><Link href="/kredi-karti-borc/" className="button glass">Kredi kartı yapılandırma</Link></div></div>
-        <div className="decision-preview"><div className="preview-top"><span>Ekim 2026 kira örneği</span><i>Güncel</i></div><div className="preview-main"><small>Yeni aylık kira</small><strong>26.298 TL</strong><span className="preview-change">+6.298 TL / ay</span></div><div className="preview-grid"><div><small>Yıllık fark</small><b>75.576 TL</b></div><div><small>Artış</small><b>%31,49</b></div></div><div className="preview-bar"><i style={{width:'67%'}}/></div></div>
+        <div className="featured-copy"><span className="eyebrow">Güncel hesaplamalar</span><h2>Kira artışını kendi oranınızla karşılaştırın.</h2><p>Mevcut kiranızı ve sözleşmeniz için geçerli oranı girin. Aşağıdaki %31,49 yalnızca örnek senaryodur; güncel oran iddiası taşımaz. Kredi kartı yapılandırmasını bankanızın teklifiyle ayrıca karşılaştırın.</p><div className="featured-actions"><Link href="/kira-artis-hesaplama/" className="button white">Kira artışını hesapla <Icon name="arrow" size="sm"/></Link><Link href="/kredi-karti-borc/" className="button glass">Kredi kartı yapılandırma</Link></div></div>
+        <div className="decision-preview"><div className="preview-top"><span>20.000 TL kira · %31,49 artış</span><i>Örnek</i></div><div className="preview-main"><small>Yeni aylık kira</small><strong>26.298 TL</strong><span className="preview-change">+6.298 TL / ay</span></div><div className="preview-grid"><div><small>Yıllık fark</small><b>75.576 TL</b></div><div><small>Artış</small><b>%31,49</b></div></div><div className="preview-bar"><i style={{width:'67%'}}/></div></div>
       </section>
 
       <section className="home-info"><div><span className="eyebrow">Neden Hesaplas?</span><h2>Karmaşık formülleri sade bir karar akışına dönüştürüyoruz.</h2><p>Her araç kendi ihtiyacına göre tasarlanır; gereksiz alan, zorunlu üyelik veya gizli sonuç ekranı yoktur.</p></div><div className="info-points"><article><span><Icon name="zap"/></span><h3>Hızlı</h3><p>Sonuçlar alanları değiştirirken anında güncellenir.</p></article><article><span><Icon name="shield"/></span><h3>Gizli</h3><p>Girdiğiniz değerler hesaplama için tarayıcıda işlenir.</p></article><article><span><Icon name="sparkles"/></span><h3>Anlaşılır</h3><p>Ana sonuç, fark ve detaylar ayrı katmanlarda gösterilir.</p></article></div></section>

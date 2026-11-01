@@ -117,13 +117,15 @@ if (errors.length === 0) {
     const html = fs.readFileSync(htmlPath, 'utf8')
     const canonical = getAttribute(extractTag(html, 'link', 'rel', 'canonical'), 'href')
     const robots = (getAttribute(extractTag(html, 'meta', 'name', 'robots'), 'content') || '').toLowerCase()
+    const indexable = robots.includes('index') && !robots.includes('noindex')
 
-    if (canonical?.startsWith(EXPECTED_ORIGIN)) {
+    // Next.js exports both 404 and _not-found documents with the same noindex
+    // canonical. Only indexed documents compete for ownership of a search URL.
+    if (indexable && canonical?.startsWith(EXPECTED_ORIGIN)) {
       if (canonicalOwners.has(canonical)) error(`Duplicate canonical in exported HTML: ${canonical}`)
       else canonicalOwners.set(canonical, htmlPath)
     }
 
-    const indexable = robots.includes('index') && !robots.includes('noindex')
     if (indexable && canonical?.startsWith(EXPECTED_ORIGIN) && !sitemapSet.has(canonical)) error(`Indexable page is missing from sitemap: ${canonical}`)
   }
 }

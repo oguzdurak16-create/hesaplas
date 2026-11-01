@@ -2,6 +2,8 @@ import { categories, tools } from '@/data/tools'
 import { SITE_URL } from '@/lib/seo'
 import { isIndexableTool } from '@/lib/indexFocus'
 
+export const dynamic = 'force-static'
+
 const SITE_UPDATED = '2026-10-05'
 const FALLBACK_TOOL_UPDATED = '2026-07-17'
 
@@ -24,11 +26,11 @@ export default function sitemap() {
   return [
     ...fixed.map((item) => ({
       url: `${SITE_URL}${item.path}`,
-      lastModified: SITE_UPDATED,
+      lastModified: item.path === '/' ? '2026-11-01' : SITE_UPDATED,
       changeFrequency: item.changeFrequency,
       priority: item.priority,
     })),
-    { url: `${SITE_URL}/abkant-tonaj`, lastModified: '2026-10-09', changeFrequency: 'monthly', priority: 0.75 },
+    { url: `${SITE_URL}/abkant-tonaj/`, lastModified: '2026-10-09', changeFrequency: 'monthly', priority: 0.75 },
     ...categories.map((category) => ({
       url: `${SITE_URL}/kategori/${category.id}/`,
       lastModified: SITE_UPDATED,
