@@ -50,7 +50,7 @@ export default function RootLayout({ children }) {
     inLanguage: 'tr-TR',
   }
   return (
-    <html lang="tr" data-theme="light">
+    <html data-scroll-behavior="smooth" lang="tr" data-theme="light">
       <head>
         <script id="consent-default" src={withBase('/consent-default.js')} />
         <script

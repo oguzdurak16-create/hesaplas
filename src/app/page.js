@@ -138,8 +138,8 @@ export default function HomePage() {
       <div className="container v6-hero-grid">
         <div className="v6-hero-copy">
           <span className="v6-badge"><Icon name="sparkles" size="sm" /> Ücretsiz, hızlı ve üyelik gerektirmez</span>
-          <h1>Ücretsiz online hesaplama araçları.<br/><em>Kredi, kira ve maaşı hesaplayın.</em></h1>
-          <p>Kredi taksitinden kira artışına, maaş hesabından yapay zekâ maliyetine kadar günlük ve profesyonel kararlar için tek hesaplama merkezi.</p>
+          <h1>Hesabınızı yapın.<br/><em>Kararınızı netleştirin.</em></h1>
+          <p>Kredi, kira, maaş ve günlük giderler için ücretsiz hesaplama araçları. Değerleri değiştirin, sonuçları karşılaştırın.</p>
           <SearchLauncher />
           <div className="v6-actions">
             <Link href="/tum-araclar/" className="button primary large">Tüm araçları keşfet <Icon name="arrow" size="sm" /></Link>
@@ -151,6 +151,18 @@ export default function HomePage() {
             <div className="v6-stat"><span><Icon name="shield" /></span><div><strong>Tarayıcıda hesaplama</strong><small>Verileriniz cihazınızda kalır</small></div></div>
           </div>
         </div>
+        <aside className="home-quick-start" aria-labelledby="home-quick-title">
+          <span className="eyebrow">Nereden başlayalım?</span>
+          <h2 id="home-quick-title">Hesabınıza doğrudan geçin.</h2>
+          <div className="home-quick-links">
+            {[
+              { href: '/kredi-hesaplama/', title: 'Kredi taksiti', text: 'Tutar, faiz ve vade' },
+              { href: '/maas-hesaplama/', title: 'Brüt / net maaş', text: 'Maaşınızı karşılaştırın' },
+              { href: '/kira-artis-hesaplama/', title: 'Kira artışı', text: 'Oranınıza göre yeni kira' },
+              { href: '/yuzde-hesaplama/', title: 'Yüzde hesabı', text: 'Oran, artış ve azalış' },
+            ].map((item, index) => <Link key={item.href} href={item.href}><span className="home-quick-number">0{index + 1}</span><span><strong>{item.title}</strong><small>{item.text}</small></span><Icon name="arrow" size="sm" /></Link>)}
+          </div>
+        </aside>
       </div>
     </section>
 

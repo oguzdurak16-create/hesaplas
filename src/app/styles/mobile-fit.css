@@ -85,3 +85,64 @@ input,select,button{max-width:100%}
   .result-card-head{grid-template-columns:1fr!important}
   .copy-button{width:100%;justify-content:center}
 }
+
+/* Interface refinement: a shorter introduction and direct paths into a calculation. */
+:where(a,button,summary,input,select,textarea):focus-visible{outline:3px solid #2463eb;outline-offset:4px}
+.v6-home .v6-hero{padding:56px 0 44px!important}
+.v6-home .v6-hero-grid{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(320px,.8fr);gap:64px;align-items:center}
+.v6-home .v6-hero-copy h1{font-size:clamp(2.8rem,4.5vw,4.5rem);line-height:1.08;letter-spacing:-.05em!important;text-wrap:balance}
+.home-quick-start{padding:28px;border:1px solid #dce5f2;border-radius:24px;background:#fff;box-shadow:0 20px 60px rgba(35,65,110,.07)}
+.home-quick-start h2{margin:10px 0 24px;font-size:1.6rem;line-height:1.25;letter-spacing:-.03em;color:#142137}
+.home-quick-links{display:grid;gap:10px}
+.home-quick-links>a{display:flex;align-items:center;gap:14px;padding:15px 12px;border:1px solid #e0e7f1;border-radius:13px;background:#f8faff;transition:background .15s,border-color .15s}
+.home-quick-links>a:hover{background:#eff5ff;border-color:#9ab6e4}
+.home-quick-number{color:#2563eb;font-size:12px;font-weight:800;font-variant-numeric:tabular-nums}
+.home-quick-links>a>span:nth-child(2){flex:1;min-width:0;display:grid;gap:4px}
+.home-quick-links strong{color:#17243a;font-size:15px}
+.home-quick-links small{color:#63748b;font-size:12px}
+.home-quick-links .icon{color:#52729f}
+.field-group label{font-size:14px!important;line-height:1.5}
+.calculator-actions button,.copy-button,.menu-button{min-height:44px}
+.summary-item strong{font-variant-numeric:tabular-nums}
+@media(max-width:1000px){
+ .v6-home .v6-hero-grid{grid-template-columns:1fr;gap:28px}
+ .home-quick-links{grid-template-columns:repeat(2,minmax(0,1fr))}
+
+ .v6-home .v6-hero{padding:28px 0!important}
+ .v6-home .v6-hero-copy h1{font-size:clamp(30px,8.5vw,38px)!important;line-height:1.1;letter-spacing:-.04em!important;margin-top:18px}
+ .v6-home .v6-hero-copy>p{font-size:15px!important;line-height:1.65!important;margin-top:16px}
+ .v6-home .v6-hero .hero-search{display:flex;align-items:center;justify-content:flex-start;gap:12px;padding:0 16px;margin-top:20px;height:56px!important}
+ .v6-home .v6-actions{display:flex}
+ .v6-home .v6-actions .button{width:auto;flex:1;min-height:46px;font-size:12px;padding:10px}
+ .v6-home .v6-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0!important;margin-top:22px!important}
+ .v6-home .v6-stat{display:block;min-height:0;padding:8px!important;border:0!important;background:transparent!important;box-shadow:none!important}
+ .v6-home .v6-stat>span{display:none}
+ .v6-home .v6-stat strong{font-size:12px;line-height:1.5}
+ .v6-home .v6-stat small{font-size:11px;line-height:1.4}
+ .home-quick-start{padding:18px;border-radius:18px}
+ .home-quick-start h2{font-size:20px;margin-bottom:16px}
+ .home-quick-links>a{align-items:start;gap:8px;padding:12px;min-height:94px}
+ .home-quick-links .icon{display:none}
+ .home-quick-links strong{font-size:13px;line-height:1.4}
+ .home-quick-links small{font-size:11px;line-height:1.5}
+ .cookie-panel{padding:14px;max-height:calc(100dvh - 100px);overflow-y:auto}
+ .cookie-head .eyebrow{display:none}
+ .cookie-head h2{font-family:inherit;font-size:16px}
+ .cookie-head>button{width:44px;height:44px;flex:0 0 44px}
+ .cookie-panel>p{font-size:12px;line-height:1.6;margin-top:4px}
+ .cookie-actions{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin-top:12px}
+ .cookie-actions .button{min-height:44px;padding:6px;font-size:11px;text-align:center}
+
+ .tool-page-hero{display:grid!important;grid-template-columns:44px minmax(0,1fr)!important;align-items:start!important;text-align:left!important;padding:20px 16px!important;gap:12px!important}
+ .tool-hero-icon{width:44px!important;height:44px!important;border-radius:12px!important;margin:0!important}
+ .tool-hero-copy,.tool-hero-copy h1,.tool-hero-copy>p{text-align:left}
+ .tool-hero-copy h1{font-size:clamp(24px,7vw,30px)!important;line-height:1.15!important}
+ .tool-hero-copy>p{font-size:14px!important}
+ .tool-hero-meta,.v7-trust-row{justify-content:flex-start!important}
+
+ .v6-home .v6-hero .hero-search span{font-size:14px;text-align:left}
+
+ .tool-hero-meta{flex-direction:row;gap:8px!important;margin-top:12px!important}
+ .v7-trust-row{gap:6px}
+ .v7-trust-row span{padding:0 7px;font-size:10px}
+}

@@ -13,22 +13,36 @@ function normalize(value = '') {
 export default function ToolSearchDialog({ open, onClose }) {
   const router = useRouter()
   const inputRef = useRef(null)
+  const dialogRef = useRef(null)
   const [query, setQuery] = useState('')
   const [active, setActive] = useState(0)
   const results = useMemo(() => {
     const q = normalize(query).trim()
-    const source = q ? tools.filter((tool) => normalize(`${tool.title} ${tool.description} ${tool.keywords.join(' ')}`).includes(q)) : tools.filter((tool) => tool.trend)
+    const source = q ? tools.map((tool) => {
+      const title = normalize(tool.title)
+      const score = title === q ? 100 : title.startsWith(q) ? 80 : title.includes(q) ? 60 : normalize(tool.keywords.join(' ')).includes(q) ? 20 : normalize(tool.description).includes(q) ? 10 : 0
+      return { tool, score }
+    }).filter((item) => item.score).sort((a, b) => b.score - a.score).map((item) => item.tool) : tools.filter((tool) => tool.trend)
     return source.slice(0, 8)
   }, [query])
 
   useEffect(() => {
     if (!open) return
     setQuery(''); setActive(0)
-    window.setTimeout(() => inputRef.current?.focus(), 30)
-    const close = (event) => { if (event.key === 'Escape') onClose() }
+    const previousFocus = document.activeElement
+    const timer = window.setTimeout(() => inputRef.current?.focus(), 30)
+    const close = (event) => {
+      if (event.key === 'Escape') onClose()
+      if (event.key === 'Tab') {
+        const items = [...(dialogRef.current?.querySelectorAll('input,button:not([disabled]),a[href]') || [])].filter((node) => node.getClientRects().length)
+        const first = items[0], last = items[items.length - 1]
+        if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last?.focus() }
+        else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first?.focus() }
+      }
+    }
     document.body.classList.add('dialog-open')
     window.addEventListener('keydown', close)
-    return () => { document.body.classList.remove('dialog-open'); window.removeEventListener('keydown', close) }
+    return () => { window.clearTimeout(timer); document.body.classList.remove('dialog-open'); window.removeEventListener('keydown', close); if (previousFocus?.isConnected) previousFocus.focus() }
   }, [onClose, open])
 
   const go = (slug) => { onClose(); router.push(`/${slug}/`) }
@@ -39,10 +53,10 @@ export default function ToolSearchDialog({ open, onClose }) {
   }
   if (!open) return null
   return <div className="search-dialog-backdrop" onMouseDown={onClose}>
-    <section className="search-dialog" role="dialog" aria-modal="true" aria-label="Hesaplama aracı ara" onMouseDown={(e) => e.stopPropagation()}>
+    <section ref={dialogRef} className="search-dialog" role="dialog" aria-modal="true" aria-label="Hesaplama aracı ara" onMouseDown={(e) => e.stopPropagation()}>
       <div className="dialog-search">
         <Icon name="search" />
-        <input ref={inputRef} value={query} onChange={(e) => { setQuery(e.target.value); setActive(0) }} onKeyDown={keyDown} placeholder="Ne hesaplamak istiyorsunuz?" />
+        <input ref={inputRef} type="search" aria-label="Hesaplama aracı ara" value={query} onChange={(e) => { setQuery(e.target.value); setActive(0) }} onKeyDown={keyDown} placeholder="Ne hesaplamak istiyorsunuz?" />
         <kbd>ESC</kbd>
         <button type="button" className="dialog-close" onClick={onClose} aria-label="Aramayı kapat" title="Kapat"><Icon name="close" /></button>
       </div>
