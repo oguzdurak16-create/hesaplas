@@ -121,6 +121,13 @@ export default async function ToolPage({ params }) {
 
       <CalculatorApp slug={tool.slug} />
 
+      {tool.category === 'maas-vergi' ? <section className="v7-content-intro" aria-label="Hesaplama dönemi">
+        <article className="v7-guide-card" style={{ gridColumn: '1 / -1' }}>
+          <h2>Kalıcı hesaplayıcı, döneme bağlı veriler</h2>
+          <p>Vergi dilimleri, SGK sınırları, tavan ve istisnalar yıl veya dönem değişince aynı kalmayabilir. Alan açıklamalarındaki dönemi ve aşağıdaki resmî kaynakları kontrol edin. Sayfanın erişilebilir olması, varsayılan değerlerin her gelecekteki dönem için geçerli olduğu anlamına gelmez.</p>
+        </article>
+      </section> : null}
+
       {!!tool.searchIntent && <section className="v7-content-intro" aria-label="Aranan sorunun kısa yanıtı">
         <article className="v7-guide-card" style={{ gridColumn: '1 / -1' }}>
           <span className="eyebrow">Hızlı yanıt</span>

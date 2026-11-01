@@ -84,7 +84,7 @@ tools.forEach((tool) => {
     const calculate = tool.calculate
     tool.calculate = (values) => ({
       ...calculate(values),
-      note: 'Ekim 2026 yenilemeleri için TÜİK Eylül 2026 on iki aylık ortalama TÜFE değişimi %31,49’dur. Farklı bir yenileme ayı için o aya karşılık gelen güncel TÜİK oranını kontrol edip alana girin.',
+      note: 'Sonuç, sizin girdiğiniz artış oranıyla hesaplanır. Yenileme tarihi oranı otomatik belirlemez; sözleşmenizi ve ilgili dönem için resmî verileri ayrıca kontrol edin.',
     })
   }
 
