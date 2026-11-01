@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from 'react'
 import { toolMap } from '@/data/tools'
+import { isCalendarDate } from '@/data/tool-utils'
 import CurrencyCalculator from './CurrencyCalculator'
 import Icon from './Icon'
 
@@ -47,7 +48,11 @@ function validate(tool, values) {
       else if (field.min !== undefined && value < field.min) fields[field.key] = `En az ${field.min} girilebilir.`
       else if (field.max !== undefined && value > field.max) fields[field.key] = `En fazla ${field.max} girilebilir.`
     }
-    if (field.type === 'date' && raw && Number.isNaN(new Date(raw).getTime())) fields[field.key] = 'Geçerli bir tarih girin.'
+    if (field.type === 'date' && !isCalendarDate(raw)) fields[field.key] = 'Geçerli bir tarih girin.'
+  })
+
+  ;(tool.dateRanges || []).forEach(({ start, end }) => {
+    if (!fields[start] && !fields[end] && values[end] < values[start]) general.push('Bitiş veya hesaplama tarihi başlangıç tarihinden önce olamaz.')
   })
 
   ;(tool.constraints || []).forEach((constraint) => {

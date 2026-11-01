@@ -12,6 +12,23 @@ export const number = (value) => trNumber.format(Number.isFinite(value) ? value 
 export const integer = (value) => trInteger.format(Number.isFinite(value) ? value : 0)
 export const usd = (value) => usdMoney.format(Number.isFinite(value) ? value : 0)
 export const percent = (value) => `%${number(value)}`
+export const isCalendarDate = (value) => {
+  if (typeof value !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(value)) return false
+  const date = new Date(`${value}T00:00:00Z`)
+  return Number.isFinite(date.getTime()) && date.toISOString().slice(0, 10) === value
+}
+// Count Monday–Friday in [start, end), independently of the browser time zone.
+export const weekdaysBetween = (start, end) => {
+  if (!isCalendarDate(start) || !isCalendarDate(end) || end < start) throw new RangeError('Geçerli ve sıralı tarihler girin.')
+  const first = new Date(`${start}T00:00:00Z`)
+  const days = (new Date(`${end}T00:00:00Z`) - first) / 86400000
+  let count = Math.floor(days / 7) * 5
+  for (let offset = 0; offset < days % 7; offset++) {
+    const day = (first.getUTCDay() + offset) % 7
+    if (day !== 0 && day !== 6) count++
+  }
+  return count
+}
 export const daysBetween = (a, b) => Math.max(0, Math.round((new Date(b) - new Date(a)) / 86400000))
 export const addDays = (date, days) => {
   const d = new Date(date)

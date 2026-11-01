@@ -30,3 +30,26 @@ assert.equal(value('zam-hesaplama', { old: 50000, rate: -10 }, 'Yeni tutar'), 45
 assert.equal(toolMap['mevduat-faiz-hesaplama'].fields.find((field) => field.key === 'withholding').default, '', 'A period-dependent tax must not be guessed');
 assert.equal(toolMap['kira-artis-hesaplama'].fields.find((field) => field.key === 'rate').default, '');
 console.log('Calculator fixtures passed: VAT round trip, loan with fees, near-zero interest, simple deposit, compound contributions and salary change.');
+
+const { weekdaysBetween, isCalendarDate } = await import('../src/data/tool-utils.js');
+assert.equal(weekdaysBetween('2026-11-02', '2026-11-09'), 5);
+assert.equal(weekdaysBetween('2000-01-01', '2020-01-01'), 5217, 'Long intervals must not collapse to zero');
+assert.equal(weekdaysBetween('2026-11-07', '2026-11-09'), 0, 'Weekend-only interval');
+assert.equal(weekdaysBetween('2026-11-02', '2026-11-02'), 0);
+assert.throws(() => weekdaysBetween('2026-11-09', '2026-11-02'), RangeError);
+assert.equal(isCalendarDate('2024-02-29'), true);
+for (const bad of ['', '2026-02-29', '2026-02-30', 'not-a-date']) assert.equal(isCalendarDate(bad), false);
+const zeroBase = toolMap['yuzde-hesaplama'].calculate({ base: 0, rate: 20, second: 125 });
+assert.equal(zeroBase.summary[0].value, '0');
+assert.match(zeroBase.summary[1].value, /Tanımsız/);
+assert.match(zeroBase.summary[2].value, /Tanımsız/);
+assert.equal(value('yuzde-hesaplama', { base: 100, rate: 20, second: 0 }, 'Yüzde değişim'), -100);
+assert.equal(value('tarih-farki-hesaplama', { start: '2000-01-01', end: '2020-01-01' }, 'Hafta içi gün tahmini'), 5217);
+for (const timezone of ['UTC', 'America/Los_Angeles', 'Europe/Istanbul']) {
+  process.env.TZ = timezone;
+  assert.equal(weekdaysBetween('2026-11-02', '2026-11-09'), 5);
+  const birthday = toolMap['yas-hesaplama'].calculate({ birth: '1990-11-02', today: '2026-11-02' });
+  assert.equal(birthday.summary[0].value, '36 yaş');
+  assert.equal(birthday.details.find((row) => row.label === 'Kalan gün').value, '0 gün');
+}
+console.log('Date/percentage regressions passed, including 20-year range, calendar validity and multiple time zones.');

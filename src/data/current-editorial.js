@@ -1,4 +1,21 @@
 export const currentEditorial = {
+  'yuzde-hesaplama': {
+    updatedAt: '2026-11-01',
+    formula: 'Yüzde karşılığı = ana sayı × oran / 100. Yüzde değişim = (ikinci sayı − ana sayı) / ana sayı × 100. Başlangıç sıfırsa yüzde değişim ve ikinci sayının başlangıca oranı tanımsızdır; sıfırın seçilen yüzde karşılığı ise 0 olarak hesaplanabilir.',
+    example: '100’den 125’e değişim %25; 100’den 0’a değişim %-100’dür. 0’dan 125’e değişim için sonlu bir yüzde oranı yoktur ve araç “tanımsız” gösterir.',
+    faqs: [{ q: 'Başlangıç değeri sıfırsa yüzde değişim nedir?', a: 'Formül sıfıra bölme gerektirir; sonlu bir yüzde değişim tanımlı değildir. Bu durum %0 değişim olarak sunulmamalıdır.' }],
+  },
+  'tarih-farki-hesaplama': {
+    updatedAt: '2026-11-01',
+    dateRanges: [{ start: 'start', end: 'end' }],
+    formula: 'Toplam gün, başlangıç dahil ve bitiş hariç takvim aralığındaki farktır. Hafta içi hesabı aynı aralıkta Pazartesi–Cuma günlerini sayar; her tam hafta 5 gündür. Resmî tatiller düşülmez. Ay karşılığı ortalama 30,4375 günlük ay üzerinden yaklaşık gösterilir.',
+    example: '2–9 Kasım 2026 aralığı 7 takvim günü ve 5 hafta içi gündür. 1 Ocak 2000–1 Ocak 2020 aralığı 7.305 takvim günü ve 5.217 hafta içi gündür; resmî tatiller düşülmemiştir.',
+    faqs: [{ q: 'Başlangıç ve bitiş günleri dahil mi?', a: 'Başlangıç dahildir, bitiş hariçtir. Aynı tarih seçildiğinde aralık 0 gündür.' }, { q: 'Hafta içi sonucu resmî iş günü mü?', a: 'Hayır. Yalnızca Pazartesi–Cuma sayılır; resmî ve yerel tatiller ayrıca düşülmelidir.' }],
+  },
+  'yas-hesaplama': {
+    updatedAt: '2026-11-01',
+    dateRanges: [{ start: 'birth', end: 'today' }],
+  },
   'kredi-hesaplama': {
     updatedAt: '2026-11-01',
     example: 'Vergi ve masraf hariç matematiksel örnek: 12.000 TL, aylık %1 faiz ve 12 ay için eşit taksit yaklaşık 1.066,19 TL; faiz sıfırsa 1.000 TL olur. Taksit toplamı tam hassasiyetle hesaplanır; bankanın kuruş yuvarlaması fark oluşturabilir.',

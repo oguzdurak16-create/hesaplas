@@ -1,4 +1,4 @@
-import { n, money, number, integer, percent, daysBetween, addDays, formatDate, payment, result, item, examNet } from '../tool-utils'
+import { n, money, number, integer, percent, weekdaysBetween, daysBetween, addDays, formatDate, payment, result, item, examNet } from '../tool-utils'
 
 export const toolsPart04 = [
 {
@@ -38,8 +38,8 @@ export const toolsPart04 = [
       { key: 'second', label: 'Karşılaştırılan sayı', type: 'number', default: 1250, step: 0.01 },
     ],
     calculate: (v) => {
-      const base = n(v.base), rate = n(v.rate), second = n(v.second), part = base * rate / 100, change = base ? (second - base) / base * 100 : 0
-      return result([item(`${percent(rate)} karşılığı`, number(part), 'primary'), item('Yüzde değişim', percent(change), change >= 0 ? 'success' : 'danger'), item('İkinci sayının oranı', percent(base ? second / base * 100 : 0))], [item('Ana sayı + yüzde', number(base + part)), item('Ana sayı - yüzde', number(base - part)), item('Fark', number(second - base))])
+      const base = n(v.base), rate = n(v.rate), second = n(v.second), part = base * rate / 100, change = base !== 0 ? (second - base) / base * 100 : null
+      return result([item(`${percent(rate)} karşılığı`, number(part), 'primary'), item('Yüzde değişim', change === null ? 'Tanımsız (başlangıç 0)' : percent(change), change === null ? '' : change >= 0 ? 'success' : 'danger'), item('İkinci sayının oranı', base === 0 ? 'Tanımsız (ana sayı 0)' : percent(second / base * 100))], [item('Ana sayı + yüzde', number(base + part)), item('Ana sayı - yüzde', number(base - part)), item('Fark', number(second - base))])
     },
   },
 {
@@ -65,10 +65,10 @@ export const toolsPart04 = [
       { key: 'today', label: 'Hesaplama tarihi', type: 'date', default: 'today' },
     ],
     calculate: (v) => {
-      const birth = new Date(v.birth), today = new Date(v.today), days = daysBetween(v.birth, v.today)
-      let age = today.getFullYear() - birth.getFullYear(); const before = today.getMonth() < birth.getMonth() || (today.getMonth() === birth.getMonth() && today.getDate() < birth.getDate()); if (before) age--
-      const next = new Date(today.getFullYear(), birth.getMonth(), birth.getDate()); if (next < today) next.setFullYear(next.getFullYear() + 1)
-      return result([item('Tam yaş', `${age} yaş`, 'primary'), item('Toplam gün', `${integer(days)} gün`), item('Sonraki doğum günü', formatDate(next))], [item('Toplam ay yaklaşık', `${integer(days / 30.4375)} ay`), item('Kalan gün', `${integer(daysBetween(v.today, next))} gün`)])
+      const birth = new Date(`${v.birth}T00:00:00Z`), today = new Date(`${v.today}T00:00:00Z`), days = daysBetween(v.birth, v.today)
+      let age = today.getUTCFullYear() - birth.getUTCFullYear(); const before = today.getUTCMonth() < birth.getUTCMonth() || (today.getUTCMonth() === birth.getUTCMonth() && today.getUTCDate() < birth.getUTCDate()); if (before) age--
+      const next = new Date(Date.UTC(today.getUTCFullYear(), birth.getUTCMonth(), birth.getUTCDate())); if (next < today) next.setUTCFullYear(next.getUTCFullYear() + 1)
+      return result([item('Tam yaş', `${age} yaş`, 'primary'), item('Toplam gün', `${integer(days)} gün`), item('Sonraki doğum günü', formatDate(next.toISOString().slice(0, 10)))], [item('Toplam ay yaklaşık', `${integer(days / 30.4375)} ay`), item('Kalan gün', `${integer(daysBetween(v.today, next))} gün`)])
     },
   },
 {
@@ -81,7 +81,7 @@ export const toolsPart04 = [
     ],
     calculate: (v) => {
       const days = daysBetween(v.start, v.end), weeks = days / 7, months = days / 30.4375
-      let weekdays = 0, d = new Date(v.start), end = new Date(v.end); while (d < end && days < 5000) { const day = d.getDay(); if (day !== 0 && day !== 6) weekdays++; d.setDate(d.getDate() + 1) }
+      const weekdays = weekdaysBetween(v.start, v.end)
       return result([item('Toplam gün', `${integer(days)} gün`, 'primary'), item('Hafta karşılığı', `${number(weeks)} hafta`), item('Ay karşılığı', `${number(months)} ay`)], [item('Hafta içi gün tahmini', `${integer(weekdays)} gün`), item('Takvim günü', `${integer(days)} gün`)], 'Resmi tatiller iş günü hesabından düşülmemiştir.')
     },
   },
