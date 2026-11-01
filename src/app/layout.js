@@ -12,7 +12,6 @@ import Script from 'next/script'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import CookieConsent from '@/components/CookieConsent'
-import MobileDock from '@/components/MobileDock'
 import ModernWebFeatures from '@/components/ModernWebFeatures'
 import AdSlot from '@/components/AdSlot'
 import AnalyticsTracker from '@/components/AnalyticsTracker'
@@ -81,7 +80,6 @@ export default function RootLayout({ children }) {
         <AdSlot slot={process.env.NEXT_PUBLIC_ADSENSE_CONTENT_SLOT} afterSelector=".calculator-layout" />
         <Footer />
         <CookieConsent />
-        <MobileDock />
         <ModernWebFeatures />
       </body>
     </html>

@@ -1,5 +1,6 @@
 'use client'
 
+import { useViewportMetrics } from '@/lib/useViewportMetrics'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 import Icon from './Icon'
@@ -21,6 +22,7 @@ const allToolsButtonStyle = {
 }
 
 export default function Header() {
+  useViewportMetrics();
   const [open, setOpen] = useState(false)
   const menuButtonRef = useRef(null)
   const [searchOpen, setSearchOpen] = useState(false)

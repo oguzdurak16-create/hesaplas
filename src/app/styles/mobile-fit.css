@@ -59,7 +59,7 @@ input,select,button{max-width:100%}
   .breadcrumb::-webkit-scrollbar{display:none}
 
   .search-dialog-backdrop{align-items:stretch!important;padding:0!important;background:rgba(5,11,21,.72)}
-  .search-dialog{width:100%!important;max-width:none!important;height:100dvh;max-height:100dvh;margin:0!important;border:0!important;border-radius:0!important;display:grid;grid-template-rows:auto auto minmax(0,1fr) auto;overflow:hidden}
+  .search-dialog{width:100%!important;max-width:none!important;height:var(--visual-viewport-height,100dvh);max-height:var(--visual-viewport-height,100dvh);margin:0!important;border:0!important;border-radius:0!important;display:grid;grid-template-rows:auto auto minmax(0,1fr) auto;overflow:hidden}
   .dialog-search{height:auto!important;min-height:68px;padding:calc(env(safe-area-inset-top) + 10px) 12px 10px!important;gap:10px!important}
   .dialog-search .icon{font-size:1.15rem}
   .dialog-search input{font-size:16px!important}
@@ -145,4 +145,17 @@ input,select,button{max-width:100%}
  .tool-hero-meta{flex-direction:row;gap:8px!important;margin-top:12px!important}
  .v7-trust-row{gap:6px}
  .v7-trust-row span{padding:0 7px;font-size:10px}
+}
+
+/* Let the browser toolbar and keyboard keep their own space. */
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+@media(max-width:640px){
+ body{padding-bottom:0}
+ .cookie-panel{bottom:max(12px,env(safe-area-inset-bottom));max-height:calc(var(--visual-viewport-height,100dvh) - 90px)}
+ .cookie-trigger{bottom:max(12px,env(safe-area-inset-bottom))}
+ .search-dialog-backdrop{position:fixed;top:var(--visual-viewport-top,0px);bottom:auto;height:var(--visual-viewport-height,100dvh)}
+ .search-dialog{height:var(--visual-viewport-height,100dvh);max-height:var(--visual-viewport-height,100dvh)}
+ .v6-home .v6-hero .hero-search{display:flex!important;justify-content:flex-start!important;gap:12px!important}
+ .v6-home .v6-hero .hero-search>span{flex:1;text-align:left!important;font-size:14px!important}
+ .mobile-nav{max-height:calc(var(--visual-viewport-height,100dvh) - 66px)}
 }
