@@ -8,7 +8,7 @@
     "postbuild": "npm run seo:audit",
     "seo:audit": "node scripts/seo-audit.mjs",
     "start": "node ./node_modules/next/dist/bin/next start",
-    "test:calculations": "node scripts/check-calculations.mjs"
+    "test:calculations": "node scripts/check-calculations.mjs && node --experimental-strip-types scripts/check-loan-comparison.mjs"
   },
   "dependencies": {
     "next": "16.4.3",

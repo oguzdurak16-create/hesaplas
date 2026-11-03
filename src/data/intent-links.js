@@ -147,6 +147,7 @@ export const relatedToolSlugs = {
   'kidem-tazminati': ['ihbar-tazminati-hesaplama', 'maas-hesaplama', 'zam-hesaplama'],
   'ihbar-tazminati-hesaplama': ['kidem-tazminati', 'maas-hesaplama', 'fazla-mesai-hesaplama'],
   'fazla-mesai-hesaplama': ['maas-hesaplama', 'kidem-tazminati', 'ihbar-tazminati-hesaplama'],
+  'kredi-teklif-karsilastirma': ['kredi-hesaplama', 'kredi-yapilandirma-hesaplama', 'taksit-hesaplama'],
   'kdv-hesaplama': ['vergi-hesaplama', 'kar-marji-hesaplama', 'basabas-noktasi-hesaplama'],
   'kira-artis-hesaplama': ['tapu-harci-hesaplama', 'emlakci-komisyonu-hesaplama', 'yakit-tuketimi-hesaplama'],
   'yakit-tuketimi-hesaplama': ['elektrikli-arac-sarj-maliyeti', 'kira-artis-hesaplama', 'elektrik-tuketimi-hesaplama'],

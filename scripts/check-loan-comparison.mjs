@@ -1,0 +1,12 @@
+import assert from 'node:assert/strict';
+import { compareLoanOffers } from '../src/data/loan-comparison.js';
+const v = { principal:1200, monthsA:12, monthsB:24, rateA:0, rateB:0, feeA:0, feeB:0 };
+const c = compareLoanOffers(v);
+assert.equal(c.monthlyA,100); assert.equal(c.monthlyB,50);
+assert.equal(c.totalA,1200); assert.equal(c.difference,0);
+const fees = compareLoanOffers({...v,rateA:1,rateB:2,monthsB:12,feeA:500});
+assert.ok(fees.monthlyA < fees.monthlyB && fees.totalA > fees.totalB);
+assert.throws(()=>compareLoanOffers({...v,monthsA:1.5}),RangeError);
+assert.throws(()=>compareLoanOffers({...v,feeB:-1}),RangeError);
+assert.throws(()=>compareLoanOffers({...v,rateA:Infinity}),RangeError);
+console.log('Loan zero-rate, term, upfront-fee and invalid-input checks passed.');

@@ -7,6 +7,7 @@ import { toolsPart06 } from './tools-parts/part-06.js'
 import { toolsPart07 } from './tools-parts/part-07.js'
 import { toolsPart08 } from './tools-parts/part-08.js'
 import { toolsPart09 } from './tools-parts/part-09.js'
+import { toolsPart10 } from './tools-parts/part-10.js'
 import { focusEditorial } from './focus-editorial.js'
 import { searchRecovery } from './search-recovery.js'
 import { indexRecovery } from './index-recovery.js'
@@ -24,6 +25,7 @@ export const categories = [
 ]
 
 export const tools = [
+  ...toolsPart10,
   ...toolsPart01,
   ...toolsPart02,
   ...toolsPart03,
